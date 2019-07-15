@@ -1,0 +1,4 @@
+com\meiko\controller\RoleController.class
+com\meiko\controller\UserController.class
+com\meiko\controller\PermissionController.class
+com\meiko\controller\FileController.class
