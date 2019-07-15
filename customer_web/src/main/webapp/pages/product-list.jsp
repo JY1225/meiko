@@ -13,7 +13,7 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MEIKO - CUSTOMER</title>
+    <title>数据 - AdminLTE2定制版</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
@@ -169,20 +169,14 @@
                                     <tr>
                                         <td><input name="ids"  type="checkbox" value="${product.id}" id="ids" ></td>
                                         <td>${product.id}</td>
-                                        <td>${product.productNum}</td>
-                                        <td>${product.productName}</td>
-                                     <%--    <td>${product.cityName}</td>
-                                        <td>${product.departureTimeStr}</td>
-                                        <td class="text-center">${product.productPrice}</td>
-                                        <td>${product.productDesc}</td>
-                                        <td class="text-center">${product.productStatusStr}</td> --%>
+                                        <td>${product.url}</td>
+                                        <td>${product.fileName}</td>
                                         <td class="text-center">
-                                           <button type="button" class="btn bg-olive btn-xs"onclick="location.href='${pageContext.request.contextPath}/file/read'" >预览</button> 
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read')" >预览</button>
-                                            <button type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download'" >下载</button>
+                                           <button type="button" class="btn bg-olive btn-xs"onclick="location.href='${pageContext.request.contextPath}/file/read?id=${product.id}&url=${product.url}&fileName=${product.fileName}'" > 预览</button> 
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?id=${product.id}&url=${product.url}&fileName=${product.fileName}')" >预览</button>
+                                            <button type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?id=${product.id}&url=${product.url}&fileName=${product.fileName}'" >下载</button>
                                           
-                                            
-                                            
+                                                                              
                                         </td>
                                     </tr>
 
@@ -218,13 +212,13 @@
                                 </div>
                             </div>
                         </div> -->
-                       <!--  <div class="box-tools pull-right">
+                        <div class="box-tools pull-right">
                             <div class="has-feedback">
                                 <input type="text" class="form-control input-sm"
                                        placeholder="搜索"> <span
                                     class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
-                        </div> -->
+                        </div>
                         <!--工具栏/-->
 
                     </div>
@@ -248,8 +242,8 @@
                     </div>
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">上一页</a></li>
 
                             <c:if test="${productPageInfo.pages<10}">
                                 <c:set var="begin" value="1" />
@@ -270,14 +264,14 @@
                             </c:if>
 
                                  <c:forEach begin="${begin}" end="${end}" var="i">
-                                     <li><a href="${pageContext.request.contextPath}/file/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</c:forEach>
+                                     <li><a href="${pageContext.request.contextPath}/product/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</c:forEach>
                                      </a></li>
 
 
 
 
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
                 </div>

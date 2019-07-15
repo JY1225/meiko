@@ -2,19 +2,6 @@ package com.meiko.controller;
 
 
 
-import com.github.pagehelper.PageInfo;
-import com.meiko.domain.Customer;
-import com.meiko.service.IProductService;
-import com.meiko.utils.FileUtil;
-import com.meiko.utils.Office2PDF;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -23,15 +10,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageInfo;
+import com.meiko.domain.OFile;
+import com.meiko.service.IProductService;
+import com.meiko.utils.FileUtil;
+import com.meiko.utils.Office2PDF;
+
 
 @Controller
 @RequestMapping("/file")
 public class FileController {
-    //base路径D:\a
+    //base璺緞D:\a
     private final String BASE_PATH = "d:/a/";
     @Autowired
     private IProductService service;
@@ -39,39 +45,39 @@ public class FileController {
     public String findAll(Model model,
                           @RequestParam(name = "page",defaultValue = "1") Integer page,
                           @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize){
-        List<Customer> products = service.findAll(page,pageSize);
-       /* for(Product product:products){
-            System.out.println(product);
-        }*/
-        PageInfo<Customer> pageInfo=new PageInfo<Customer>(products);
+        //List<Product> products = service.findAll(page,pageSize);       
+        List<OFile> oFiles = getFileList("C:/Users/yangzhiyu/Desktop/test");
+        //System.out.println(oFiles.get(0));
+        PageInfo<OFile> pageInfo=new PageInfo<OFile>(oFiles);
+        //PageInfo<Product> pageInfo=new PageInfo<Product>(products);
       /*  System.out.println(products);
 
         System.out.println(pageInfo);*/
        model.addAttribute("productPageInfo",pageInfo);
         return  "product-list";
     }
-   
+
     
     @RequestMapping("/download")
-    public void download(HttpServletResponse response) {
+    public void download(HttpServletResponse response,OFile ofile) {
     	
     	try {
-    		String path="D:\\a\\prelec.xls";
-            // path是指欲下载的文件的路径。
+    		String path=ofile.getUrl()+"/"+ofile.getFileName();
+            // path鏄寚娆蹭笅杞界殑鏂囦欢鐨勮矾寰勩��
             File file = new File(path);
-            // 取得文件名。
+            // 鍙栧緱鏂囦欢鍚嶃��
             String filename = file.getName();
-            // 取得文件的后缀名。
+            // 鍙栧緱鏂囦欢鐨勫悗缂�鍚嶃��
             String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
 
-            // 以流的形式下载文件。
+            // 浠ユ祦鐨勫舰寮忎笅杞芥枃浠躲��
             InputStream fis = new BufferedInputStream(new FileInputStream(path));
             byte[] buffer = new byte[fis.available()];
             fis.read(buffer);
             fis.close();
-            // 清空response
+            // 娓呯┖response
             response.reset();
-            // 设置response的Header
+            // 璁剧疆response鐨凥eader
             response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
             response.addHeader("Content-Length", "" + file.length());
             OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
@@ -98,13 +104,13 @@ public class FileController {
         byte[] buf = new byte[1024];
         int len = 0;
 
-        response.reset(); // 非常重要
-        if (isOnLine) { // 在线打开方式
+        response.reset(); // 闈炲父閲嶈
+        if (isOnLine) { // 鍦ㄧ嚎鎵撳紑鏂瑰紡
             URL u = new URL("file:///" + filePath);
             response.setContentType(u.openConnection().getContentType());
             response.setHeader("Content-Disposition", "inline; filename=" + f.getName());
-            // 文件名应该编码成UTF-8
-        } else { // 纯下载方式
+            // 鏂囦欢鍚嶅簲璇ョ紪鐮佹垚UTF-8
+        } else { // 绾笅杞芥柟寮�
             response.setContentType("application/x-msdownload");
             response.setHeader("Content-Disposition", "attachment; filename=" + f.getName());
         }
@@ -116,14 +122,14 @@ public class FileController {
     }
     
     
-    @RequestMapping("/read")
-    public void readFile(HttpServletResponse res ) throws Exception{
+    @RequestMapping(value = "/read")
+    public void readFile(HttpServletResponse res, OFile file
+    		) throws Exception{
         InputStream in = null;
-        OutputStream out = null;
-        String fileName="1.xls";
-        String filePath =  fileHandler(fileName);
-        //判断是pdf还是word还是excel
-        //若是pdf直接读 否则转pdf 再读  //
+        OutputStream out = null;        
+        String filePath =  fileHandler(file.getUrl()+"/"+file.getFileName());
+        System.out.println(filePath);
+
        try{
            if(filePath != null){
                in = new FileInputStream(filePath);
@@ -147,7 +153,7 @@ public class FileController {
        }
     }
     /**
-     * 文件处理
+     * 鏂囦欢澶勭悊
      * @param fileName
      * @return
      */
@@ -156,13 +162,31 @@ public class FileController {
         System.out.println(fileSuffix);
         if("pdf".equals(fileSuffix))
         {
-            return BASE_PATH + fileName;
+            return fileName;
         }
         else
         {
-            return Office2PDF.openOfficeToPDF(BASE_PATH + fileName).getAbsolutePath();
+            return Office2PDF.openOfficeToPDF(fileName).getAbsolutePath();
         }
 
     }
-
+    /**
+     * 璇诲彇鏂囦欢澶规枃浠�
+     * @param path
+     * @return
+     */
+    public List<OFile> getFileList(String path) { 
+    	  List<OFile> list = new ArrayList<OFile>(); 
+    	  try { 
+    	   File file = new File(path); 
+    	   String[] filelist = file.list(); 
+    	   for (int i = 0; i < filelist.length; i++) {
+    		   OFile oFile = new OFile(String.valueOf(i),filelist[i],path);
+    	    list.add(oFile); 
+    	   } 
+    	  } catch (Exception e) { 
+    	   e.printStackTrace(); 
+    	  } 
+    	  return list; 
+    	} 
 }
