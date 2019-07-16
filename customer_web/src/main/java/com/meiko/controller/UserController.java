@@ -6,6 +6,7 @@ import com.meiko.domain.UserInfo;
 import com.meiko.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +20,22 @@ import java.util.List;
 public class UserController {
     @Autowired
     private IUserService service;
+   
+   /* @Secured({"ROLE_ADMIN","ROLE_USER"})*/
+    
+    @RequestMapping("/getUserName")
+    public void getUserName() {
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    	System.out.println(name);
+    }
+    
     @RequestMapping("/findAll")
-    @Secured({"ROLE_ADMIN","ROLE_USER"})
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
                                 @RequestParam(name = "pageSize",required = true,defaultValue = "3")Integer pageSize
                                 )
     {
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    	System.out.println(name);
         List<UserInfo> list= service.findAll(page,pageSize);
         ModelAndView modelAndView=new ModelAndView();
         PageInfo<UserInfo> pageInfo=new PageInfo<>(list);

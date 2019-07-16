@@ -11,12 +11,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.OFile;
+import com.meiko.domain.Role;
 import com.meiko.service.IProductService;
 import com.meiko.utils.FileUtil;
 import com.meiko.utils.Office2PDF;
@@ -46,8 +50,11 @@ public class FileController {
                           @RequestParam(name = "page",defaultValue = "1") Integer page,
                           @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize){
         //List<Product> products = service.findAll(page,pageSize);       
-        List<OFile> oFiles = getFileList("C:/Users/yangzhiyu/Desktop/test");
-        //System.out.println(oFiles.get(0));
+        List<OFile> oFiles = null;
+        if(SecurityContextHolder.getContext().getAuthentication().getName().equals("test")){
+        	//List<Role> roles = (List<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        	oFiles = getFileList("C:/Users/lidan/Desktop/test");
+        }
         PageInfo<OFile> pageInfo=new PageInfo<OFile>(oFiles);
         //PageInfo<Product> pageInfo=new PageInfo<Product>(products);
       /*  System.out.println(products);

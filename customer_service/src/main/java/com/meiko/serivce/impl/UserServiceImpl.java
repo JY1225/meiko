@@ -28,14 +28,16 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     private PasswordEncoder bCryptPasswordEncoder;
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-     UserInfo userInfo= dao.findByUserName(s);
-        User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
-        System.out.println(user);
+        UserInfo userInfo= dao.findByUserName(s);
+        
+        User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));        
+        System.out.println(user.getAuthorities());
         return user;
     }
 
     public List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
+       // authority.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         for (Role role:roles){
             authority.add(new SimpleGrantedAuthority("ROLE_"+role));
         }

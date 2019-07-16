@@ -16,6 +16,8 @@ public interface IUserDao {
             )
     })
     UserInfo findByUserName(String s);
+    
+    
     @Select("select * from userinfo")
     List<UserInfo> findAll();
 

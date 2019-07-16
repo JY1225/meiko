@@ -30,6 +30,10 @@ public class RoleServiceImpl implements IRoleService {
     public void saveRolePermission(String id,String roleId) {
         dao.saveRolePermission(id,roleId);
     }
+    @Override
+    public void saveRoleMenu(String id,String roleId) {
+        dao.saveRoleMenu(id,roleId);
+    }
 
     @Override
     public List<Permission> findNotPermissions(String id) {

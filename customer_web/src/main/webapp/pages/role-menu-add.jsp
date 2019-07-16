@@ -98,7 +98,7 @@
         </section>
         <!-- 内容头部 /-->
 
-        <form action="${pageContext.request.contextPath}/role/saveRolePermission" method="post">
+        <form action="${pageContext.request.contextPath}/role/saveRoleMenu" method="post">
             <!-- 正文区域 -->
             <section class="content">
 
@@ -111,15 +111,15 @@
                         <th class="" style="padding-right: 0px">
                             <input id="selall" type="checkbox" class="icheckbox_square-blue"></th>
                         <th class="sorting_asc">ID</th>
-                        <th class="sorting">权限名称</th>
-                        <th class="sorting">权限URL</th>
+                        <th class="sorting">菜单名称</th>
+                        <th class="sorting">菜单URL</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="menu" items="${Menus}">
+                    <c:forEach var="menu" items="${menus}">
                         <tr>
                             <td>
-                                <input name="ids" type="checkbox" value="${Menu.id}">
+                                <input name="ids" type="checkbox" value="${menu.id}">
                             </td>
                             <td>${menu.id}</td>
                             <td>${menu.name}</td>

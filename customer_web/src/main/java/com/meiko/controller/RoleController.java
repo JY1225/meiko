@@ -47,6 +47,15 @@ public class RoleController {
 
          return "redirect:findAll";
     }
+    
+    @RequestMapping("/saveRoleMenu")
+    public String saveRoleMenu(String roleId,String[] ids){
+        for(String id:ids){
+            service.saveRoleMenu(id,roleId);
+        }
+
+         return "redirect:findAll";
+    }
    @RequestMapping("/findNotPermissions")
    public ModelAndView findNotPermissions(String id){
        ModelAndView modelAndView=new ModelAndView();

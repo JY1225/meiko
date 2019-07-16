@@ -18,4 +18,6 @@ public interface IRoleService {
     List<Menu> findNotMenus(String id);
 
 	void save(Role role);
+
+	void saveRoleMenu(String id, String roleId);
 }

@@ -6,8 +6,9 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface IPermissionDao {
-    @Select("select * from permission p,role_permission rp where p.id=rp.permissionid and rp.roleid=#{id} ")
+    @Select("select * from permission p,role_permission rp where p.id=rp.permissionid and rp.roleid=#{id}")//
     List<Permission> findById(String id);
+   
     @Select("select * from permission")
     List<Permission> findAll();
 
