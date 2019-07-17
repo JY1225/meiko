@@ -39,7 +39,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
        // authority.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         for (Role role:roles){
-            authority.add(new SimpleGrantedAuthority("ROLE_"+role));
+            authority.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
         }
         return authority;
 
@@ -73,4 +73,10 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     	int roleId = Integer.parseInt(roleid);
         dao.saveUserRole(userId,roleId);
     }
+
+	@Override
+	public UserInfo findByUserName(String UserName) {
+		// TODO Auto-generated method stub
+		return dao.findByUserName(UserName);
+	}
 }

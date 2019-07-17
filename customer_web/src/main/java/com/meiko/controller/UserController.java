@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.security.RolesAllowed;
@@ -24,9 +25,16 @@ public class UserController {
    /* @Secured({"ROLE_ADMIN","ROLE_USER"})*/
     
     @RequestMapping("/getUserName")
-    public void getUserName() {
+    
+    public @ResponseBody List<Role> getUserName() {
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
     	System.out.println(name);
+    	ModelAndView modelAndView=new ModelAndView();
+      
+    	UserInfo userInfo = service.findByUserName(name);
+    	List<Role> list = userInfo.getRoles();
+    	
+    	return list;
     }
     
     @RequestMapping("/findAll")
@@ -34,8 +42,7 @@ public class UserController {
                                 @RequestParam(name = "pageSize",required = true,defaultValue = "3")Integer pageSize
                                 )
     {
-    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
-    	System.out.println(name);
+    	
         List<UserInfo> list= service.findAll(page,pageSize);
         ModelAndView modelAndView=new ModelAndView();
         PageInfo<UserInfo> pageInfo=new PageInfo<>(list);

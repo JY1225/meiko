@@ -23,10 +23,13 @@
         <ul class="sidebar-menu">
             <li class="header">菜单</li>
             <li id="admin-index">
-                <a href="./main.jsp">
+                <a href="${pageContext.request.contextPath}/main.jsp">
                     <i class="fa fa-dashboard"></i> <span>首页</span>
                 </a>
             </li>
+         <c:forEach items="${roles}" var="role">
+             ${role.name}
+            </c:forEach> 
 
        <li class="treeview">
                 <a href="#">
@@ -87,13 +90,13 @@
         </ul>
     </section>
 </aside>
-<script
-        src="./plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script
-        src="./plugins/jQueryUI/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
 $(document).ready(function () {
-	//alert("123");
-	/* $.get(); */
+	
+    $.get("/user/getUserName",function(data){
+    	alert(data);
+    }); 
 });
 </script>

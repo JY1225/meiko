@@ -15,4 +15,6 @@ public interface IUserService {
     List<Role> findNotRoles(String id);
 
     void saveUserRole(String userId, String roleId);
+    
+    UserInfo findByUserName(String UserName);
 }
