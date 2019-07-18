@@ -4,11 +4,33 @@ public class OFile {
 	private String id;
     private String fileName;
     private String url; 
+    private int status;
+    private float fileSize;
+    private UserInfo user;
     
-    public OFile(){
+    public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public float getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(float fileSize) {
+		this.fileSize = fileSize;
+	}
+	public OFile(){
 
     }
-    public OFile(String id,String fileName,String url){
+	
+    public UserInfo getUser() {
+		return user;
+	}
+	public void setUser(UserInfo user) {
+		this.user = user;
+	}
+	public OFile(String id,String fileName,String url){
     	this.id = id;
     	this.fileName = fileName;
     	this.url = url;

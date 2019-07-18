@@ -125,13 +125,17 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <div class="">
+                            <form action="${pageContext.request.contextPath}/user/findAll" method="post" >
+                                <input type="text" class="form-control input-sm" name="userName"
+                                       placeholder="客户名称">
+                                         <button type="submit" class="btn btn-default">搜索</button> 
+                                     </form>
                             </div>
                         </div>
+                       
                         <!--工具栏/-->
 
                         <!--数据列表-->
@@ -142,25 +146,25 @@
                                 <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting_desc">用户名</th>
-                                <th class="sorting_asc sorting_asc_disabled">邮箱</th>
-                                <th class="sorting_desc sorting_desc_disabled">联系电话</th>
-                                <th class="sorting">状态</th>
+                                <th class="text-center">序号</th>
+                                <th class="text-center">用户名</th>
+                                <th class="text-center">邮箱</th>
+                                <th class="text-center">联系电话</th>
+                                <th class="text-center">状态</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pageInfo.list}" var="userInfo">
+                            <c:forEach items="${pageInfo.list}" var="userInfo" varStatus="status">
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td>${userInfo.id}</td>
-                                    <td>${userInfo.userName}</td>
-                                    <td>${userInfo.email}</td>
-                                    <td>${userInfo.phoneNum}</td>
-                                    <td>${userInfo.statusStr}</td>
+                                    <td class="text-center">${status.index + 1}</td>
+                                    <td class="text-center">${userInfo.userName}</td>
+                                    <td class="text-center">${userInfo.email}</td>
+                                    <td class="text-center">${userInfo.phoneNum}</td>
+                                    <td class="text-center">${userInfo.statusStr}</td>
                                     <td class="text-center">
-                                        <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a>
+                                        <%-- <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> --%>
                                         <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
                                     </td>
                                 </tr>
@@ -188,7 +192,7 @@
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="#" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous">首页</a></li>
                             <li><a href="#">上一页</a></li>
                             <c:if test="${pageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>

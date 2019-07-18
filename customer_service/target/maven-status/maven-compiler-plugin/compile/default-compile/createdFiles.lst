@@ -1,5 +1,3 @@
-com\meiko\service\IProductService.class
-com\meiko\serivce\impl\ProductServiceImpl.class
 com\meiko\service\IRoleService.class
 com\meiko\serivce\impl\PermissionServiceImpl.class
 com\meiko\serivce\impl\RoleServiceImpl.class

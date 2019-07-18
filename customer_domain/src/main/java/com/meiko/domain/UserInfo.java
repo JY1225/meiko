@@ -11,7 +11,7 @@ public class UserInfo {
     private int status;
     private String statusStr;
     private List<Role> roles;
-
+    private List<OFile> files;
   
 
     public int getId() {
@@ -83,7 +83,15 @@ public class UserInfo {
         this.roles = roles;
     }
 
-    @Override
+    public List<OFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<OFile> files) {
+		this.files = files;
+	}
+
+	@Override
     public String toString() {
         return "UserInfo{" +
                 "id='" + id + '\'' +

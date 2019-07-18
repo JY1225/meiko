@@ -27,11 +27,28 @@
                     <i class="fa fa-dashboard"></i> <span>首页</span>
                 </a>
             </li>
-         <c:forEach items="${roles}" var="role">
-             ${role.name}
-            </c:forEach> 
+        
 
-       <li class="treeview">
+      
+            <li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
+                <span>基础数据</span> <span class="pull-right-container"> <i
+                        class="fa fa-angle-left pull-right"></i>
+				</span>
+            </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/file/findAll">
+                            <i class="fa fa-circle-o"></i> 文件管理
+                        </a>
+                    </li>
+                    <%-- <li>
+                        <a href="${pageContext.request.contextPath}/orders/findAll?page=1&pageSize=3">
+                            <i class="fa fa-circle-o"></i> xxxx
+                        </a>
+                    </li> --%>
+                </ul>
+            </li>
+ <li class="treeview" id="role" style="visibility:hidden;">
                 <a href="#">
                     <i class="fa fa-cogs"></i>
                     <span>系统管理</span>
@@ -68,25 +85,6 @@
                     </li>
                 </ul>
             </li> 
-            <li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
-                <span>基础数据</span> <span class="pull-right-container"> <i
-                        class="fa fa-angle-left pull-right"></i>
-				</span>
-            </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/file/findAll">
-                            <i class="fa fa-circle-o"></i> 文件管理
-                        </a>
-                    </li>
-                    <%-- <li>
-                        <a href="${pageContext.request.contextPath}/orders/findAll?page=1&pageSize=3">
-                            <i class="fa fa-circle-o"></i> xxxx
-                        </a>
-                    </li> --%>
-                </ul>
-            </li>
-
         </ul>
     </section>
 </aside>
@@ -96,7 +94,14 @@
 $(document).ready(function () {
 	
     $.get("/user/getUserName",function(data){
-    	alert(data);
-    }); 
+    	//var roleName=data[0].name;
+    	for(var i = 0;i < data.length; i++){
+    		 if(data[i].name.toLowerCase()=="admin"){
+     	    	$("#role").css("visibility","visible");
+     	    	break;
+    	}   	    
+    	}  	
+    	
+    },"json"); 
 });
 </script>

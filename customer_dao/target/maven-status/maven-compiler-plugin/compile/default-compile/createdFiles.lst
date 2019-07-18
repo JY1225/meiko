@@ -1,4 +1,3 @@
 com\meiko\dao\IUserDao.class
-com\meiko\dao\IProductDao.class
 com\meiko\dao\IPermissionDao.class
 com\meiko\dao\IRoleDao.class

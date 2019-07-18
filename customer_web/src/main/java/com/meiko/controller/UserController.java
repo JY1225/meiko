@@ -39,11 +39,12 @@ public class UserController {
     
     @RequestMapping("/findAll")
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
-                                @RequestParam(name = "pageSize",required = true,defaultValue = "3")Integer pageSize
+                                @RequestParam(name = "pageSize",required = true,defaultValue = "3")Integer pageSize,
+                                @RequestParam(name="userName",required=false) String userName
                                 )
     {
     	
-        List<UserInfo> list= service.findAll(page,pageSize);
+        List<UserInfo> list= service.findAll(page,pageSize,userName);
         ModelAndView modelAndView=new ModelAndView();
         PageInfo<UserInfo> pageInfo=new PageInfo<>(list);
         modelAndView.addObject("pageInfo",pageInfo);

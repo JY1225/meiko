@@ -20,7 +20,10 @@ public interface IUserDao {
     
     @Select("select * from userinfo")
     List<UserInfo> findAll();
-
+    
+    @Select("select * from userinfo where userName like concat('%',#{userName},'%') ")
+    List<UserInfo> findAllByName(String userName);
+    
     @Insert("insert into userinfo(username,password,email,phonenum,status)values(#{userName},#{password},#{email},#{phoneNum},#{status})")
     void save(UserInfo userInfo);
     @Select("select * from userinfo where id=#{id}")

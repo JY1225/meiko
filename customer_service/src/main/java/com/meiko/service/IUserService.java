@@ -6,7 +6,7 @@ import com.meiko.domain.UserInfo;
 import java.util.List;
 
 public interface IUserService {
-    List<UserInfo> findAll(int page, int pageSize);
+    List<UserInfo> findAll(int page, int pageSize,String userName);
 
     void save(UserInfo userInfo);
 

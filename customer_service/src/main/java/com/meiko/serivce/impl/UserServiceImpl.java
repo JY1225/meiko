@@ -5,6 +5,8 @@ import com.meiko.dao.IUserDao;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 import com.meiko.service.IUserService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +31,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserInfo userInfo= dao.findByUserName(s);
-        
+         
         User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));        
         System.out.println(user.getAuthorities());
         return user;
@@ -46,9 +48,16 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     }
 
     @Override
-    public List<UserInfo> findAll(int page, int pageSize) {
-        PageHelper.startPage(page,pageSize);
-        return dao.findAll();
+    public List<UserInfo> findAll(int page, int pageSize,String userName) {
+       
+        if(StringUtils.isBlank(userName)) {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findAll();
+        }else {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findAllByName(userName);
+        }
+        
     }
 
     @Override

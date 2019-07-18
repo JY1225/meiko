@@ -11,29 +11,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.OFile;
-import com.meiko.domain.Role;
-import com.meiko.service.IProductService;
+import com.meiko.domain.UserInfo;
+import com.meiko.service.IFileService;
+import com.meiko.service.IUserService;
 import com.meiko.utils.FileUtil;
 import com.meiko.utils.Office2PDF;
 
@@ -41,20 +35,33 @@ import com.meiko.utils.Office2PDF;
 @Controller
 @RequestMapping("/file")
 public class FileController {
-    //base璺緞D:\a
-    private final String BASE_PATH = "d:/a/";
-    @Autowired
-    private IProductService service;
-    @RequestMapping("/findAll")
+	@Autowired
+    private IUserService service;
+	@Autowired
+    private IFileService fileservice;
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/findAll")
     public String findAll(Model model,
                           @RequestParam(name = "page",defaultValue = "1") Integer page,
                           @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize){
         //List<Product> products = service.findAll(page,pageSize);       
-        List<OFile> oFiles = null;
-        if(SecurityContextHolder.getContext().getAuthentication().getName().equals("test")){
-        	//List<Role> roles = (List<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        	oFiles = getFileList("C:/Users/lidan/Desktop/test");
-        }
+        List<OFile> oFiles = new ArrayList<OFile>();
+        List<OFile> files = new ArrayList<OFile>();
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<SimpleGrantedAuthority> roles = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for(int i = 0;i < roles.size(); i++) {
+         if(roles.get(i).getAuthority().contains("ADMIN")){ 
+        	 files = fileservice.findAll(page, pageSize);             
+            }else if(roles.get(i).getAuthority().contains("USER")) {
+            	 UserInfo user = service.findByUserName(name);
+                 files = fileservice.findAllByUserId(page, pageSize, user.getId());
+                 
+            }
+         for(int J = 0;J < files.size();J++) {
+          	oFiles.addAll(getFileList(files.get(J).getUrl()));
+          }
+        }        
+        
         PageInfo<OFile> pageInfo=new PageInfo<OFile>(oFiles);
         //PageInfo<Product> pageInfo=new PageInfo<Product>(products);
       /*  System.out.println(products);
@@ -186,8 +193,9 @@ public class FileController {
     	  List<OFile> list = new ArrayList<OFile>(); 
     	  try { 
     	   File file = new File(path); 
+    	   path.replaceAll("\\", "/");
     	   String[] filelist = file.list(); 
-    	   for (int i = 0; i < filelist.length; i++) {
+    	   for (int i = 0; i < filelist.length; i++) {    		   
     		   OFile oFile = new OFile(String.valueOf(i),filelist[i],path);
     	    list.add(oFile); 
     	   } 
