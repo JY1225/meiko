@@ -191,9 +191,9 @@ public class FileController {
      */
     public List<OFile> getFileList(String path) { 
     	  List<OFile> list = new ArrayList<OFile>(); 
-    	  try { 
-    	   File file = new File(path); 
-    	   path.replaceAll("\\", "/");
+    	  try {
+    		  path = path.replace("\\", "/");
+    	   File file = new File(path);     	   
     	   String[] filelist = file.list(); 
     	   for (int i = 0; i < filelist.length; i++) {    		   
     		   OFile oFile = new OFile(String.valueOf(i),filelist[i],path);
