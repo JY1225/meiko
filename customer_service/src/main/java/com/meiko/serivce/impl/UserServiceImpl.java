@@ -17,10 +17,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService ,UserDetailsService {
@@ -39,9 +43,10 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
     public List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
-       // authority.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
         for (Role role:roles){
             authority.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
+            session.setAttribute("role", "ROLE_"+role.getName());
         }
         return authority;
 

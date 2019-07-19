@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 import com.meiko.service.IUserService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private IUserService service;
+
    
    /* @Secured({"ROLE_ADMIN","ROLE_USER"})*/
     

@@ -111,7 +111,7 @@
                     <div class="table-box">
 
                         <!--工具栏-->
-                        <div class="pull-left">
+                        <%-- <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
@@ -132,12 +132,18 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --%>
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
+                                <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" name="fileName"
+                                       placeholder="文件名称">
+                                 </div>   
+                                 <div class="col-md-1">
+                                         <button type="submit" class="btn btn-default">搜索</button> 
+                                  </div>
+                             </form>
                             </div>
                         </div>
                         <!--工具栏/-->

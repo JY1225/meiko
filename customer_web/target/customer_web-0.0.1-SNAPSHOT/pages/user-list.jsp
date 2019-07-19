@@ -129,10 +129,13 @@
                         <div class="box-tools pull-right">
                             <div class="">
                             <form action="${pageContext.request.contextPath}/user/findAll" method="post" >
-                                <input type="text" class="form-control input-sm" name="userName"
+                                <div class="col-md-8"><input type="text" class="form-control input-sm" name="userName"
                                        placeholder="客户名称">
+                                 </div>   
+                                 <div class="col-md-1">
                                          <button type="submit" class="btn btn-default">搜索</button> 
-                                     </form>
+                                  </div>
+                             </form>
                             </div>
                         </div>
                        
@@ -193,7 +196,7 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li><a href="${pageContext.request.contextPath}/user/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="#">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}">上一页</a></li>
                             <c:if test="${pageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>
                                 <c:set var="end" value="${pageInfo.pages}"></c:set>
@@ -221,8 +224,8 @@
                             </c:forEach>
 
 
-                            <li><a href="#">下一页</a></li>
-                            <li><a href="#" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
 

@@ -48,7 +48,8 @@
                     </li> --%>
                 </ul>
             </li>
- <li class="treeview" id="role" style="visibility:hidden;">
+           <c:if test="${sessionScope.role == 'ROLE_ADMIN' }"> 
+ <li class="treeview" ><!-- id="role" style="visibility:hidden; -->
                 <a href="#">
                     <i class="fa fa-cogs"></i>
                     <span>系统管理</span>
@@ -68,11 +69,11 @@
                             <i class="fa fa-circle-o"></i> 角色管理
                         </a>
                     </li>
-                    <li>
+                    <%-- <li>
                         <a href="${pageContext.request.contextPath}/permission/findAll">
                             <i class="fa fa-circle-o"></i> 资源权限管理
                         </a>
-                    </li>
+                    </li> --%>
                     <li>
                         <a href="${pageContext.request.contextPath}/syslog/findAll">
                             <i class="fa fa-circle-o"></i> 访问日志
@@ -84,14 +85,15 @@
                         </a>
                     </li>
                 </ul>
-            </li> 
+            </li>
+           </c:if>  
         </ul>
     </section>
 </aside>
 <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
-$(document).ready(function () {
+/* $(document).ready(function () {
 	
     $.get("/user/getUserName",function(data){
     	//var roleName=data[0].name;
@@ -103,5 +105,5 @@ $(document).ready(function () {
     	}  	
     	
     },"json"); 
-});
+}); */
 </script>

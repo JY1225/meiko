@@ -1,5 +1,6 @@
 package com.meiko.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SysLog {
@@ -33,10 +34,13 @@ public class SysLog {
     }
 
     public String getVisitTimeStr() {
+    	SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd mm:hh:ss");
+    	visitTimeStr=format.format(this.visitTime);
         return visitTimeStr;
     }
 
     public void setVisitTimeStr(String visitTimeStr) {
+    	 
         this.visitTimeStr = visitTimeStr;
     }
 
