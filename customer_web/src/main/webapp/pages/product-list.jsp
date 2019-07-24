@@ -166,6 +166,7 @@
                                 <th class="sorting">产品描述</th>
                                 <th class="text-center sorting">状态</th> -->
                                 <th class="text-center">操作</th>
+                                <th class="text-center">次数</th>
                             </tr>
                             </thead>
                             <tbody>

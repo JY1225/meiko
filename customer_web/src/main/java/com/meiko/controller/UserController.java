@@ -1,6 +1,7 @@
 package com.meiko.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.meiko.domain.OFile;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 import com.meiko.service.IUserService;
@@ -31,6 +32,7 @@ public class UserController {
     
     public @ResponseBody List<Role> getUserName() {
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    //	SecurityContextHolder.getContext().getAuthentication().getCredentials();
     	System.out.println(name);
     	ModelAndView modelAndView=new ModelAndView();
       
@@ -83,10 +85,28 @@ public class UserController {
         modelAndView.setViewName("user-role-add");
         return modelAndView;
     }
+    
+    @RequestMapping("/findNotFile")
+    public ModelAndView  findNotFile(String id){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("uid",id);
+        List<OFile> list= service.findNotFile(id);
+        modelAndView.addObject("files",list);
+        modelAndView.setViewName("user-file-add");
+        return modelAndView;
+    }
     @RequestMapping("/saveUserRole")
     public String saveRole(String userId,String[] ids){
         for(String roleId :ids){
             service.saveUserRole(userId,roleId);
+        }
+
+        return "redirect:findAll";
+    }
+    @RequestMapping("/saveUserFile")
+    public String saveFile(String userId,String[] ids){
+        for(String fileId :ids){
+            service.saveUserFile(userId,fileId);
         }
 
         return "redirect:findAll";

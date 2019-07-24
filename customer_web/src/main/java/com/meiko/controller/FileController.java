@@ -80,21 +80,21 @@ public class FileController {
     	
     	try {
     		String path=ofile.getUrl()+"/"+ofile.getFileName();
-            // path鏄寚娆蹭笅杞界殑鏂囦欢鐨勮矾寰勩��
+            // 
             File file = new File(path);
-            // 鍙栧緱鏂囦欢鍚嶃��
+            // 
             String filename = file.getName();
-            // 鍙栧緱鏂囦欢鐨勫悗缂�鍚嶃��
+            // 
             String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
 
-            // 浠ユ祦鐨勫舰寮忎笅杞芥枃浠躲��
+            // 
             InputStream fis = new BufferedInputStream(new FileInputStream(path));
             byte[] buffer = new byte[fis.available()];
             fis.read(buffer);
             fis.close();
-            // 娓呯┖response
+            // 
             response.reset();
-            // 璁剧疆response鐨凥eader
+            //
             response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
             response.addHeader("Content-Length", "" + file.length());
             OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
@@ -109,34 +109,7 @@ public class FileController {
 
     	
     }
-    @RequestMapping("/downLoadOnline")
-    public void downLoadOnline(HttpServletResponse response, boolean isOnLine) throws Exception {
-    	String filePath="D:\\a.txt";
-        File f = new File(filePath);
-        if (!f.exists()) {
-            response.sendError(404, "File not found!");
-            return;
-        }
-        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
-        byte[] buf = new byte[1024];
-        int len = 0;
-
-        response.reset(); // 闈炲父閲嶈
-        if (isOnLine) { // 鍦ㄧ嚎鎵撳紑鏂瑰紡
-            URL u = new URL("file:///" + filePath);
-            response.setContentType(u.openConnection().getContentType());
-            response.setHeader("Content-Disposition", "inline; filename=" + f.getName());
-            // 鏂囦欢鍚嶅簲璇ョ紪鐮佹垚UTF-8
-        } else { // 绾笅杞芥柟寮�
-            response.setContentType("application/x-msdownload");
-            response.setHeader("Content-Disposition", "attachment; filename=" + f.getName());
-        }
-        OutputStream out = response.getOutputStream();
-        while ((len = br.read(buf)) > 0)
-            out.write(buf, 0, len);
-        br.close();
-        out.close();
-    }
+   
     
     
     @RequestMapping(value = "/read")
@@ -170,7 +143,7 @@ public class FileController {
        }
     }
     /**
-     * 鏂囦欢澶勭悊
+     * 
      * @param fileName
      * @return
      */
@@ -188,7 +161,7 @@ public class FileController {
 
     }
     /**
-     * 璇诲彇鏂囦欢澶规枃浠�
+     * 
      * @param path
      * @param fileName 
      * @return
@@ -214,4 +187,17 @@ public class FileController {
     	  } 
     	  return list; 
     	} 
+
+    @RequestMapping("/findAllDir")
+    public String findAllDir(Model model,
+            @RequestParam(name = "page",defaultValue = "1") Integer page,
+            @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize,
+            @RequestParam(name="fileName",required=false) String fileName) {
+    	List<OFile> oFiles = fileservice.findAll(page, pageSize,fileName);  
+    	 PageInfo<OFile> pageInfo=new PageInfo<OFile>(oFiles);
+    	 model.addAttribute("filePageInfo",pageInfo);
+         return  "dir-list";
+    	
+    }
+    
 }

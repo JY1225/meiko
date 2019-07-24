@@ -1,5 +1,6 @@
 package com.meiko.dao;
 
+import com.meiko.domain.OFile;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
@@ -26,6 +27,7 @@ public interface IUserDao {
     
     @Insert("insert into userinfo(username,password,email,phonenum,status)values(#{userName},#{password},#{email},#{phoneNum},#{status})")
     void save(UserInfo userInfo);
+    
     @Select("select * from userinfo where id=#{id}")
     @Results(id = "UserInfoRolePermission", value={
             @Result(id = true,column = "id",property = "id"),
@@ -43,4 +45,10 @@ public interface IUserDao {
     
     @Insert("insert into userinfo_role(userId,roleId) values (#{userId},#{roleId})")
     void saveUserRole(@Param("userId") int userId,@Param("roleId") int roleId);
+
+    @Select("select * from ofile f where f.id not in( select uf.fileId  from user_file uf where uf.userId=#{id})")
+	List<OFile> findNotFile(String id);
+
+    @Insert("insert into user_file(userId,fileId) values (#{userId},#{fileId})")
+	void saveUserFile(@Param("userId")String userId,@Param("fileId")String fileId);
 }

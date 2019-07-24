@@ -1,5 +1,6 @@
 package com.meiko.service;
 
+import com.meiko.domain.OFile;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 
@@ -17,4 +18,8 @@ public interface IUserService {
     void saveUserRole(String userId, String roleId);
     
     UserInfo findByUserName(String UserName);
+
+	List<OFile> findNotFile(String id);
+
+	void saveUserFile(String userId, String fileId);
 }

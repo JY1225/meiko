@@ -79,9 +79,19 @@
                             <i class="fa fa-circle-o"></i> 访问日志
                         </a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/loginlog/findAll">
+                            <i class="fa fa-circle-o"></i> 登录日志
+                        </a>
+                    </li>
                      <li>
                         <a href="${pageContext.request.contextPath}/menu/findAll">
                             <i class="fa fa-circle-o"></i> 菜单管理
+                        </a>
+                    </li>
+                     <li>
+                        <a href="${pageContext.request.contextPath}/file/findAllDir">
+                            <i class="fa fa-circle-o"></i> 文件系统管理
                         </a>
                     </li>
                 </ul>

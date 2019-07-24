@@ -13,9 +13,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <title>MEIKO</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -88,7 +88,7 @@
                 <small>全部用户</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.html"><i
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
                         href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
@@ -167,8 +167,9 @@
                                     <td class="text-center">${userInfo.phoneNum}</td>
                                     <td class="text-center">${userInfo.statusStr}</td>
                                     <td class="text-center">
-                                        <%-- <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> --%>
+                          <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> 
                                         <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
+                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加文件管理</a>
                                     </td>
                                 </tr>
                             </c:forEach>

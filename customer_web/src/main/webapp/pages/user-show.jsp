@@ -13,9 +13,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <title>MEIKO</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -88,7 +88,7 @@
                 用户管理 <small>全部用户</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.html"><i
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
                         href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
@@ -151,13 +151,13 @@
                                 <tbody>
                                 <c:forEach var="role" items="${userInfo.roles}" varStatus="vs">
                                     <tr data-tt-id="${vs.count}" data-tt-parent-id="0">
-                                        <td>${role.roleName}</td>
-                                        <td>${role.roleDesc}</td>
+                                        <td>${role.name}</td>
+                                        <td>${role.keyword}</td>
                                     </tr>
                                     <c:forEach items="${role.permissions}" var="permission" varStatus="vs2">
                                         <tr data-tt-id="${vs.count}-${vs2.count}" data-tt-parent-id="${vs.count}">
-                                            <td>${permission.permissionName}</td>
-                                            <td>${permission.url}</td>
+                                            <td>${permission.name}</td>
+                                            <td>${permission.keyword}</td>
                                         </tr>
                                     </c:forEach>
                                 </c:forEach>
@@ -175,7 +175,7 @@
 
                 <!-- .box-footer-->
                 <div class="box-footer">
-                    <div class="pull-left">
+                   <!--  <div class="pull-left">
                         <div class="form-group form-inline">
                             总共2 页，共14 条数据。 每页 <select class="form-control">
                             <option>1</option>
@@ -185,9 +185,9 @@
                             <option>5</option>
                         </select> 条
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="box-tools pull-right">
+                   <!--  <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li><a href="#" aria-label="Previous">首页</a></li>
                             <li><a href="#">上一页</a></li>
@@ -199,7 +199,7 @@
                             <li><a href="#">下一页</a></li>
                             <li><a href="#" aria-label="Next">尾页</a></li>
                         </ul>
-                    </div>
+                    </div> -->
 
                 </div>
                 <!-- /.box-footer-->
