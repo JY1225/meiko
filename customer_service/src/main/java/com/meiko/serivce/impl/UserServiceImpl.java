@@ -1,37 +1,33 @@
 package com.meiko.serivce.impl;
 
-import com.github.pagehelper.PageHelper;
-
-import com.meiko.dao.IUserDao;
-import com.meiko.domain.LoginLog;
-import com.meiko.domain.OFile;
-import com.meiko.domain.Role;
-import com.meiko.domain.UserInfo;
-import com.meiko.service.ILoginLogService;
-import com.meiko.service.ISysLogService;
-import com.meiko.service.IUserService;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.github.pagehelper.PageHelper;
+import com.meiko.dao.IUserDao;
+import com.meiko.domain.Cust_Addr;
+import com.meiko.domain.Cust_jccjs_list;
+import com.meiko.domain.LoginLog;
+import com.meiko.domain.Role;
+import com.meiko.domain.UserInfo;
+import com.meiko.service.ILoginLogService;
+import com.meiko.service.IUserService;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService ,UserDetailsService {
@@ -129,20 +125,32 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
 	@Override
 	public UserInfo findByUserName(String UserName) {
-		// TODO Auto-generated method stub
-		return dao.findByUserName(UserName);
+		
+        return dao.findByUserName(UserName);        
 	}
 
 	@Override
-	public List<OFile> findNotFile(String id) {
+	public List<Cust_Addr> findNotFile(String id) {
 		// TODO Auto-generated method stub
 		return  dao.findNotFile(id);
 	}
 
 	@Override
-	public void saveUserFile(String userId, String fileId) {
+	public void saveUserFile(String userId, String addr_id) {
 		// TODO Auto-generated method stub
 		
-        dao.saveUserFile(userId,fileId);
+        dao.saveUserFile(userId,addr_id);
+        
+	}
+
+	@Override
+	public List<Cust_jccjs_list> findFiles(int page, int pageSize,int id,String fileName) {
+		if(StringUtils.isBlank(fileName)) {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findFiles(id);
+        }else {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findFilesByFileName(fileName);
+        }		
 	}
 }

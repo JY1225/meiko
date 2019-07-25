@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.LoginLog;
-import com.meiko.domain.SysLog;
 import com.meiko.service.ILoginLogService;
-import com.meiko.service.ISysLogService;
 @Controller
 @RequestMapping("/loginlog")
 public class LoginController {

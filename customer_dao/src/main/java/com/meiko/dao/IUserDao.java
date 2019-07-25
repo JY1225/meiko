@@ -1,11 +1,18 @@
 package com.meiko.dao;
 
-import com.meiko.domain.OFile;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import com.meiko.domain.Cust_Addr;
+import com.meiko.domain.Cust_jccjs_list;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
-import org.apache.ibatis.annotations.*;
-
-import java.util.List;
 
 public interface IUserDao {
 
@@ -46,9 +53,16 @@ public interface IUserDao {
     @Insert("insert into userinfo_role(userId,roleId) values (#{userId},#{roleId})")
     void saveUserRole(@Param("userId") int userId,@Param("roleId") int roleId);
 
-    @Select("select * from ofile f where f.id not in( select uf.fileId  from user_file uf where uf.userId=#{id})")
-	List<OFile> findNotFile(String id);
+    @Select("select * from cust_jccjs_list t where t.cust_addr_id in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
+	List<Cust_jccjs_list> findFiles(int id);
+	
+    @Select("select * from CUST_ADDR t where t.recid not in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
+	List<Cust_Addr> findNotFile(String id);
 
-    @Insert("insert into user_file(userId,fileId) values (#{userId},#{fileId})")
-	void saveUserFile(@Param("userId")String userId,@Param("fileId")String fileId);
+    //@Insert("insert into user_file(userId,fileId) values (#{userId},#{fileId})")
+    @Insert("insert into userinfo_cust_addr(user_id,addr_id) values (#{userId},#{addr_id})")
+	void saveUserFile(@Param("userId")String userId,@Param("addr_id")String addr_id);
+
+    @Select("select * from cust_jccjs_list t where t.upload_filename like concat('%',#{fileName},'%')")
+	List<Cust_jccjs_list> findFilesByFileName(String fileName);
 }

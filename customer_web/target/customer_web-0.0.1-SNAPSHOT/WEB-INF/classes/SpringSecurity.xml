@@ -50,13 +50,7 @@
 		authorities="ROLE_USER"/> </security:user-service> </security:authentication-provider> 
 		</security:authentication-manager>  -->
 		
-		<!-- <security:authentication-manager 
-		alias="MyAuthenticationManager"> <security:authentication-provider ref="authenticationProvider" 
-		> </security:authentication-provider> </security:authentication-manager> 
-		<bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider"> 
-		<property name="userDetailsService" ref="userService" /> 显示用户错误信息 <property 
-		name="hideUserNotFoundExceptions" value="false" /> <property name="passwordEncoder" 
-		ref="passwordEncoder" /> </bean> -->
+		
 		
 		
 	<!-- 配置加密类 -->

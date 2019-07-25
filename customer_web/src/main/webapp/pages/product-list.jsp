@@ -157,16 +157,19 @@
                                 <th class="" style="padding-right: 0px;"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting_desc">编号</th>
-                                <th class="sorting_asc sorting_asc_disabled">文件名称</th>
-                               <!--  <th class="sorting_desc sorting_desc_disabled">出发城市</th>
-                                <th class="sorting">出发时间</th>
-                                <th class="text-center sorting">产品价格</th>
-                                <th class="sorting">产品描述</th>
-                                <th class="text-center sorting">状态</th> -->
-                                <th class="text-center">操作</th>
-                                <th class="text-center">次数</th>
+                                <th class="sorting_asc" >ID</th>
+                                <th class="text-center" >客户编码</th>
+                                <th class="text-center" >客户名称</th>
+                                <th class="text-center" >送货地址</th>
+                                <th class="text-center" >品名</th>
+                                <th class="text-center" >送货日期</th>
+                                <th class="text-center" >成绩书编号</th>                        
+                                <th class="sorting_asc sorting_asc_disabled" >文件名称</th>
+                                <th class="text-center" >上传时间</th>   
+                                <!-- <th class="text-center" >上传终端</th> -->
+                                <th class="text-center" >上传人员</th>    
+                                <th class="text-center" >操作</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
@@ -174,14 +177,22 @@
                                 <c:forEach items="${productPageInfo.list}" var="product" >
 
                                     <tr>
-                                        <td><input name="ids"  type="checkbox" value="${product.id}" id="ids" ></td>
-                                        <td>${product.id}</td>
-                                        <td>${product.url}</td>
-                                        <td>${product.fileName}</td>
-                                        <td class="text-center">
-                                           <button type="button" class="btn bg-olive btn-xs"onclick="location.href='${pageContext.request.contextPath}/file/read?id=${product.id}&url=${product.url}&fileName=${product.fileName}'" > 预览</button> 
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?id=${product.id}&url=${product.url}&fileName=${product.fileName}')" >预览</button>
-                                            <button type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?id=${product.id}&url=${product.url}&fileName=${product.fileName}'" >下载</button>
+                                        <td><input name="ids"  type="checkbox" value="${product.recid}" id="ids" ></td>
+                                        <td style="font-size:14px">${product.recid}</td>
+                                        <td style="font-size:14px">${product.cust_code}</td>
+                                        <td style="font-size:14px">${product.cust_name}</td>
+                                        <td style="font-size:14px">${product.shipping_addr}</td>
+                                        <td style="font-size:14px">${product.cust_part}</td>
+                                        <td style="font-size:14px">${product.shipping_dt}</td>
+                                        <td style="font-size:14px">${product.shipping_jccjs_no}</td>
+                                        <td style="font-size:14px">${product.upload_filename}</td>
+                                        <td style="font-size:14px">${product.upload_dt}</td>
+                                        <%-- <td>${product.upload_terminal}</td> --%>
+                                        <td style="font-size:14px">${product.upload_user}</td>
+                                        <td class="text-center" style="font-size:14px">
+                                           <button type="button" class="btn bg-olive btn-xs"onclick="location.href='${pageContext.request.contextPath}/file/read?upload_filename=${product.upload_filename}'" > 预览</button> 
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${product.upload_filename}')" >预览</button>
+                                            <button type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${product.upload_filename}'" >下载</button>
                                           
                                                                               
                                         </td>
@@ -249,8 +260,8 @@
                     </div>
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">上一页</a></li>
 
                             <c:if test="${productPageInfo.pages<10}">
                                 <c:set var="begin" value="1" />
@@ -271,14 +282,14 @@
                             </c:if>
 
                                  <c:forEach begin="${begin}" end="${end}" var="i">
-                                     <li><a href="${pageContext.request.contextPath}/product/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</c:forEach>
+                                     <li><a href="${pageContext.request.contextPath}/file/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</c:forEach>
                                      </a></li>
 
 
 
 
-                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/product/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
                 </div>
@@ -429,7 +440,7 @@
             var pageSize = $(this).val();
 
             //向服务器发送请求，改变没页显示条数
-            location.href = "${pageContext.request.contextPath}/product/findAll?page=1&pageSize=" + pageSize;
+            location.href = "${pageContext.request.contextPath}/file/findAll?page=1&pageSize=" + pageSize;
 
         });
 

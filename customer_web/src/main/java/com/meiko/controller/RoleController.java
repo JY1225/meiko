@@ -1,11 +1,6 @@
 package com.meiko.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.meiko.domain.Menu;
-import com.meiko.domain.Permission;
-import com.meiko.domain.Role;
-import com.meiko.domain.UserInfo;
-import com.meiko.service.IRoleService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.github.pagehelper.PageInfo;
+import com.meiko.domain.Menu;
+import com.meiko.domain.Permission;
+import com.meiko.domain.Role;
+import com.meiko.service.IRoleService;
 
 @Controller
 @RequestMapping("/role")

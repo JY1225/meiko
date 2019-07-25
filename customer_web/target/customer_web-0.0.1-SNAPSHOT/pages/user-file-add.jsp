@@ -112,19 +112,21 @@
                         <th class="" style="padding-right: 0px">
                             <input id="selall" type="checkbox" class="icheckbox_square-blue"></th>
                         <th class="sorting_asc">ID</th>
-                        <th class="sorting">名称</th>
-                        <th class="sorting">描述</th>
+                        <th class="sorting">客户编号</th>
+                        <th class="sorting">客户名称</th>
+                        <th class="sorting">送货地点</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${files}" var="file">
                         <tr>
                             <td>
-                                <input name="ids" type="checkbox" value="${file.id}">
+                                <input name="ids" type="checkbox" value="${file.recid}">
                             </td>
-                            <td>${file.id}</td>
-                            <td>${file.fileName}</td>
-                            <td>${file.url}</td>
+                            <td>${file.recid}</td>
+                            <td>${file.cust_code}</td>
+                            <td>${file.cust_name}</td>
+                            <td>${file.cust_shipping_addr}</td>
                         </tr>
                     </c:forEach>
 

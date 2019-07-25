@@ -11,7 +11,7 @@ public class UserInfo {
     private int status;
     private String statusStr;
     private List<Role> roles;
-    private List<OFile> files;
+    private List<Dir> files;
   
 
     public int getId() {
@@ -83,11 +83,11 @@ public class UserInfo {
         this.roles = roles;
     }
 
-    public List<OFile> getFiles() {
+    public List<Dir> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<OFile> files) {
+	public void setFiles(List<Dir> files) {
 		this.files = files;
 	}
 

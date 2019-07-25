@@ -9,11 +9,12 @@ import com.github.pagehelper.PageHelper;
 import com.meiko.dao.ILoginLogDao;
 import com.meiko.domain.LoginLog;
 import com.meiko.service.ILoginLogService;
+
 @Service
 public class LoginLogServiceImpl implements ILoginLogService  {
 
 	 @Autowired
-	    private ILoginLogDao dao;
+	private ILoginLogDao dao;
 	@Override
 	public List<LoginLog> findAll(int page, int pageSize) {
 		// TODO Auto-generated method stub

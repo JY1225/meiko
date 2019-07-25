@@ -84,16 +84,16 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                用户管理
-                <small>全部用户</small>
+                文件根目录管理
+                <small>全部根目录</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/main.html"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
+                        href="${pageContext.request.contextPath}/user/findAll.do">根目录管理</a></li>
 
-                <li class="active">全部用户</li>
+                <li class="active">全部根目录</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -115,18 +115,19 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick="location.href='${pageContext.request.contextPath}/pages/user-add.jsp'">
+                                            onclick="location.href='${pageContext.request.contextPath}/pages/dir-add.jsp'">
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
 
-                                    <button type="button" class="btn btn-default" title="刷新">
+                                    <button type="button" class="btn btn-default" title="刷新" 
+                                    onclick="location.href='${pageContext.request.contextPath}/file/findAllDir'">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="box-tools pull-right">
+                        <%-- <div class="box-tools pull-right">
                             <div class="">
                             <form action="${pageContext.request.contextPath}/user/findAll" method="post" >
                                 <div class="col-md-8"><input type="text" class="form-control input-sm" name="userName"
@@ -137,7 +138,7 @@
                                   </div>
                              </form>
                             </div>
-                        </div>
+                        </div> --%>
                        
                         <!--工具栏/-->
 
@@ -149,10 +150,10 @@
                                 <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="text-center">序号</th>
-                                <th class="text-center">用户名</th>
+                                <th class="text-center">序号</th>                                
                                 <th class="text-center">根目录</th>
-                                
+                                <th class="text-center">状态</th>
+                                <th class="text-center">编辑员</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
@@ -160,14 +161,14 @@
                             <c:forEach items="${filePageInfo.list}" var="dir" varStatus="status">
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td class="text-center">${status.index + 1}</td>
-                                    <td class="text-center">${dir.fileName}</td>
+                                    <td class="text-center">${dir.id}</td>                                    
                                     <td class="text-center">${dir.url}</td>
-                                   
+                                   <td class="text-center">${dir.statuStr}</td>
+                                   <td class="text-center">${dir.editUser}</td>
                                     <td class="text-center">
-                                        <%-- <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> --%>
-                                       <%--  <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加文件管理</a> --%>
+                                        <a href="${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}" class="btn bg-olive btn-xs">开启</a>
+                                        <a href="${pageContext.request.contextPath}/file/dirOffById?id=${dir.id}" class="btn bg-olive btn-xs">关闭</a>
+                                        <a href="${pageContext.request.contextPath}/file/dirDeleById?id=${dir.id}" class="btn bg-olive btn-xs">删除</a>
                                     </td>
                                 </tr>
                             </c:forEach>
