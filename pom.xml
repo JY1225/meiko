@@ -197,8 +197,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.7</version>
 		</dependency>
-<!-- log4j -->
-
+		<!-- sqlserver -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+		</dependency>
 
 	</dependencies>
 	<!-- 添加tomcat7插件 -->

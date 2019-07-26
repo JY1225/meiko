@@ -81,6 +81,7 @@ public class FileController {
     	try {
     		String path=ofile.getUrl()+"/"+ofile.getFileName();
             // 
+    		
             File file = new File(path);
             // 
             String filename = file.getName();
