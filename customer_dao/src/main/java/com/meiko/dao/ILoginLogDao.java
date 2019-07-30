@@ -13,6 +13,9 @@ public interface ILoginLogDao {
 	List<LoginLog> findAll();
 	 @Insert("insert into loginlog(loginName,password,userId,loginStatus,loginTime,ip) values(#{loginName},#{password},#{userId},#{loginStatus},#{loginTime},#{ip})")
 	void save(LoginLog loginLog);
+	 
+	 @Select("select * from loginlog where loginName like #{loginName}")
+	List<LoginLog> findAllByName(String loginName);
 	
 
 }

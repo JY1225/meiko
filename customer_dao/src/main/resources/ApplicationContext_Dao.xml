@@ -25,7 +25,7 @@
                     <property name="properties">
                         <props>
                             <!--数据库类型-->
-                            <prop key="helperDialect">mysql</prop>
+                            <prop key="helperDialect">sqlserver</prop>
                             <prop key="reasonable">true</prop>
                         </props>
                     </property>

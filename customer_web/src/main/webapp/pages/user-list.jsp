@@ -119,7 +119,8 @@
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
 
-                                    <button type="button" class="btn btn-default" title="刷新">
+                                    <button type="button" class="btn btn-default" title="刷新" 
+                                    onclick="window.location.reload();">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
                                 </div>
@@ -167,9 +168,10 @@
                                     <td class="text-center">${userInfo.phoneNum}</td>
                                     <td class="text-center">${userInfo.statusStr}</td>
                                     <td class="text-center">
-                          <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> 
+                           				<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>
+                                        <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>
                                         <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加文件管理</a>
+                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">送货地址管理</a>
                                     </td>
                                 </tr>
                             </c:forEach>

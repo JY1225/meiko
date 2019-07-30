@@ -74,11 +74,11 @@
                             <i class="fa fa-circle-o"></i> 资源权限管理
                         </a>
                     </li> --%>
-                    <li>
+                   <%--  <li>
                         <a href="${pageContext.request.contextPath}/syslog/findAll">
                             <i class="fa fa-circle-o"></i> 访问日志
                         </a>
-                    </li>
+                    </li> --%>
                     <li>
                         <a href="${pageContext.request.contextPath}/loginlog/findAll">
                             <i class="fa fa-circle-o"></i> 登录日志

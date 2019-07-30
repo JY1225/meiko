@@ -24,7 +24,7 @@ public interface IFileDao {
 //    @Select("SELECT * FROM ofile WHERE fileName LIKE concat('%',#{fileName},'%')")
 //	List<Dir> findAllbyFileName(String fileName);
 
-    @Update("UPDATE dir t SET t.status=#{status},t.editUser=#{editUser} WHERE t.id = #{id}")
+    @Update("UPDATE dir  SET status=#{status},editUser=#{editUser} WHERE id = #{id}")
 	void updateDirStausById(@Param("status") int status, @Param("editUser") String editUser, @Param("id") int id);
 
     @Delete("DELETE FROM dir  WHERE id = #{id}")

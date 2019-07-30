@@ -86,7 +86,7 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                日志管理 <small>全部日志</small>
+               日志管理 <small>全部日志</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.html"><i

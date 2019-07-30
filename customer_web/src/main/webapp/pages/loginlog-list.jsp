@@ -86,13 +86,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                日志管理 <small>全部日志</small>
+               登录日志管理 <small>全部日志</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.html"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="../pages/syslog-list.html">登录日志管理</a></li>
+                        href="../pages/loginlog-list.html">登录日志管理</a></li>
 
                 <li class="active">全部日志</li>
             </ol>
@@ -122,11 +122,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                         <div class="box-tools pull-right">
+                            <div class="">
+                            <form action="${pageContext.request.contextPath}/loginlog/findAll" method="post" >
+                                <div class="col-md-8"><input type="text" class="form-control input-sm" name="loginName"
+                                       placeholder="账号">
+                                 </div>   
+                                 <div class="col-md-1">
+                                         <button type="submit" class="btn btn-default">搜索</button> 
+                                  </div>
+                             </form>
                             </div>
                         </div>
                         <!--工具栏/-->
@@ -169,7 +174,7 @@
                         <!--数据列表/-->
 
                         <!--工具栏-->
-                        <div class="pull-left">
+                        <!-- <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="刷新"
@@ -185,7 +190,7 @@
                                        placeholder="搜索"> <span
                                     class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
-                        </div>
+                        </div> -->
                         <!--工具栏/-->
 
 
@@ -211,33 +216,38 @@
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="#" aria-label="Previous">首页</a></li>
-                            <li><a href="#">上一页</a></li>
-                            <c:if test="${pageInfo.pages<10}">
-                                <c:set var="begin" value="1" />
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}" aria-label="Previous">上一页</a></li>
+                            <c:if test="${pageInfo.pages<10 }">
+                                <c:set var="begin" value="1"></c:set>
+                                <c:set var="end" value="${pageInfo.pages}"></c:set>
+                            </c:if>
+                            <c:if test="${pageInfo.pages==10 }">
+                                <c:set var="begin" value="1"></c:set>
                                 <c:set var="end" value="${pageInfo.pages}"></c:set>
                             </c:if>
                             <c:if test="${pageInfo.pages>10}">
-                                <c:set var="begin" value="${pageInfo.pageNum-4}" />
-                                <c:set var="end" value="${pageInfo.pageNum+5}"></c:set>
+                                <c:set var="begin" value="${pageInfo.pageNum-5}"></c:set>
+                                <c:set var="end" value="${pageInfo.pageNum+4}"></c:set>
                                 <c:if test="${begin<0}">
-                                    <c:set var="begin" value="1" />
+                                    <c:set var="begin" value="1"></c:set>
                                     <c:set var="end" value="${begin+9}"></c:set>
                                 </c:if>
                                 <c:if test="${end>pageInfo.pages}">
-                                    <c:set var="end" value="${pageInfo.pages}" />
+                                    <c:set var="end" value="${pageInfo.pages}"></c:set>
                                     <c:set var="begin" value="${end-9}"></c:set>
+
                                 </c:if>
-
                             </c:if>
-                            <c:forEach begin="${begin}" end="${end}" var="i">
-                            <li><a href="${pageContext.request.contextPath}/syslog/findAll?page=${i}&pageSize=${pageInfo.pageSize}">${i}</c:forEach>
-                            </a></li>
 
 
+ 							<c:forEach begin="${begin}" end="${end}" var="i">
+                                <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${i}&pageSize=${pageInfo.pageSize}">${i}</a></li>
+                            </c:forEach>
 
-                            <li><a href="#">下一页</a></li>
-                            <li><a href="#" aria-label="Next">尾页</a></li>
+
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
 
@@ -345,13 +355,13 @@
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // 选择框
         $(".select2").select2();
 
         // WYSIHTML5编辑器
         $(".textarea").wysihtml5({
-            locale : 'zh-CN'
+            locale: 'zh-CN'
         });
     });
 
@@ -364,27 +374,48 @@
         }
     }
 
-    $(document).ready(function() {
+    $(document)
+        .ready(
+            function () {
 
-        // 激活导航位置
-        setSidebarActive("order-manage");
+                // 激活导航位置
+                setSidebarActive("admin-datalist");
 
-        // 列表按钮
-        $("#dataList td input[type='checkbox']").iCheck({
-            checkboxClass : 'icheckbox_square-blue',
-            increaseArea : '20%'
-        });
-        // 全选操作
-        $("#selall").click(function() {
-            var clicks = $(this).is(':checked');
-            if (!clicks) {
-                $("#dataList td input[type='checkbox']").iCheck("uncheck");
-            } else {
-                $("#dataList td input[type='checkbox']").iCheck("check");
-            }
-            $(this).data("clicks", !clicks);
-        });
-    });
+                // 列表按钮
+                $("#dataList td input[type='checkbox']")
+                    .iCheck(
+                        {
+                            checkboxClass: 'icheckbox_square-blue',
+                            increaseArea: '20%'
+                        });
+                // 全选操作
+                $("#selall")
+                    .click(
+                        function () {
+                            var clicks = $(this).is(
+                                ':checked');
+                            if (!clicks) {
+                                $(
+                                    "#dataList td input[type='checkbox']")
+                                    .iCheck(
+                                        "uncheck");
+                            } else {
+                                $(
+                                    "#dataList td input[type='checkbox']")
+                                    .iCheck("check");
+                            }
+                            $(this).data("clicks",
+                                !clicks);
+                        });
+                $("#changePageSize").change(function () {
+                    //获取下拉框的值
+                    var pageSize = $(this).val();
+
+                    //向服务器发送请求，改变没页显示条数
+                    location.href = "${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum}&pageSize=" + pageSize;
+
+                });
+            });
 </script>
 </body>
 

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.meiko.domain.Cust_Addr;
 import com.meiko.domain.Cust_jccjs_list;
@@ -29,7 +30,7 @@ public interface IUserDao {
     @Select("select * from userinfo")
     List<UserInfo> findAll();
     
-    @Select("select * from userinfo where userName like concat('%',#{userName},'%') ")
+    @Select("select * from userinfo where userName like #{userName}")
     List<UserInfo> findAllByName(String userName);
     
     @Insert("insert into userinfo(username,password,email,phonenum,status)values(#{userName},#{password},#{email},#{phoneNum},#{status})")
@@ -63,6 +64,9 @@ public interface IUserDao {
     @Insert("insert into userinfo_cust_addr(user_id,addr_id) values (#{userId},#{addr_id})")
 	void saveUserFile(@Param("userId")String userId,@Param("addr_id")String addr_id);
 
-    @Select("select * from cust_jccjs_list t where t.upload_filename like concat('%',#{fileName},'%')")
+    @Select("select * from cust_jccjs_list t where t.upload_filename like #{fileName}")
 	List<Cust_jccjs_list> findFilesByFileName(String fileName);
+
+	@Update("UPDATE userinfo  SET status=#{status} WHERE id = #{id}")
+	void updateUserStausById(@Param("id")int id, @Param("status")int status);
 }
