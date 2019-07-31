@@ -1,10 +1,11 @@
 package com.meiko.service;
 
-import com.meiko.domain.OFile;
+import java.util.List;
+
+import com.meiko.domain.Cust_Addr;
+import com.meiko.domain.Cust_jccjs_list;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
-
-import java.util.List;
 
 public interface IUserService {
     List<UserInfo> findAll(int page, int pageSize,String userName);
@@ -19,7 +20,9 @@ public interface IUserService {
     
     UserInfo findByUserName(String UserName);
 
-	List<OFile> findNotFile(String id);
+	List<Cust_Addr> findNotFile(String id);
+	
+	List<Cust_jccjs_list> findFiles(int id, int pageSize, int i, String fileName);
 
 	void saveUserFile(String userId, String fileId);
 }

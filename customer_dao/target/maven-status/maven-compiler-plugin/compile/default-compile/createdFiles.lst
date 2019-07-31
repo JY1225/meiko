@@ -2,5 +2,6 @@ com\meiko\dao\IUserDao.class
 com\meiko\dao\IMenuDao.class
 com\meiko\dao\ISysLogDao.class
 com\meiko\dao\IFileDao.class
+com\meiko\dao\ILoginLogDao.class
 com\meiko\dao\IPermissionDao.class
 com\meiko\dao\IRoleDao.class

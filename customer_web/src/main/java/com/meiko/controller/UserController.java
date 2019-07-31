@@ -1,14 +1,8 @@
 package com.meiko.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.meiko.domain.OFile;
-import com.meiko.domain.Role;
-import com.meiko.domain.UserInfo;
-import com.meiko.service.IUserService;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.security.RolesAllowed;
-import java.util.List;
+import com.github.pagehelper.PageInfo;
+import com.meiko.domain.Cust_Addr;
+import com.meiko.domain.Role;
+import com.meiko.domain.UserInfo;
+import com.meiko.service.IUserService;
 
 @Controller
 @RequestMapping("/user")
@@ -51,7 +48,7 @@ public class UserController {
     	
         List<UserInfo> list= service.findAll(page,pageSize,userName);
         ModelAndView modelAndView=new ModelAndView();
-        PageInfo<UserInfo> pageInfo=new PageInfo<>(list);
+        PageInfo<UserInfo> pageInfo=new PageInfo<UserInfo>(list);
         modelAndView.addObject("pageInfo",pageInfo);
         modelAndView.setViewName("user-list");
         return modelAndView;
@@ -90,7 +87,7 @@ public class UserController {
     public ModelAndView  findNotFile(String id){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("uid",id);
-        List<OFile> list= service.findNotFile(id);
+        List<Cust_Addr> list= service.findNotFile(id);
         modelAndView.addObject("files",list);
         modelAndView.setViewName("user-file-add");
         return modelAndView;
@@ -105,8 +102,8 @@ public class UserController {
     }
     @RequestMapping("/saveUserFile")
     public String saveFile(String userId,String[] ids){
-        for(String fileId :ids){
-            service.saveUserFile(userId,fileId);
+        for(String addr_id :ids){
+            service.saveUserFile(userId,addr_id);
         }
 
         return "redirect:findAll";

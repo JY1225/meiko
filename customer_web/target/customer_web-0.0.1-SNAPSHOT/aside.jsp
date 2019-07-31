@@ -91,7 +91,7 @@
                     </li>
                      <li>
                         <a href="${pageContext.request.contextPath}/file/findAllDir">
-                            <i class="fa fa-circle-o"></i> 文件系统管理
+                            <i class="fa fa-circle-o"></i> 文件路径管理
                         </a>
                     </li>
                 </ul>

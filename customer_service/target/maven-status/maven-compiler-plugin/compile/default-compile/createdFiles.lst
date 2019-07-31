@@ -1,5 +1,6 @@
 com\meiko\service\IFileService.class
 com\meiko\serivce\impl\FileServiceImpl.class
+com\meiko\service\ILoginLogService.class
 com\meiko\service\IRoleService.class
 com\meiko\service\ISysLogService.class
 com\meiko\serivce\impl\SysLogServiceImpl.class

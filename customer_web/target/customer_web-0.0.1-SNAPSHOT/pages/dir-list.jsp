@@ -84,16 +84,16 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                用户管理
-                <small>全部用户</small>
+                文件根目录管理
+                <small>全部根目录</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/main.html"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
+                        href="${pageContext.request.contextPath}/user/findAll.do">根目录管理</a></li>
 
-                <li class="active">全部用户</li>
+                <li class="active">全部根目录</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -115,18 +115,19 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick="location.href='${pageContext.request.contextPath}/pages/user-add.jsp'">
+                                            onclick="location.href='${pageContext.request.contextPath}/pages/dir-add.jsp'">
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
 
-                                    <button type="button" class="btn btn-default" title="刷新">
+                                    <button type="button" class="btn btn-default" title="刷新" 
+                                    onclick="location.href='${pageContext.request.contextPath}/file/findAllDir'">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="box-tools pull-right">
+                        <%-- <div class="box-tools pull-right">
                             <div class="">
                             <form action="${pageContext.request.contextPath}/user/findAll" method="post" >
                                 <div class="col-md-8"><input type="text" class="form-control input-sm" name="userName"
@@ -137,7 +138,7 @@
                                   </div>
                              </form>
                             </div>
-                        </div>
+                        </div> --%>
                        
                         <!--工具栏/-->
 
@@ -149,10 +150,10 @@
                                 <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="text-center">序号</th>
-                                <th class="text-center">用户名</th>
+                                <th class="text-center">序号</th>                                
                                 <th class="text-center">根目录</th>
-                                
+                                <th class="text-center">状态</th>
+                                <th class="text-center">编辑员</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
@@ -160,14 +161,14 @@
                             <c:forEach items="${filePageInfo.list}" var="dir" varStatus="status">
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td class="text-center">${status.index + 1}</td>
-                                    <td class="text-center">${dir.fileName}</td>
+                                    <td class="text-center">${dir.id}</td>                                    
                                     <td class="text-center">${dir.url}</td>
-                                   
+                                   <td class="text-center">${dir.statuStr}</td>
+                                   <td class="text-center">${dir.editUser}</td>
                                     <td class="text-center">
-                                        <%-- <a href="${pageContext.request.contextPath}/user/findById?id=${userInfo.id}" class="btn bg-olive btn-xs">详情</a> --%>
-                                       <%--  <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加文件管理</a> --%>
+                                        <a href="${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}" class="btn bg-olive btn-xs">开启</a>
+                                        <a href="${pageContext.request.contextPath}/file/dirOffById?id=${dir.id}" class="btn bg-olive btn-xs">关闭</a>
+                                        <a href="${pageContext.request.contextPath}/file/dirDeleById?id=${dir.id}" class="btn bg-olive btn-xs">删除</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -181,50 +182,50 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            总共${pageInfo.pages} 页，共${pageInfo.total}条数据。 每页
+                            总共${filePageInfo.pages} 页，共${filePageInfo.total}条数据。 每页
                             <select class="form-control" id="changePageSize">
-                            <option <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1</option>
-                            <option <c:if test="${pageInfo.pageSize==2}">selected</c:if>>2</option>
-                            <option <c:if test="${pageInfo.pageSize==3}">selected</c:if>>3</option>
-                            <option <c:if test="${pageInfo.pageSize==4}">selected</c:if>>4</option>
-                            <option <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option <c:if test="${filePageInfo.pageSize==1}">selected</c:if>>1</option>
+                            <option <c:if test="${filePageInfo.pageSize==2}">selected</c:if>>2</option>
+                            <option <c:if test="${filePageInfo.pageSize==3}">selected</c:if>>3</option>
+                            <option <c:if test="${filePageInfo.pageSize==4}">selected</c:if>>4</option>
+                            <option <c:if test="${filePageInfo.pageSize==5}">selected</c:if>>5</option>
                         </select> 条
                         </div>
                     </div>
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}">上一页</a></li>
-                            <c:if test="${pageInfo.pages<10 }">
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=1&pageSize=${filePageInfo.pageSize}" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum-1}&pageSize=${filePageInfo.pageSize}">上一页</a></li>
+                            <c:if test="${filePageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>
-                                <c:set var="end" value="${pageInfo.pages}"></c:set>
+                                <c:set var="end" value="${filePageInfo.pages}"></c:set>
                             </c:if>
-                            <c:if test="${pageInfo.pages==10 }">
+                            <c:if test="${filePageInfo.pages==10 }">
                                 <c:set var="begin" value="1"></c:set>
-                                <c:set var="end" value="${pageInfo.pages}"></c:set>
+                                <c:set var="end" value="${filePageInfo.pages}"></c:set>
                             </c:if>
-                            <c:if test="${pageInfo.pages>10}">
-                                <c:set var="begin" value="${pageInfo.pageNum-5}"></c:set>
-                                <c:set var="end" value="${pageInfo.pageNum+4}"></c:set>
+                            <c:if test="${filePageInfo.pages>10}">
+                                <c:set var="begin" value="${filePageInfo.pageNum-5}"></c:set>
+                                <c:set var="end" value="${filePageInfo.pageNum+4}"></c:set>
                                 <c:if test="${begin<0}">
                                     <c:set var="begin" value="1"></c:set>
                                     <c:set var="end" value="${begin+9}"></c:set>
                                 </c:if>
-                                <c:if test="${end>pageInfo.pages}">
-                                    <c:set var="end" value="${pageInfo.pages}"></c:set>
+                                <c:if test="${end>filePageInfo.pages}">
+                                    <c:set var="end" value="${filePageInfo.pages}"></c:set>
                                     <c:set var="begin" value="${end-9}"></c:set>
 
                                 </c:if>
                             </c:if>
 
                             <c:forEach begin="${begin}" end="${end}" var="i">
-                                <li><a href="${pageContext.request.contextPath}/user/findAll?page=${i}&pageSize=${pageInfo.pageSize}">${i}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${i}&pageSize=${filePageInfo.pageSize}">${i}</a></li>
                             </c:forEach>
 
 
-                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum+1}&pageSize=${filePageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pages}&pageSize=${filePageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
 
@@ -347,7 +348,7 @@
                     var pageSize = $(this).val();
 
                     //向服务器发送请求，改变没页显示条数
-                    location.href = "${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum}&pageSize=" + pageSize;
+                    location.href = "${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum}&pageSize=" + pageSize;
 
                 });
             });
