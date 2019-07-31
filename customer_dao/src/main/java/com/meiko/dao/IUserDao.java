@@ -69,4 +69,7 @@ public interface IUserDao {
 
 	@Update("UPDATE userinfo  SET status=#{status} WHERE id = #{id}")
 	void updateUserStausById(@Param("id")int id, @Param("status")int status);
+
+	@Update("UPDATE userinfo  SET password=#{password} WHERE userName = #{userName}")
+	void passUpadateByName(@Param("userName")String userName, @Param("password")String password);
 }

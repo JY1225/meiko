@@ -27,4 +27,6 @@ public interface IUserService {
 	void saveUserFile(String userId, String fileId);
 
 	void updateUserStausById(int id, int status);
+
+	void passUpadateByName(String name, String password);
 }

@@ -109,7 +109,11 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     @Override
     public void save(UserInfo userInfo) {
       userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
-      dao.save(userInfo);
+      if(dao.findAllByName(userInfo.getUserName()).size()>0) {
+    	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
+      }else {
+    	  dao.save(userInfo);
+      }
     }
 
     @Override
@@ -163,5 +167,17 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	@Override
 	public void updateUserStausById(int id, int status) {
 		dao.updateUserStausById(id,status);		
+	}
+
+	@Override
+	public void passUpadateByName(String userName, String password) {
+		try {
+			dao.passUpadateByName(userName,password);
+			JOptionPane.showMessageDialog(null,"密码修改成功","",JOptionPane.PLAIN_MESSAGE);
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"密码修改失败","",JOptionPane.PLAIN_MESSAGE);
+			e.printStackTrace();
+		}
+		
 	}
 }

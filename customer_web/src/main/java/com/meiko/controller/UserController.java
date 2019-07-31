@@ -125,4 +125,11 @@ public class UserController {
     	service.updateUserStausById(id,0);        
         return  "redirect:findAll";
     }
+    
+    @RequestMapping("/passUpadateByName")
+    private String passUpadateById(UserInfo userInfo){
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();                
+        service.passUpadateByName(name,userInfo.getPassword());
+        return  "password-edit";
+    }
 }

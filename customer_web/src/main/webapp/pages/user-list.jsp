@@ -152,8 +152,8 @@
                                 </th>
                                 <th class="text-center">序号</th>
                                 <th class="text-center">用户名</th>
-                                <th class="text-center">邮箱</th>
-                                <th class="text-center">联系电话</th>
+                                <th class="text-center">密码</th>
+                                <th class="text-center">邮箱</th>                               
                                 <th class="text-center">状态</th>
                                 <th class="text-center">操作</th>
                             </tr>
@@ -164,8 +164,8 @@
                                     <td><input name="ids" type="checkbox"></td>
                                     <td class="text-center">${status.index + 1}</td>
                                     <td class="text-center">${userInfo.userName}</td>
-                                    <td class="text-center">${userInfo.email}</td>
-                                    <td class="text-center">${userInfo.phoneNum}</td>
+                                    <td class="text-center">${userInfo.password}</td>
+                                    <td class="text-center">${userInfo.email}</td>                                    
                                     <td class="text-center">${userInfo.statusStr}</td>
                                     <td class="text-center">
                            				<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>

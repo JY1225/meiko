@@ -27,10 +27,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
                <!--  <img src="./img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
                  <span>
-				    <security:authentication property="principal.username"></security:authentication>
-				    
-				</span>  
-				         
+				    <security:authentication property="principal.username"></security:authentication>				    
+				</span>            
                 </a> 
              
                     <ul class="dropdown-menu" style="width:20px;">
@@ -47,6 +45,9 @@
                             </div>
                         </li> --%>
                     </ul></li>
+                    <li class="" >                        
+                         <a href="${pageContext.request.contextPath}/pages/password-edit.jsp" class="">修改密码</a>                   
+                    </li>
 					<li class="" >                                                      
                         <a href="${pageContext.request.contextPath}/logout"
                           class="" >注销</a>
