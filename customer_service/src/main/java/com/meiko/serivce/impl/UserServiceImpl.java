@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -50,7 +51,11 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     	 
     	 
     	try {
-    		UserInfo userInfo= dao.findByUserName(s);   
+    		UserInfo userInfo= dao.findByUserName(s);
+    		if(userInfo.getStatus()==0) {
+    			userInfo.setRoles(null);
+    			JOptionPane.showMessageDialog(null,"您的状态已关闭，请联系管理员","提示",JOptionPane.PLAIN_MESSAGE);
+    		}
             User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));            
             //System.out.println(user.getAuthorities());
             
@@ -78,10 +83,11 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
         HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
        
-        
+        if(roles != null) {
         for (Role role:roles){
             authority.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
             session.setAttribute("role", "ROLE_"+role.getName());
+        }
         }
         return authority;
 
@@ -95,7 +101,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
         	return dao.findAll();
         }else {
         	PageHelper.startPage(page,pageSize);
-        	return dao.findAllByName(userName);
+        	return dao.findAllByName("%"+userName+"%");
         }
         
     }
@@ -103,7 +109,11 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     @Override
     public void save(UserInfo userInfo) {
       userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
-      dao.save(userInfo);
+      if(dao.findAllByName(userInfo.getUserName()).size()>0) {
+    	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
+      }else {
+    	  dao.save(userInfo);
+      }
     }
 
     @Override
@@ -150,7 +160,24 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
         	return dao.findFiles(id);
         }else {
         	PageHelper.startPage(page,pageSize);
-        	return dao.findFilesByFileName(fileName);
+        	return dao.findFilesByFileName("%"+fileName+"%");
         }		
+	}
+
+	@Override
+	public void updateUserStausById(int id, int status) {
+		dao.updateUserStausById(id,status);		
+	}
+
+	@Override
+	public void passUpadateByName(String userName, String password) {
+		try {
+			dao.passUpadateByName(userName,password);
+			JOptionPane.showMessageDialog(null,"密码修改成功","",JOptionPane.PLAIN_MESSAGE);
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"密码修改失败","",JOptionPane.PLAIN_MESSAGE);
+			e.printStackTrace();
+		}
+		
 	}
 }

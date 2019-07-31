@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,21 +54,16 @@ public class UserController {
         modelAndView.setViewName("user-list");
         return modelAndView;
     }
+    
     @RequestMapping("/save")
     public String save(UserInfo userInfo){
         service.save(userInfo);
         return "redirect:findAll";
     }
+    
     @RequestMapping("/findById")
     public ModelAndView findById(String id){
      UserInfo userInfo= service.findById(id);
-     /*System.out.println(userInfo);
-        List<Role> roles = userInfo.getRoles();
-        for(Role role:roles){
-            System.out.println(role);
-            System.out.println(role.getPermissions());
-        }
-*/
      ModelAndView modelAndView=new ModelAndView();
      modelAndView.addObject("userInfo",userInfo);
      modelAndView.setViewName("user-show");
@@ -107,5 +103,33 @@ public class UserController {
         }
 
         return "redirect:findAll";
+    }
+    
+    @RequestMapping("/userOnById")
+    public String userOnById(Model model,
+            @RequestParam(name = "page",defaultValue = "1") Integer page,
+            @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize,
+            @RequestParam(name="id",required=false) int id) {    	
+    	
+    		service.updateUserStausById(id,1); 
+    		   	  
+        return   "redirect:findAll";
+    }
+    
+    @RequestMapping("/userOffById")
+    public String userOffById(Model model,
+            @RequestParam(name = "page",defaultValue = "1") Integer page,
+            @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize,
+            @RequestParam(name="id",required=false) int id) {
+    	
+    	service.updateUserStausById(id,0);        
+        return  "redirect:findAll";
+    }
+    
+    @RequestMapping("/passUpadateByName")
+    private String passUpadateById(UserInfo userInfo){
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();                
+        service.passUpadateByName(name,userInfo.getPassword());
+        return  "password-edit";
     }
 }

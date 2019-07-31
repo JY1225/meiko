@@ -20,9 +20,10 @@ public class LoginController {
     public  String findAll(
             @RequestParam(name="page",required = true,defaultValue = "1")Integer page,
             @RequestParam(name="pageSize",required = true,defaultValue = "3")Integer pageSize,
+            @RequestParam(name="loginName",required=false) String loginName,
             Model model)
     {
-     List<LoginLog> list= service.findAll(page,pageSize);
+     List<LoginLog> list= service.findAll(page,pageSize,loginName);
         PageInfo<LoginLog> pageInfo=new PageInfo<LoginLog>(list);
         model.addAttribute("pageInfo",pageInfo);
         return "loginlog-list";

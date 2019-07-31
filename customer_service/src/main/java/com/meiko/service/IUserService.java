@@ -25,4 +25,8 @@ public interface IUserService {
 	List<Cust_jccjs_list> findFiles(int id, int pageSize, int i, String fileName);
 
 	void saveUserFile(String userId, String fileId);
+
+	void updateUserStausById(int id, int status);
+
+	void passUpadateByName(String name, String password);
 }

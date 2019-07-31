@@ -8,7 +8,7 @@ import com.meiko.domain.SysLog;
 public interface ILoginLogService {
 
 	
-	List<LoginLog> findAll(int page, int pageSize);
+	List<LoginLog> findAll(int page, int pageSize, String userName);
 
 	void save(LoginLog loginLog);
 }

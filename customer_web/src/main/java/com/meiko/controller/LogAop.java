@@ -35,7 +35,7 @@ public class LogAop {
     private Class clazz;
     private String methodName;
 
-    @Pointcut("execution(* com.meiko.controller.*.*(..))")
+	@Pointcut("execution(* com.meiko.controller111.*.*(..))")
     public void pointCut1(){
 
     }

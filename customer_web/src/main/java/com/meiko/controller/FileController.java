@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,7 +174,7 @@ public class FileController {
     public String dirOnById(Model model,
             @RequestParam(name = "page",defaultValue = "1") Integer page,
             @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize,
-            @RequestParam(name="id",required=false) int id) {
+            @RequestParam(name="id",required=false) int id) throws IOException {
     	List<Dir> dirs = fileservice.findAll(page, pageSize,"");
     	List<Integer> status = new ArrayList<Integer>();
     	for(int i = 0;i < dirs.size();i++) {   		
@@ -189,10 +190,8 @@ public class FileController {
     	}else {
     		JOptionPane.showMessageDialog(null,"已有开启目录，如需切换请先关闭该目录","错误",JOptionPane.PLAIN_MESSAGE);
     	}    
-    	List<Dir> oFiles = fileservice.findAll(page, pageSize,"");  
-	 	PageInfo<Dir> pageInfo=new PageInfo<Dir>(oFiles);
-	 	model.addAttribute("filePageInfo",pageInfo); 
-        return  "dir-list";
+ 
+        return  "redirect:findAllDir";
     }
     
     @RequestMapping("/dirOffById")
@@ -202,10 +201,8 @@ public class FileController {
             @RequestParam(name="id",required=false) int id) {
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
     	fileservice.updateDirStausById(0,name,id);        
-        List<Dir> oFiles = fileservice.findAll(page, pageSize,"");  
-   	 	PageInfo<Dir> pageInfo=new PageInfo<Dir>(oFiles);
-   	 	model.addAttribute("filePageInfo",pageInfo);
-        return  "dir-list";
+
+        return  "redirect:findAllDir";
     }
     
     @RequestMapping("/dirDeleById")
@@ -214,10 +211,7 @@ public class FileController {
             @RequestParam(name = "pageSize",defaultValue = "3") Integer pageSize,
             @RequestParam(name="id",required=false) int id){
     	fileservice.deleteDirStausById(id);        
-        List<Dir> oFiles = fileservice.findAll(page, pageSize,"");  
-   	 	PageInfo<Dir> pageInfo=new PageInfo<Dir>(oFiles);
-   	 	model.addAttribute("filePageInfo",pageInfo);
-        return  "dir-list";
+        return  "redirect:findAllDir";
     }
     
     @RequestMapping("/save")

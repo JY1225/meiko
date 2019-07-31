@@ -120,7 +120,7 @@
                                     </button>
 
                                     <button type="button" class="btn btn-default" title="刷新" 
-                                    onclick="location.href='${pageContext.request.contextPath}/file/findAllDir'">
+                                     onclick="window.location.reload();">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
                                 </div>
