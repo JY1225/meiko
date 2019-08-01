@@ -20,4 +20,6 @@ public interface IFileService {
 	Dir findDirByStatus(int status);
 
 	void updateDownloads(Cust_jccjs_list ofile);
+
+	void updatePreviews(Cust_jccjs_list ofile);
 }

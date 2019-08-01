@@ -3,9 +3,14 @@ import org.jodconverter.OfficeDocumentConverter;
 import org.jodconverter.office.DefaultOfficeManagerBuilder;
 import org.jodconverter.office.OfficeException;
 import org.jodconverter.office.OfficeManager;
+import org.junit.experimental.runners.Enclosed;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64.Encoder;
 import java.util.regex.Pattern;
+
+import javax.sound.sampled.AudioFormat.Encoding;
 
 /**
  * Created by lenovo12 on 2018/8/18.
@@ -30,6 +35,7 @@ public final class Office2PDF {
      */
     public static File office2pdf(String sourceFilePath){
         OfficeManager officeManager = null;
+        
         try{
             if(StringUtil.isEmpty(sourceFilePath))
             {
@@ -43,7 +49,7 @@ public final class Office2PDF {
                 //鎵撳嵃鏃ュ織...
                 return null;
             }
-            System.out.println("123");
+            //System.out.println("123");
             String after_convert_file_path = getAfterConverFilePath(sourceFilePath);
             //鍚姩openOffice
             officeManager = getOfficeManager();
@@ -73,13 +79,20 @@ public final class Office2PDF {
      * @return
      */
     public static File convertFile(File sourceFile,
-                           String after_convert_file_path,String sourceFilePath,OfficeDocumentConverter converter) throws OfficeException {
+                           String after_convert_file_path,String sourceFilePath,OfficeDocumentConverter converter)  {
+    	
         File outputFile = new File(after_convert_file_path);
+        
         if(!outputFile.getParentFile().exists()){
             //濡傛灉涓婄骇鐩綍涓嶅瓨鍦ㄤ篃灏辨槸E:/pdfFile杩欎釜鏂囦欢澶逛笉瀛樺湪鍒欏垱寤轰竴涓�
             outputFile.getParentFile().mkdirs();
         }
-            converter.convert(sourceFile,outputFile);
+        try {
+				converter.convert(sourceFile,outputFile);
+			} catch (OfficeException e) {
+				
+				e.printStackTrace();
+			}
         return outputFile;
     }
 

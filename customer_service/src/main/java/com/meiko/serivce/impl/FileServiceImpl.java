@@ -70,4 +70,10 @@ public  class FileServiceImpl implements IFileService {
 		// TODO Auto-generated method stub
 		dao.updateDownloads(ofile.getDown_loads(),ofile.getRecid());
 	}
+
+	@Override
+	public void updatePreviews(Cust_jccjs_list ofile) {
+		// TODO Auto-generated method stub
+		dao.Previews(ofile.getPreviews(),ofile.getRecid());
+	}
 }

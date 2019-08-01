@@ -38,4 +38,7 @@ public interface IFileDao {
 	Dir findDirByStatus(@Param("status")int status);
     @Update("UPDATE cust_jccjs_list SET down_loads=#{down_loads}+1 WHERE recid=#{recid}")
 	void updateDownloads(@Param("down_loads")int down_loads,@Param("recid")int recid);
+    
+    @Update("UPDATE cust_jccjs_list SET previews=#{previews}+1 WHERE recid=#{recid}")
+	void Previews(@Param("previews")int previews, @Param("recid")int recid);
 }

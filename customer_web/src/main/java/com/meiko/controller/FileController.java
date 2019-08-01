@@ -90,7 +90,6 @@ public class FileController {
             toClient.write(buffer);
             toClient.flush();
             toClient.close();
-            System.out.println("1111111="+response.isCommitted());;
             int down_loads = ofile.getDown_loads();
             ofile.setDown_loads(down_loads);
             fileservice.updateDownloads(ofile); 
@@ -107,12 +106,12 @@ public class FileController {
     
     
     @RequestMapping(value = "/read")
-    public void readFile(HttpServletResponse res, Cust_jccjs_list file
+    public void readFile(HttpServletResponse res, Cust_jccjs_list ofile
     		) throws Exception{
         InputStream in = null;
         OutputStream out = null; 
         Dir dir = fileservice.findDirByStatus(1);
-		String path=dir.getUrl().replace("\\", "/")+"/"+file.getUpload_filename();
+		String path=dir.getUrl().replace("\\", "/")+"/"+ofile.getUpload_filename();
         String filePath =  fileHandler(path);
         System.out.println(filePath);
 
@@ -127,6 +126,9 @@ public class FileController {
            while((len = in.read(b)) != -1){
                out.write(b);
            }
+           int previews = ofile.getPreviews();
+           ofile.setPreviews(previews);;
+           fileservice.updatePreviews(ofile); 
        }catch (Exception e){
            e.printStackTrace();
        }finally {
