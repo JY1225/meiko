@@ -88,10 +88,9 @@
                 <small>全部用户</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.html"><i
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
+                <li>用户管理</li>
 
                 <li class="active">全部用户</li>
             </ol>

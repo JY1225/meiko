@@ -89,10 +89,9 @@
                登录日志管理 <small>全部日志</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../main.html"><i
+                <li><a href="../main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="../pages/loginlog-list.html">登录日志管理</a></li>
+                <li>登录日志管理</li>
 
                 <li class="active">全部日志</li>
             </ol>

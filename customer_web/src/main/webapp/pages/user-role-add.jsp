@@ -90,10 +90,9 @@
                 <small>添加角色表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../main.html"><i
+                <li><a href="../main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="user-list.html">用户管理</a></li>
+                <li>用户管理</li>
                 <li class="active">添加角色表单</li>
             </ol>
         </section>

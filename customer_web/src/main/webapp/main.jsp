@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <html>
 <head>
+    
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,6 +60,52 @@
           href="./plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
           href="./plugins/bootstrap-slider/slider.css">
+    <style type="text/css">
+        .case {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            left: calc(40% - 400px);
+            top: 200px;
+        }
+        .case .part1 {
+            float: left;
+            width: 5%;
+            height: 40px;
+        }
+        .case .part1 img {
+            width: 30px;
+            height: 30px;
+            float: right;
+            margin-top: 5px;
+        }
+        .case .part2 {
+            float: left;
+            width: 93%;
+            height: 100px;
+            text-indent: 1em;
+            overflow: hidden;
+        }
+        #part2 ul {
+            width: 100%;
+            height: auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #part2 ul li {
+            width: 100%;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            color: #DC143C;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+         
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -75,7 +122,58 @@
 
     <!-- 内容区域 -->
     <div class="content-wrapper">
-        <!-- <img src="./images/center.jpg" width="100%" height="100%"/> -->
+        <!-- <img src="./images/center.jpg" width="100%" height="100%"/>  -->
+        <!-- <img src="../images/bg.jpg" width="100%" height="100%"/>  -->
+        <!-- 内容头部 -->
+        <section class="content-header">
+            <h1>
+               系统公告！
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/file/findAll">成绩书管理</a></li>
+                <li class="active"></li>
+            </ol>
+        </section>
+        <!-- 内容头部 /-->
+        
+            <!-- Main content -->
+        <section class="content">
+            <div class="box box-primary">
+                <div   class="box-header with-border">
+                   <p>
+                                     欢迎登陆名幸成绩书管理系统
+                   </p>
+				
+
+                </div>
+                <!-- /.error-content -->
+            </div>
+            <!-- 公告 -->
+            <div class="case">
+        <div class="part1">
+            <img src="../img/notice.png"/>
+        </div>
+        <div class="part2" id="part2">
+            <div id="scroll1">
+                <ul>
+                    <li><a href="#">1.不要被别人表现出来的毫不费力所迷惑，你要知道，那些信手拈来的东西，一定有拼尽全力作为支撑。</a></li>
+                    <li><a href="#">2.这个世界上，天才好像真的没有那么多。</a></li>
+                    <li><a href="#">3.而我希望，自己也可以在别人看不见的地方不动声色的努力，在关键时刻出其不意的傲娇绽放。</a></li>
+                    <li><a href="#">4.这个年纪我不在将就。</a></li>
+                    <li><a href="#">5.不要被别人表现出来的毫不费力所迷惑，你要知道，那些信手拈来的东西，一定有拼尽全力作为支撑。</a></li>
+                    <li><a href="#">6.这个世界上，天才好像真的没有那么多。</a></li>
+                    <li><a href="#">7.而我希望，自己也可以在别人看不见的地方不动声色的努力，在关键时刻出其不意的傲娇绽放。</a></li>
+                    <li><a href="#">8.这个年纪我不在将就。</a></li>
+                </ul>
+            </div>
+            <div id="scroll2">
+            </div>
+        </div>
+    </div>
+    <!-- /.error-page -->
+        </section>
     </div>
     <!-- 内容区域 /-->
 
@@ -191,7 +289,34 @@
         // 激活导航位置
         setSidebarActive("admin-index");
     });
-</script>
+    
+    //滚动
+
+        var PartArea = document.getElementById('part2');
+        var Scroll1 = document.getElementById('scroll1');
+        var Scroll2 = document.getElementById('scroll2');
+
+        Scroll2.innerHTML = Scroll1.innerHTML;
+
+        function roll() {
+            if(Scroll2.offsetHeight - PartArea.scrollTop <= 0) {
+                PartArea.scrollTop -= Scroll1.offsetHeight;
+            } else {
+                PartArea.scrollTop++;
+            }
+        }
+
+        var StopRoll = setInterval(roll, 60);
+
+        PartArea.onmouseover = function () {
+            clearInterval(StopRoll);
+        }
+        PartArea.onmouseout = function () {
+            StopRoll = setInterval(roll, 60);
+        }
+
+    </script>
+
 </body>
 
 </html>

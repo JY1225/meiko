@@ -79,7 +79,7 @@
             <h1>登录失败 页面</h1>
 
             <ol class="breadcrumb">
-                <li><a href="main.html"><i
+                <li><a href="main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li class="active">登录失败</li>
             </ol>
@@ -94,7 +94,7 @@
                 <div class="error-content">
 
                     <p>
-                        登录失败 , 你可以 <a href="login.html">返回到登录页面</a>
+                        登录失败 , 你可以 <a href="login.jsp">返回到登录页面</a>
                         重新登录
                     </p>
 

@@ -86,38 +86,30 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                目录管理 <small>添加目录</small>
+               密码管理 <small>密码表单</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li> 目录管理</li>
-                <li class="active">添加目录</li>
+                <li><a
+                        href="#"> 密码管理</a></li>
+                <li class="active"> 密码表单</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
 
-        <form action="${pageContext.request.contextPath}/file/save" method="post">
+        <form action="${pageContext.request.contextPath}/user/passUpadateByName" method="post">
             <!-- 正文区域 -->
             <section class="content"> <!--产品信息-->
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"> 目录信息</div>
+                    <div class="panel-heading"> 密码信息</div>
                     <div class="row data-type">
 
-                        <div class="col-md-2 title"> 目录地址</div>
+                        <div class="col-md-2 title"> 新密码</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="url"
-                                   placeholder="目录地址" value="">
-                        </div>
-                        
-                        <div class="col-md-2 title"> 目录状态</div>
-                        <div class="col-md-4 data">
-                            <select class="form-control select2" style="width: 100%"
-                                    name="status">
-                                <option value="0" selected="selected">关闭</option>
-                                <option value="1">开启</option>
-                            </select>
+                            <input type="text" class="form-control" name="password"
+                                   placeholder="新密码" value="">
                         </div>
 
                     </div>
@@ -130,7 +122,7 @@
                         </a> --%>
                         
                     <button type="button" class="btn bg-default"
-                            onclick="window.location.href='${pageContext.request.contextPath}/file/findAllDir'">返回</button>
+                            onclick="<!-- history.back(-1); -->">返回</button>
                 </div>
                 <!--工具栏/--> </section>
             <!-- 正文区域 /-->

@@ -10,7 +10,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<style type="text/css">
+	.test{
+		background-size:100% 100%;
+		width:100%;
+		height:100%;
+		background-image:url(./images/bg.jpg);
+		position:absolute;
+		z-index:100;
+	}
 
+</style>
     <title>MEIKO - CUSTOMER | Log in</title>
 
     <meta
@@ -29,7 +39,7 @@
           href="./plugins/iCheck/square/blue.css">
 </head>
 
-<body class="hold-transition login-page">
+<body class="test">
 <div class="login-box">
     <div class="login-logo">
         <a href="all-admin-index.html"><b>MEIKO</b>客户管理系统</a>

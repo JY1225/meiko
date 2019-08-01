@@ -89,8 +89,8 @@
                 <small>产品表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../main.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="product-list.html">产品管理</a></li>
+                <li><a href="../main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li>产品管理</li>
                 <li class="active">产品表单</li>
             </ol>
         </section>

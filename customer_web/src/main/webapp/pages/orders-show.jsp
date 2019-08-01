@@ -93,9 +93,8 @@
                 <small>全部订单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i
-                        class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">订单管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li>订单管理</li>
                 <li class="active">订单详情</li>
             </ol>
         </section>
