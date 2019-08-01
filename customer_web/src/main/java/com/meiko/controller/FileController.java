@@ -59,9 +59,12 @@ public class FileController {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         UserInfo user = service.findByUserName(name);
         
-        List<Cust_jccjs_list> list = service.findFiles(page,pageSize,user.getId(),fileName);        
+        List<Cust_jccjs_list> list = service.findFiles(page,pageSize,user.getId(),fileName); 
+        for(int i = 0;i < list.size();i++) {
+        	list.get(i).setUpload_filename(list.get(i).getUpload_filename().trim());
+        }
         PageInfo<Cust_jccjs_list> pageInfo=new PageInfo<Cust_jccjs_list>(list);
-       model.addAttribute("productPageInfo",pageInfo);
+        model.addAttribute("productPageInfo",pageInfo);
         return  "product-list";
     }
 
@@ -132,7 +135,7 @@ public class FileController {
         InputStream in = null;
         OutputStream out = null; 
         Dir dir = fileservice.findDirByStatus(1);
-		String path=dir.getUrl().replace("\\", "/")+"/"+ofile.getUpload_filename();
+		String path=dir.getUrl().replace("\\", "/")+"/"+ofile.getUpload_filename().trim();
         String filePath =  fileHandler(path);
         System.out.println(filePath);
 

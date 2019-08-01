@@ -58,7 +58,7 @@
 	<bean id="passwordEncoder"
 		class="org.springframework.security.crypto.password.NoOpPasswordEncoder">
 	</bean>
-
+<bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
 
 

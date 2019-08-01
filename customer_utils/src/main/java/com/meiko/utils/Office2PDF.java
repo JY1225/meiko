@@ -1,16 +1,11 @@
 package com.meiko.utils;
+import java.io.File;
+import java.util.regex.Pattern;
+
 import org.jodconverter.OfficeDocumentConverter;
 import org.jodconverter.office.DefaultOfficeManagerBuilder;
 import org.jodconverter.office.OfficeException;
 import org.jodconverter.office.OfficeManager;
-import org.junit.experimental.runners.Enclosed;
-
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64.Encoder;
-import java.util.regex.Pattern;
-
-import javax.sound.sampled.AudioFormat.Encoding;
 
 /**
  * Created by lenovo12 on 2018/8/18.
