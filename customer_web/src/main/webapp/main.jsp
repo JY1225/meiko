@@ -158,14 +158,10 @@
         <div class="part2" id="part2">
             <div id="scroll1">
                 <ul>
-                    <li><a href="#">1.不要被别人表现出来的毫不费力所迷惑，你要知道，那些信手拈来的东西，一定有拼尽全力作为支撑。</a></li>
-                    <li><a href="#">2.这个世界上，天才好像真的没有那么多。</a></li>
-                    <li><a href="#">3.而我希望，自己也可以在别人看不见的地方不动声色的努力，在关键时刻出其不意的傲娇绽放。</a></li>
-                    <li><a href="#">4.这个年纪我不在将就。</a></li>
-                    <li><a href="#">5.不要被别人表现出来的毫不费力所迷惑，你要知道，那些信手拈来的东西，一定有拼尽全力作为支撑。</a></li>
-                    <li><a href="#">6.这个世界上，天才好像真的没有那么多。</a></li>
-                    <li><a href="#">7.而我希望，自己也可以在别人看不见的地方不动声色的努力，在关键时刻出其不意的傲娇绽放。</a></li>
-                    <li><a href="#">8.这个年纪我不在将就。</a></li>
+                    <li><a href="#">1.成绩书支持在线预览。</a></li>
+                    <li><a href="#">2.成绩书支持在线下载。</a></li> 
+                    <li><a href="#">3.预览成绩书需要提前安装 OpenOffice 插件。</a></li>
+                    <li><a href="http://www.openoffice.org/"  target="_blank">4.OpenOffice <font color="red">插件下载。</font></a></li>          
                 </ul>
             </div>
             <div id="scroll2">
