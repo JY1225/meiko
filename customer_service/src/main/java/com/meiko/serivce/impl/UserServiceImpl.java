@@ -81,12 +81,12 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
     public List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
-        HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+        //HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
        
         if(roles != null) {
         for (Role role:roles){
             authority.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
-            session.setAttribute("role", "ROLE_"+role.getName());
+            //session.setAttribute("role", "ROLE_"+role.getName());
         }
         }
         return authority;

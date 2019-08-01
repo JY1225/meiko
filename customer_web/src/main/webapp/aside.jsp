@@ -48,8 +48,10 @@
                     </li> --%>
                 </ul>
             </li>
-           <c:if test="${sessionScope.role == 'ROLE_ADMIN' }"> 
+            
+           <%-- <c:if test="${sessionScope.role == 'ROLE_ADMIN' }">  --%>
  <li class="treeview" ><!-- id="role" style="visibility:hidden; -->
+ <security:authorize access="hasRole('ROLE_ADMIN')">
                 <a href="#">
                     <i class="fa fa-cogs"></i>
                     <span>系统管理</span>
@@ -100,8 +102,9 @@
                         </a>
                     </li>
                 </ul>
+                </security:authorize> 
             </li>
-           </c:if>  
+           <%-- </c:if>  --%>
         </ul>
     </section>
 </aside>
