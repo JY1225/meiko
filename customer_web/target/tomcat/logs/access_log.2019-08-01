@@ -21,3 +21,9 @@
 0:0:0:0:0:0:0:1 - - [01/Aug/2019:14:34:20 +0800] "GET /logout HTTP/1.1" 302 - http-bio-8080-exec-9 1
 0:0:0:0:0:0:0:1 - - [01/Aug/2019:14:34:20 +0800] "GET /login.jsp HTTP/1.1" 200 2921 http-bio-8080-exec-10 3
 0:0:0:0:0:0:0:1 - - [01/Aug/2019:14:34:21 +0800] "POST /login HTTP/1.1" 200 15383 http-bio-8080-exec-10 23
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:08:31 +0800] "GET /file/findAllDir HTTP/1.1" 302 - http-bio-8080-exec-4 3
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:08:31 +0800] "GET /login.jsp HTTP/1.1" 200 2921 http-bio-8080-exec-4 4
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:08:33 +0800] "POST /login HTTP/1.1" 200 15383 http-bio-8080-exec-4 23
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:08:33 +0800] "GET /img/notice.png HTTP/1.1" 304 - http-bio-8080-exec-4 22
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:08:37 +0800] "GET /file/findAllDir HTTP/1.1" 200 20533 http-bio-8080-exec-4 1391
+0:0:0:0:0:0:0:1 - - [01/Aug/2019:15:10:46 +0800] "GET /main.jsp HTTP/1.1" 200 15383 http-bio-8080-exec-3 15
