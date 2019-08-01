@@ -54,10 +54,10 @@
 		
 		
 	<!-- 配置加密类 -->
-	<!-- <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
-	<bean id="passwordEncoder"
+	<!-- <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>  -->
+	 <bean id="passwordEncoder"
 		class="org.springframework.security.crypto.password.NoOpPasswordEncoder">
-	</bean>
+	</bean> 
 <bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
 
