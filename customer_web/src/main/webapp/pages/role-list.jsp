@@ -154,9 +154,9 @@
                                     <td>${role.name}</td>
                                     <td>${role.description}</td>
                                     <td class="text-center">
-                                        <a href="${pageContext.request.contextPath}/role/findById?id=${role.id}" class="btn bg-olive btn-xs">详情</a>
+                                        <%-- <a href="${pageContext.request.contextPath}/role/findById?id=${role.id}" class="btn bg-olive btn-xs">详情</a>
                                         <a href="${pageContext.request.contextPath}/role/findNotPermissions?id=${role.id}" class="btn bg-olive btn-xs">添加权限</a>
-                                         <a href="${pageContext.request.contextPath}/role/findNotMenus?id=${role.id}" class="btn bg-olive btn-xs">添加菜单</a>
+                                         <a href="${pageContext.request.contextPath}/role/findNotMenus?id=${role.id}" class="btn bg-olive btn-xs">添加菜单</a> --%>
                                     </td>
                                 </tr>
                             </c:forEach>

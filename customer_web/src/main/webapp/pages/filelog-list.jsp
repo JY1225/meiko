@@ -86,13 +86,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-               登录日志管理 <small>全部日志</small>
+           下载日志<small>全部日志</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.html"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="../pages/loginlog-list.html">登录日志管理</a></li>
+                        href="../pages/filelog-list.html">下载日志</a></li>
 
                 <li class="active">全部日志</li>
             </ol>
@@ -124,8 +124,8 @@
                         </div>
                          <div class="box-tools pull-right">
                             <div class="">
-                            <form action="${pageContext.request.contextPath}/loginlog/findAll" method="post" >
-                                <div class="col-md-8"><input type="text" class="form-control input-sm" name="loginName"
+                            <form action="${pageContext.request.contextPath}/filelog/findAll" method="post" >
+                                <div class="col-md-8"><input type="text" class="form-control input-sm" name="file_name"
                                        placeholder="账号">
                                  </div>   
                                  <div class="col-md-1">
@@ -144,25 +144,29 @@
                                 <th class="" style="padding-right: 0px"><input id="selall"
                                                                                type="checkbox" class="icheckbox_square-blue"></th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">登录账号</th>
-                                <th class="sorting">登录密码</th>
-                                <th class="sorting">用户id</th>
-                                <th class="sorting">登录状态</th>
-                                <th class="sorting">登录时间</th>
-                                <th class="sorting">ip</th>
+                                <th class="sorting">文件名</th>
+                                <th class="sorting">文件id</th>
+                                <th class="sorting">操作类型</th>
+                                <th class="sorting">操作时间</th>
+                                <th class="sorting">登录用户名</th>
+                                <th class="sorting">下载总数</th>
+                                <th class="sorting">预览总数</th>
+                                 
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pageInfo.list}" var="loginlog">
+                            <c:forEach items="${pageInfo.list}" var="filelog">
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td>${loginlog.id}</td>
-                                    <td>${loginlog.loginName}</td>
-                                    <td>${loginlog.password}</td>
-                                    <td>${loginlog.userId}</td>
-                                    <td>${loginlog.loginStatus}</td>
-                                    <td>${loginlog.loginTime}</td>
-                                    <td>${loginlog.ip}</td>
+                                    <td>${filelog.recid}</td>
+                                    <td>${filelog.file_name}</td>
+                                    <td>${filelog.cust_jccjs_list_id}</td>
+                                    <td>${filelog.type}</td>
+                                    <td>${filelog.loadTime}</td>
+                                    <td>${filelog.login_name}</td>
+                                    <td>${filelog.down_loads}</td>
+                                    <td>${filelog.previews}</td>
+                                    
                                 </tr>
                             </c:forEach>
 
@@ -216,8 +220,8 @@
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}" aria-label="Previous">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/filelog/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/filelog/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}" aria-label="Previous">上一页</a></li>
                             <c:if test="${pageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>
                                 <c:set var="end" value="${pageInfo.pages}"></c:set>
@@ -242,12 +246,12 @@
 
 
  							<c:forEach begin="${begin}" end="${end}" var="i">
-                                <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${i}&pageSize=${pageInfo.pageSize}">${i}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/filelog/findAll?page=${i}&pageSize=${pageInfo.pageSize}">${i}</a></li>
                             </c:forEach>
 
 
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/filelog/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/filelog/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
 
@@ -412,7 +416,7 @@
                     var pageSize = $(this).val();
 
                     //向服务器发送请求，改变没页显示条数
-                    location.href = "${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum}&pageSize=" + pageSize;
+                    location.href = "${pageContext.request.contextPath}/filelog/findAll?page=${pageInfo.pageNum}&pageSize=" + pageSize;
 
                 });
             });
