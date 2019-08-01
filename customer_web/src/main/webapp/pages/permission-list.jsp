@@ -90,12 +90,12 @@
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <a href="${pageContext.request.contextPath}/main.html">
+                    <a href="${pageContext.request.contextPath}/main.jsp">
                         <i class="fa fa-dashboard"></i> 首页
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/pages/permission-list.html">资源权限管理</a>
+                    	资源权限管理
                 </li>
 
                 <li class="active">全部权限</li>

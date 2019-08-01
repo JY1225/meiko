@@ -89,10 +89,9 @@
                 <small>添加权限表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../main.html"><i
+                <li><a href="../main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="role-list.html">角色管理</a></li>
+                <li>角色管理</li>
                 <li class="active">添加权限表单</li>
             </ol>
         </section>

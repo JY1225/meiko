@@ -87,10 +87,9 @@
                 角色管理 <small>全部角色</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.html"><i
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="${pageContext.request.contextPath}/pages/role-list.html">角色管理</a></li>
+                <li>角色管理</li>
 
                 <li class="active">全部角色</li>
             </ol>

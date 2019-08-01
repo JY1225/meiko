@@ -25,7 +25,7 @@
 
                 <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-               <!--  <img src="./img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+               <img src="../img/user.png" class="user-image" alt="User Image"> 
                  <span>
 				    <security:authentication property="principal.username"></security:authentication>				    
 				</span>            

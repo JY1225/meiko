@@ -88,9 +88,9 @@
                 <small>资源权限表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.html"><i
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="permission-list.html">资源权限管理</a></li>
+                <li><a href="#">资源权限管理</a></li>
                 <li class="active">资源权限表单</li>
             </ol>
         </section>

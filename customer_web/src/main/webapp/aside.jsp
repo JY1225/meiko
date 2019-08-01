@@ -10,10 +10,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <aside class="main-sidebar" >
     <section class="sidebar"  >
-        <div class="user-panel" style="height: 55px;" >
-            <!--  <div class="pull-left image">
-                <img src="./img/user2-160x160.jpg" class="img-circle" alt="User Image">
-            </div>  -->
+        <div class="user-panel" style="height: 60px;" >
+            <div class="pull-left image">
+                <img src="../img/user.png" class="img-circle" alt="User Image">
+            </div> 
             <div class="pull-left info" >
                <security:authentication property="principal.username"></security:authentication>
                 <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
@@ -38,7 +38,7 @@
                 <ul class="treeview-menu">
                     <li>
                         <a href="${pageContext.request.contextPath}/file/findAll">
-                            <i class="fa fa-circle-o"></i> 文件管理
+                            <i class="fa fa-circle-o"></i> 成绩书管理
                         </a>
                     </li>
                     <%-- <li>

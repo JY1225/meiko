@@ -85,12 +85,12 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                文件管理
+                成绩书管理
                 <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/product/findAll">文件管理</a></li>
+                <li>成绩书管理</li>
                 <li class="active"></li>
             </ol>
         </section>

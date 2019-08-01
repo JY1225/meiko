@@ -89,10 +89,9 @@
                 用户管理 <small>用户表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../main.html"><i
+                <li><a href="../main.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a
-                        href="user-list.html">菜单管理</a></li>
+                <li>菜单管理</li>
                 <li class="active">菜单表单</li>
             </ol>
         </section>
