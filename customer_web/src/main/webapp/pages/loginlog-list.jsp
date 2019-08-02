@@ -7,15 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <title>MEIKO - 文档管理</title>
+    <meta name="description" content="MEIKO - 文档管理">
+    <meta name="keywords" content="MEIKO - 文档管理">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -160,7 +161,7 @@
                                     <td>${loginlog.password}</td>
                                     <td>${loginlog.userId}</td>
                                     <td>${loginlog.loginStatus}</td>
-                                    <td>${loginlog.loginTime}</td>
+                                    <td><fmt:formatDate value='${loginlog.loginTime}' type='date' pattern='yyyy-MM-dd hh:mm:ss'/></td>
                                     <td>${loginlog.ip}</td>
                                 </tr>
                             </c:forEach>

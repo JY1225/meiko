@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <!-- 页面meta -->
@@ -14,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>MEIKO-CUSTOMER</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <meta name="description" content="MEIKO - 文档管理">
+    <meta name="keywords" content="MEIKO - 文档管理">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -162,7 +163,7 @@
                                     <td>${filelog.file_name}</td>
                                     <td>${filelog.cust_jccjs_list_id}</td>
                                     <td>${filelog.type}</td>
-                                    <td>${filelog.loadTime}</td>
+                                    <td><fmt:formatDate value='${filelog.loadTime}' type='date' pattern='yyyy-MM-dd hh:mm:ss'/></td>
                                     <td>${filelog.login_name}</td>
                                     <td>${filelog.down_loads}</td>
                                     <td>${filelog.previews}</td>

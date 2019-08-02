@@ -53,18 +53,23 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     	 
     	try {
     		UserInfo userInfo= dao.findByUserName(s);
-    		if(userInfo!=null&&userInfo.getStatus()==0) {
-    			userInfo.setRoles(null);
-    			JOptionPane.showMessageDialog(null,"您的状态已关闭，请联系管理员","提示",JOptionPane.PLAIN_MESSAGE);
+    		User  user;
+    		if(userInfo!=null&&userInfo.getStatus()==0) {   			
+    			user = new User(userInfo.getUserName(),"",getAuthority(userInfo.getRoles()));
+    		}else {
+    			user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
     		}
-            User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));            
             //System.out.println(user.getAuthorities());
-            if(s.equals(userInfo.getUserName()) && request.getParameter("password").equals(userInfo.getPassword())) {
+            if(s.equals(userInfo.getUserName()) && request.getParameter("password").equals(userInfo.getPassword()) 
+            		&& userInfo.getStatus()==1) {
             	loginLog.setPassword(userInfo.getPassword());
                 loginLog.setLoginStatus("OK");
                 loginLog.setUserId(userInfo.getId());
                 
             }else {
+            	if(userInfo!=null) {
+        			loginLog.setUserId(userInfo.getId());       			
+        		}
             	String password = request.getParameter("password");
        		 	loginLog.setPassword(password);
        		 	loginLog.setLoginStatus("NG");     		 

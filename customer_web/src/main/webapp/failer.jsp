@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>MEIKO - CUSTOMER</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+    <meta name="description" content="MEIKO - 文档管理">
+    <meta name="keywords" content="MEIKO - 文档管理">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
