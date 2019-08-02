@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -31,7 +32,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.Cust_jccjs_list;
 import com.meiko.domain.Dir;
+import com.meiko.domain.FileLog;
 import com.meiko.domain.UserInfo;
+import com.meiko.service.IFileLogService;
 import com.meiko.service.IFileService;
 import com.meiko.service.IUserService;
 import com.meiko.utils.FileUtil;
@@ -45,7 +48,8 @@ public class FileController {
     private IUserService service;
 	@Autowired
     private IFileService fileservice;
-   // private final String BASEPATH="http:\\192.1.8.35\\jccjs\\LIDAN" ;
+	@Autowired
+    private IFileLogService fileLogService;
 	@RequestMapping("/findAll")
     public String findAll(Model model,
                           @RequestParam(name = "page",defaultValue = "1") Integer page,
@@ -66,7 +70,7 @@ public class FileController {
 
     
     @RequestMapping("/download")
-    public String download(HttpServletResponse response,HttpServletRequest request,Cust_jccjs_list ofile) {
+    public void download(HttpServletResponse response,HttpServletRequest request,Cust_jccjs_list ofile) {
     	try {
     		Dir dir = fileservice.findDirByStatus(1);
     		String path=dir.getUrl().replace("\\", "/")+"/"+ofile.getUpload_filename();
@@ -93,19 +97,36 @@ public class FileController {
             toClient.write(buffer);
             toClient.flush();
             toClient.close();
-            int down_loads = ofile.getDown_loads();
-            ofile.setDown_loads(down_loads);
-            fileservice.updateDownloads(ofile); 
+            fileservice.updateDownloads(ofile.getRecid()); 
+            Cust_jccjs_list one=fileservice.findByOne(ofile.getRecid());
+                 
+            saveFileLog(one,"下载");
             
-            return null; 
         } catch (IOException ex) {
             ex.printStackTrace();
-            //return null;
+           
         }
-		return null;
+	
            	
     }
    
+    private void saveFileLog(Cust_jccjs_list one,String type) {
+    	int down_loads = one.getDown_loads();
+        int previews = one.getPreviews();
+        int custJccJsListId = one.getRecid();
+        String upload_filename = one.getUpload_filename();
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();   
+        	 FileLog fileLog=new FileLog();            
+            fileLog.setCust_jccjs_list_id(custJccJsListId);
+            fileLog.setDown_loads(down_loads);
+            fileLog.setFile_name(upload_filename);
+            fileLog.setLoadTime(new Date());
+            fileLog.setType(type);
+            fileLog.setLogin_name(name);
+            fileLog.setPreviews(previews);
+            fileLogService.save(fileLog);
+       
+    }
     
     
     @RequestMapping(value = "/read")
@@ -129,9 +150,10 @@ public class FileController {
            while((len = in.read(b)) != -1){
                out.write(b);
            }
-           int previews = ofile.getPreviews();
-           ofile.setPreviews(previews);;
-           fileservice.updatePreviews(ofile); 
+           
+           fileservice.updatePreviews(ofile.getRecid()); 
+           Cust_jccjs_list one=fileservice.findByOne(ofile.getRecid());
+           saveFileLog(one,"预览");
        }catch (Exception e){
            e.printStackTrace();
        }finally {

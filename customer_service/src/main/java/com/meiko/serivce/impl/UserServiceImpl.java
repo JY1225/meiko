@@ -15,6 +15,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,49 +37,52 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
     @Autowired
     private IUserDao dao;
-    @Autowired
-    private PasswordEncoder bCryptPasswordEncoder;
+    //@Autowired
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private HttpServletRequest request;
     @Autowired
     private ILoginLogService service;
     
     @Override
-    public UserDetails loadUserByUsername(String s)  {
+    public UserDetails loadUserByUsername(String s) {
     	 LoginLog loginLog=new LoginLog();
     	 loginLog.setIp(request.getRemoteAddr());
     	 loginLog.setLoginName(s);
     	 loginLog.setLoginTime(new Date());
     	 
-    	 
     	try {
     		UserInfo userInfo= dao.findByUserName(s);
-    		if(userInfo.getStatus()==0) {
+    		if(userInfo!=null&&userInfo.getStatus()==0) {
     			userInfo.setRoles(null);
     			JOptionPane.showMessageDialog(null,"您的状态已关闭，请联系管理员","提示",JOptionPane.PLAIN_MESSAGE);
     		}
             User  user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));            
             //System.out.println(user.getAuthorities());
-            
-            loginLog.setPassword(userInfo.getPassword());
-            loginLog.setLoginStatus("OK");
-            loginLog.setUserId(userInfo.getId());
+            if(s.equals(userInfo.getUserName()) && request.getParameter("password").equals(userInfo.getPassword())) {
+            	loginLog.setPassword(userInfo.getPassword());
+                loginLog.setLoginStatus("OK");
+                loginLog.setUserId(userInfo.getId());
+                
+            }else {
+            	String password = request.getParameter("password");
+       		 	loginLog.setPassword(password);
+       		 	loginLog.setLoginStatus("NG");     		 
+            }       
             service.save(loginLog);
             return user;
+    	}catch(Exception e) {
+    		String password = request.getParameter("password");
+   		 	loginLog.setPassword(password);
+   		 	loginLog.setLoginStatus("NG");  
+   		 	service.save(loginLog);
     	}
-    	catch(Exception notFound) {
-    		
-    		LOG.debug("User '" + s + "' not found");  
-    		 String password = request.getParameter("password");
-    		 loginLog.setPassword(password);
-    		 loginLog.setLoginStatus("NG");
-    		 service.save(loginLog);
-    		 //System.out.print(request.getParameter("password")+request.getRemoteAddr());
-    	        throw notFound;  
-    	   
+    	return null;
+               	
     	}
+    	
         
-    }
+
 
     public List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authority=new ArrayList<SimpleGrantedAuthority>();
@@ -108,7 +113,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
     @Override
     public void save(UserInfo userInfo) {
-      userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
+      /*userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));*/      
       if(dao.findAllByName(userInfo.getUserName()).size()>0) {
     	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
       }else {

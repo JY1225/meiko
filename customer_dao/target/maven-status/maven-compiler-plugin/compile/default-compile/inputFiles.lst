@@ -3,5 +3,6 @@ D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\ISysLogDao.java
 D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\IUserDao.java
 D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\IMenuDao.java
 D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\ILoginLogDao.java
+D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\IFileLogDao.java
 D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\IPermissionDao.java
 D:\JY\git\meiko\customer_dao\src\main\java\com\meiko\dao\IRoleDao.java

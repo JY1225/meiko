@@ -191,8 +191,8 @@
                                         <td style="font-size:14px">${ofile.upload_user}</td>
                                         <td class="text-center" style="font-size:14px">
                                           
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}&previews=${ofile.previews}')" >预览</button>
-                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}&down_loads=${ofile.down_loads}'" >下载</button>
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >预览</button>
+                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >下载</button>
                                           
                                                                               
                                         </td>

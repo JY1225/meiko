@@ -19,7 +19,9 @@ public interface IFileService {
 
 	Dir findDirByStatus(int status);
 
-	void updateDownloads(Cust_jccjs_list ofile);
+	void updateDownloads(int recid);
 
-	void updatePreviews(Cust_jccjs_list ofile);
+	void updatePreviews(int recid);
+
+	Cust_jccjs_list findByOne(int recid);
 }

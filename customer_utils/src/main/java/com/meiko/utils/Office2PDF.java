@@ -13,7 +13,6 @@ import org.jodconverter.office.OfficeManager;
  */
 public final class Office2PDF {
     private Office2PDF(){}
-
     /**
      * 灏唎ffice鏍煎紡鐨勬枃浠惰浆涓簆df
      * @param sourceFilePath 婧愭枃浠惰矾寰�
@@ -112,15 +111,15 @@ public final class Office2PDF {
      */
     public static String getAfterConverFilePath(String sourceFilePath){
         //鎴彇婧愭枃浠舵枃浠跺悕
-        String sourceFileName = sourceFilePath.substring(sourceFilePath.lastIndexOf("/") + 1);
-        File outputFile = new File("d:/pdfFile");
+        String sourceFileName = sourceFilePath.substring(sourceFilePath.lastIndexOf("/") + 1);        
+        File outputFile = new File("../ptf/");
         // 假如目标路径不存在,则新建该路径
         if (!outputFile.exists()&&!outputFile.isDirectory()) {
             outputFile.mkdirs();
         }
 
         
-        return "d:/pdfFile/" + sourceFileName.replaceAll("\\."+FileUtil.getFileSuffix(sourceFileName),".pdf");
+        return "../ptf/" + sourceFileName.replaceAll("\\."+FileUtil.getFileSuffix(sourceFileName),".pdf");
     }
 
     /**

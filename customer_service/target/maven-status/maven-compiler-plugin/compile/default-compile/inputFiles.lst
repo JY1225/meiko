@@ -1,6 +1,8 @@
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\serivce\impl\UserServiceImpl.java
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\service\IMenuService.java
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\service\IPermissionService.java
+D:\JY\git\meiko\customer_service\src\main\java\com\meiko\serivce\impl\FileLogServiceImpl.java
+D:\JY\git\meiko\customer_service\src\main\java\com\meiko\service\IFileLogService.java
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\service\IFileService.java
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\service\IRoleService.java
 D:\JY\git\meiko\customer_service\src\main\java\com\meiko\serivce\impl\FileServiceImpl.java
