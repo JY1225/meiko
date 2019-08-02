@@ -158,10 +158,10 @@
         <div class="part2" id="part2">
             <div id="scroll1">
                 <ul>
-                    <li><a href="#">1.成绩书支持在线预览。</a></li>
-                    <li><a href="#">2.成绩书支持在线下载。</a></li> 
-                    <li><a href="#">3.预览成绩书需要提前安装 OpenOffice 插件。</a></li>
-                    <li><a href="http://www.openoffice.org/"  target="_blank">4.OpenOffice <font color="red">插件下载。</font></a></li>          
+                    <li><a href="#">1.系统试行，欢迎使用和反馈。</a></li>
+                    <li><a href="#">2.成绩书支持在线预览，如预览速度慢，请稍微等候。</a></li> 
+                    <li><a href="#">3.成绩书支持在线下载。</a></li>
+                    <li><a href="https://xin.baidu.com/detail/compinfo?pid=xlTM-TogKuTwqCKqxDu31WFqNNYm9Whoywmd&from=ps&fl=1&castk=LTE%3D"  target="_blank">4.名幸（广州南沙）电子 <font color="red">详细信息。</font></a></li>          
                 </ul>
             </div>
             <div id="scroll2">

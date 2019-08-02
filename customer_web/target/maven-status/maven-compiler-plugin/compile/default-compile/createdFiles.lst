@@ -1,9 +1,0 @@
-com\meiko\controller\LogAop.class
-com\meiko\controller\PermissionController.class
-com\meiko\controller\FileController.class
-com\meiko\controller\MenuController.class
-com\meiko\controller\LoginController.class
-com\meiko\controller\SyslogController.class
-com\meiko\controller\RoleController.class
-com\meiko\controller\UserController.class
-com\meiko\controller\FilelogController.class

@@ -163,7 +163,7 @@
                                     <td>${filelog.file_name}</td>
                                     <td>${filelog.cust_jccjs_list_id}</td>
                                     <td>${filelog.type}</td>
-                                    <td><fmt:formatDate value='${filelog.loadTime}' type='date' pattern='yyyy-MM-dd hh:mm:ss'/></td>
+                                    <td><fmt:formatDate value='${filelog.loadTime}' type="both"/></td>
                                     <td>${filelog.login_name}</td>
                                     <td>${filelog.down_loads}</td>
                                     <td>${filelog.previews}</td>

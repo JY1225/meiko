@@ -161,7 +161,7 @@
                                     <td>${loginlog.password}</td>
                                     <td>${loginlog.userId}</td>
                                     <td>${loginlog.loginStatus}</td>
-                                    <td><fmt:formatDate value='${loginlog.loginTime}' type='date' pattern='yyyy-MM-dd hh:mm:ss'/></td>
+                                    <td><fmt:formatDate value='${loginlog.loginTime}' type="both" /></td>
                                     <td>${loginlog.ip}</td>
                                 </tr>
                             </c:forEach>
