@@ -108,7 +108,7 @@
 
                         <div class="col-md-2 title"> 新密码</div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="password"
+                            <input type="text" class="form-control" name="password" required="required"
                                    placeholder="新密码" value="">
                         </div>
 
@@ -117,12 +117,10 @@
                 <!--订单信息/--> <!--工具栏-->
                 <div class="box-tools text-center">
                     <button type="submit" class="btn bg-maroon">保存</button>
-                    <%-- <a href="${pageContext.request.contextPath}/file/findAllDir">
-                            <i class="fa fa-circle-o"></i>返回
-                        </a> --%>
+                    
                         
                     <button type="button" class="btn bg-default"
-                            onclick="<!-- history.back(-1); -->">返回</button>
+                            onclick="window.location.href='${pageContext.request.contextPath}/main.jsp'">返回</button>
                 </div>
                 <!--工具栏/--> </section>
             <!-- 正文区域 /-->
