@@ -19,14 +19,17 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public List<Role> findAll(int page, int pageSize) {
         PageHelper.startPage(page,pageSize);
-        return   dao.findAll();
+        return dao.findAll();
     }
 
     @Override
     public Role findOneById(String id) {
         return dao.findOneById(id);
     }
-
+	@Override
+	public Role findByName(String name) {
+		return dao.findByName(name);
+	}
     @Override
     public void saveRolePermission(String id,String roleId) {
         dao.saveRolePermission(id,roleId);
@@ -50,4 +53,6 @@ public class RoleServiceImpl implements IRoleService {
 		// TODO Auto-generated method stub
 		dao.save(role);
 	}
+
+
 }

@@ -53,13 +53,8 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     	 
     	try {
     		UserInfo userInfo= dao.findByUserName(s);
-    		User  user;
-    		if(userInfo!=null&&userInfo.getStatus()==0) {   			
-    			user = new User(userInfo.getUserName(),"",getAuthority(userInfo.getRoles()));
-    		}else {
-    			user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
-    		}
-            //System.out.println(user.getAuthorities());
+    		User user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
+    		
             if(s.equals(userInfo.getUserName()) && request.getParameter("password").equals(userInfo.getPassword()) 
             		&& userInfo.getStatus()==1) {
             	loginLog.setPassword(userInfo.getPassword());
@@ -105,25 +100,35 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
     @Override
     public List<UserInfo> findAll(int page, int pageSize,String userName) {
-       
+    	List<UserInfo> list = new ArrayList<UserInfo>();
         if(StringUtils.isBlank(userName)) {
         	PageHelper.startPage(page,pageSize);
-        	return dao.findAll();
+        	list = dao.findAll();
+        	for(int i = 0;i < list.size();i++) {
+        		list.get(i).setRoles(dao.findByUserName(list.get(i).getUserName()).getRoles());
+        	}
+        	return list;
         }else {
         	PageHelper.startPage(page,pageSize);
-        	return dao.findAllByName("%"+userName+"%");
+        	list = dao.findAllByName("%"+userName+"%");
+        	for(int i = 0;i < list.size();i++) {
+        		list.get(i).setRoles(dao.findByUserName(list.get(i).getUserName()).getRoles());
+        	}
+        	return list;
         }
         
     }
 
     @Override
-    public void save(UserInfo userInfo) {
+    public int save(UserInfo userInfo) {
       /*userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));*/      
       if(dao.findAllByName(userInfo.getUserName()).size()>0) {
     	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
+    	  return 0;
       }else {
-    	  dao.save(userInfo);
+    	  return dao.save(userInfo);
       }
+	
     }
 
     @Override

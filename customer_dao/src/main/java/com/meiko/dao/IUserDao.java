@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -17,7 +18,7 @@ import com.meiko.domain.UserInfo;
 
 public interface IUserDao {
 
-    @Select("select * from userinfo where userName=#{userName}")
+    @Select("select * from userinfo where userName=#{userName} and status = 1")
     @Results(id="userRoleMap",value = {
             @Result(id = true,property = "id",column = "id"),
             @Result(property = "roles",column = "id",javaType = java.util.List.class,
@@ -33,8 +34,9 @@ public interface IUserDao {
     @Select("select * from userinfo where userName like #{userName}")
     List<UserInfo> findAllByName(String userName);
     
-    @Insert("insert into userinfo(username,password,email,phonenum,status)values(#{userName},#{password},#{email},#{phoneNum},#{status})")
-    void save(UserInfo userInfo);
+    @Insert("insert into userinfo(username,password,mark,status,company)values(#{userName},#{password},#{mark},#{status},#{company})")
+    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
+    int save(UserInfo userInfo);
     
     @Select("select * from userinfo where id=#{id}")
     @Results(id = "UserInfoRolePermission", value={

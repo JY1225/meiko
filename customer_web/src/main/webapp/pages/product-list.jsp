@@ -63,6 +63,10 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+          
+    <style type="text/css">
+        #box { font-size: 1vw;}
+    </style>
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
@@ -157,39 +161,39 @@
                                 <th class="" style="padding-right: 0px;"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="sorting_asc" >ID</th>
-                                <th class="text-center" >客户编码</th>
-                                <th class="text-center" >客户名称</th>
-                                <th class="text-center" >送货地址</th>
-                                <th class="text-center" >品名</th>
-                                <th class="text-center" >送货日期</th>
-                                <th class="text-center" >成绩书编号</th>                        
-                                <th class="sorting_asc sorting_asc_disabled" >文件名称</th>
-                                <th class="text-center" >上传时间</th>   
+                                <th id="box" >ID</th>
+                                <!-- <th class="" >客户编码</th> -->
+                                <th id="box" >客户名称</th>
+                                <th id="box" >送货地址</th>
+                                <th id="box" >品名</th>
+                                <th  id="box">送货日期</th>
+                                <th  id="box">成绩书编号</th>                        
+                                <th  id="box">文件名称</th>
+                                <th  id="box">上传时间</th>   
                                 <!-- <th class="text-center" >上传终端</th> -->
-                                <th class="text-center" >上传人员</th>    
-                                <th class="text-center" >操作</th>
+                                <th  id="box">上传人员</th>    
+                                <th  id="box">操作</th>
                                 
                             </tr>
                             </thead>
                             <tbody>
 
-                                <c:forEach items="${productPageInfo.list}" var="ofile" >
+                                <c:forEach items="${productPageInfo.list}" var="ofile" varStatus="status">
 
                                     <tr>
                                         <td><input name="ids"  type="checkbox" value="${ofile.recid}" id="ids" ></td>
-                                        <td style="font-size:14px">${ofile.recid}</td>
-                                        <td style="font-size:14px">${ofile.cust_code}</td>
-                                        <td style="font-size:14px">${ofile.cust_name}</td>
-                                        <td style="font-size:14px">${ofile.shipping_addr}</td>
-                                        <td style="font-size:14px">${ofile.cust_part}</td>
-                                        <td style="font-size:14px">${ofile.shipping_dt}</td>
-                                        <td style="font-size:14px">${ofile.shipping_jccjs_no}</td>
-                                        <td style="font-size:14px">${ofile.upload_filename}</td>
-                                        <td style="font-size:14px">${ofile.upload_dt}</td>
-                                        <%-- <td>${product.upload_terminal}</td> --%>
-                                        <td style="font-size:14px">${ofile.upload_user}</td>
-                                        <td class="text-center" style="font-size:14px">
+                                        <td id="box">${status.index + 1}</td>
+                                       <%--  <td style="font-size:14px">${ofile.cust_code}</td> --%>
+                                        <td id="box">${ofile.cust_name}</td>
+                                        <td id="box">${ofile.shipping_addr}</td>
+                                        <td id="box">${ofile.cust_part}</td>
+                                        <td id="box">${ofile.shipping_dt}</td>
+                                        <td id="box">${ofile.shipping_jccjs_no}</td>
+                                        <td id="box">${ofile.upload_filename}</td>
+                                        <td id="box">${ofile.upload_dt}</td>
+                                        <%-- <td>${product.upload_terminal}</td>  style="font-size:14px" --%>
+                                        <td id="box">${ofile.upload_user}</td>
+                                        <td id="box">
                                           
                                            <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >预览</button>
                                             <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >下载</button>
@@ -466,6 +470,11 @@
         
         
     });
+    
+    window.onresize = function(){
+        var box = document.getElementById("box");
+        box.style["z-index"] = 1;
+    }
 </script>
 </body>
 

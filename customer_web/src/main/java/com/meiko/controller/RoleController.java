@@ -38,6 +38,13 @@ public class RoleController {
       model.addAttribute("role",role);
       return "role-show";
     }
+    
+    @RequestMapping("/findByName")
+    public  Role findByName(String name){
+      Role role= service.findByName(name);
+      return role;
+    }
+    
     @RequestMapping("/saveRolePermission")
     public String saveRolePermission(String roleId,String[] ids){
         for(String id:ids){

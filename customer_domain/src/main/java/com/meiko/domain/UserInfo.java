@@ -4,13 +4,17 @@ import java.util.List;
 
 public class UserInfo {
     private int id;
-    private String email;
     private String userName;
     private String password;
-    private String phoneNum;
+    private String mark;//备注
+    private String company;//公司简称
+    
     private int status;
     private String statusStr;
+    
+    private String role;
     private List<Role> roles;
+    
     private List<Dir> files;
   
 
@@ -21,14 +25,6 @@ public class UserInfo {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getUserName() {
         return userName;
@@ -47,11 +43,11 @@ public class UserInfo {
     }
 
     public String getPhoneNum() {
-        return phoneNum;
+        return mark;
     }
 
     public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+        this.mark = phoneNum;
     }
 
     public int getStatus() {
@@ -62,7 +58,15 @@ public class UserInfo {
         this.status = status;
     }
 
-    public String getStatusStr() {
+    public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getStatusStr() {
         if(status==1){
             statusStr="开启";
         }else if (status==0){
@@ -91,14 +95,30 @@ public class UserInfo {
 		this.files = files;
 	}
 
+	public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
 	@Override
     public String toString() {
         return "UserInfo{" +
                 "id='" + id + '\'' +
-                ", email='" + email + '\'' +
+                ", company='" + company + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
+                ", mark='" + mark + '\'' +
                 ", status=" + status +
                 ", statusStr='" + statusStr + '\'' +
                 ", roles=" + roles +

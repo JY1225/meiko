@@ -74,24 +74,19 @@ public class FileController {
     	try {
     		Dir dir = fileservice.findDirByStatus(1);
     		String path=dir.getUrl().replace("\\", "/")+"/"+ofile.getUpload_filename();
-            // 
     		
-            File file = new File(path);
-            // 
+            File file = new File(path); 
             String filename = file.getName();
-            // 
-            String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
-
-            // 
             InputStream fis = new BufferedInputStream(new FileInputStream(path));
             byte[] buffer = new byte[fis.available()];
             fis.read(buffer);
             fis.close();
-            // 
+             
             response.reset();
             //
             response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
             response.addHeader("Content-Length", "" + file.length());
+            
             OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
             response.setContentType("application/octet-stream");
             toClient.write(buffer);

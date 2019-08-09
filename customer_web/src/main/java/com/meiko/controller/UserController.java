@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import com.meiko.domain.Cust_Addr;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
+import com.meiko.service.IRoleService;
 import com.meiko.service.IUserService;
 
 @Controller
@@ -22,7 +23,8 @@ import com.meiko.service.IUserService;
 public class UserController {
     @Autowired
     private IUserService service;
-
+    @Autowired
+    private IRoleService roleService;
    
    /* @Secured({"ROLE_ADMIN","ROLE_USER"})*/
     
@@ -42,7 +44,7 @@ public class UserController {
     
     @RequestMapping("/findAll")
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
-                                @RequestParam(name = "pageSize",required = true,defaultValue = "3")Integer pageSize,
+                                @RequestParam(name = "pageSize",required = true,defaultValue = "10")Integer pageSize,
                                 @RequestParam(name="userName",required=false) String userName
                                 )
     {
@@ -55,9 +57,11 @@ public class UserController {
         return modelAndView;
     }
     
-    @RequestMapping("/save")
+	@RequestMapping("/save")
     public String save(UserInfo userInfo){
         service.save(userInfo);
+        Role role = roleService.findByName(userInfo.getRole());
+        service.saveUserRole(String.valueOf(userInfo.getId()),String.valueOf(role.getId()));
         return "redirect:findAll";
     }
     
@@ -79,6 +83,8 @@ public class UserController {
         return modelAndView;
     }
     
+   
+    
     @RequestMapping("/findNotFile")
     public ModelAndView  findNotFile(String id){
         ModelAndView modelAndView=new ModelAndView();
@@ -88,6 +94,12 @@ public class UserController {
         modelAndView.setViewName("user-file-add");
         return modelAndView;
     }
+    /**
+     * 用户添加角色
+     * @param userId
+     * @param ids
+     * @return
+     */
     @RequestMapping("/saveUserRole")
     public String saveRole(String userId,String[] ids){
         for(String roleId :ids){

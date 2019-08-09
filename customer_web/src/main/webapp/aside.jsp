@@ -105,6 +105,11 @@
                 </security:authorize> 
             </li>
            <%-- </c:if>  --%>
+           <%-- <li id="admin-index">
+                <a href="${pageContext.request.contextPath}/pages/barcode-create.jsp">
+                    <i class="fa fa-dashboard"></i> <span>条码</span>
+                </a>
+            </li> --%>
         </ul>
     </section>
 </aside>

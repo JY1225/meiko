@@ -20,4 +20,6 @@ public interface IRoleService {
 	void save(Role role);
 
 	void saveRoleMenu(String id, String roleId);
+
+	Role findByName(String name);
 }

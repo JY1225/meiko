@@ -64,6 +64,10 @@
           href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
+          
+    <style type="text/css">
+        #box { font-size: 1vw;}
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -109,7 +113,7 @@
                     <!-- 数据表格 -->
                     <div class="table-box">
 
-                        <!--工具栏-->
+                        <!--工具栏 ">-->
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
@@ -146,31 +150,39 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input
+                                <!-- <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
-                                </th>
-                                <th class="text-center">序号</th>
-                                <th class="text-center">用户名</th>
-                                <th class="text-center">密码</th>
-                                <th class="text-center">邮箱</th>                               
-                                <th class="text-center">状态</th>
-                                <th class="text-center">操作</th>
+                                </th> -->
+                                <th id="box">序号</th>
+                                <th id="box">用户名</th>
+                                <th id="box">密码</th>
+                                <th id="box">角色</th>       
+                                <th id="box">公司</th>                                
+                                <th id="box">状态</th>
+                                <th id="box">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${pageInfo.list}" var="userInfo" varStatus="status">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td class="text-center">${status.index + 1}</td>
-                                    <td class="text-center">${userInfo.userName}</td>
-                                    <td class="text-center">${userInfo.password}</td>
-                                    <td class="text-center">${userInfo.email}</td>                                    
-                                    <td class="text-center">${userInfo.statusStr}</td>
-                                    <td class="text-center">
-                           				<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>
+                                    <!-- <td><input name="ids" type="checkbox"></td> -->
+                                    <td id="box">${status.index + 1}</td>
+                                    <td id="box">${userInfo.userName}</td>
+                                    <td id="box">${userInfo.password}</td>
+                                    <td id="box">${userInfo.roles[0].name}</td>
+                                    <td id="box">${userInfo.company}</td>
+                                    <%-- <c:forEach items="${userInfo.roles}" var="role">
+                                    ${role.name}
+                                    </c:forEach> --%>
+                                                                      
+                                    <td id="box">${userInfo.statusStr}
+                                    
+                                    	<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>
                                         <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>
+                                    </td>
+                                    <td class="text-center">                        				
                                         <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">送货地址管理</a>
+                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">送货地址</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -354,6 +366,11 @@
 
                 });
             });
+    
+    window.onresize = function(){
+        var box = document.getElementById("box");
+        box.style["z-index"] = 1;
+    }
 </script>
 </body>
 

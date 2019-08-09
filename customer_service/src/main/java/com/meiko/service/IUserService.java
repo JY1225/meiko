@@ -10,7 +10,7 @@ import com.meiko.domain.UserInfo;
 public interface IUserService {
     List<UserInfo> findAll(int page, int pageSize,String userName);
 
-    void save(UserInfo userInfo);
+    int save(UserInfo userInfo);
 
     UserInfo findById(String id);
 
