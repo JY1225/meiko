@@ -157,8 +157,9 @@
                                 <th id="box">用户名</th>
                                 <th id="box">密码</th>
                                 <th id="box">角色</th>       
-                                <th id="box">公司</th>                                
-                                <th id="box">状态</th>
+                                <th id="box">公司</th> 
+                                <th id="box">备注</th>                               
+                                <th id="box">状态</th>                                
                                 <th id="box">操作</th>
                             </tr>
                             </thead>
@@ -171,18 +172,14 @@
                                     <td id="box">${userInfo.password}</td>
                                     <td id="box">${userInfo.roles[0].name}</td>
                                     <td id="box">${userInfo.company}</td>
-                                    <%-- <c:forEach items="${userInfo.roles}" var="role">
-                                    ${role.name}
-                                    </c:forEach> --%>
-                                                                      
-                                    <td id="box">${userInfo.statusStr}
+                                    <td id="box">${userInfo.mark}</td>                                  
+                                    <td id="box">${userInfo.statusStr}</td>
                                     
+                                    <td id="box">   
                                     	<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>
-                                        <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>
-                                    </td>
-                                    <td class="text-center">                        				
-                                        <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">送货地址</a>
+                                        <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>                     				
+                                        <%-- <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a> --%>
+                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加送货地址</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -199,10 +196,9 @@
                             总共${pageInfo.pages} 页，共${pageInfo.total}条数据。 每页
                             <select class="form-control" id="changePageSize">
                             <option <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1</option>
-                            <option <c:if test="${pageInfo.pageSize==2}">selected</c:if>>2</option>
-                            <option <c:if test="${pageInfo.pageSize==3}">selected</c:if>>3</option>
-                            <option <c:if test="${pageInfo.pageSize==4}">selected</c:if>>4</option>
                             <option <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
+                            <option <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
                         </select> 条
                         </div>
                     </div>
@@ -313,7 +309,30 @@
         $(".textarea").wysihtml5({
             locale: 'zh-CN'
         });
+        $("#btn_01").click(function(){
+        	var status=this.innerHTML;
+        	alert(status);
+        	if(status=="开启"){
+        		this.innerHTML="关闭";
+        	}else{
+        		this.innerHTML="开启";
+        	}
+        });
     });
+    function opOCl(id){
+    	var status=this.innerHTML;
+    	alert(id);
+    	alert(status);
+    	if(status=="开启"){
+    		this.innerHTML="关闭";
+    		$.get("/user/userOnById","id="+id);
+    	}else{
+    		this.innerHTML="开启";
+    		$.get("/user/userOffById","id="+id);
+    	}
+    	
+    	
+    }
 
     // 设置激活菜单
     function setSidebarActive(tagUri) {

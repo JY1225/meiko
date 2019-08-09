@@ -24,4 +24,6 @@ public interface IFileService {
 	void updatePreviews(int recid);
 
 	Cust_jccjs_list findByOne(int recid);
+
+	Cust_jccjs_list findOneByName(String fileName);
 }

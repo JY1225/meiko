@@ -29,7 +29,7 @@
 			password-parameter="password"
 			authentication-failure-url="/failer.jsp"
 			default-target-url="/main.jsp"
-			authentication-success-forward-url="/main.jsp" />
+			authentication-success-forward-url="/file/findAll" />
 
 		<!-- 关闭CSRF,默认是开启的 ,跨服务器配置 -->
 		<security:csrf disabled="true" />

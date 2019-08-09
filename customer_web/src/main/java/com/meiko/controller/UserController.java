@@ -44,7 +44,7 @@ public class UserController {
     
     @RequestMapping("/findAll")
     public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1")Integer page,
-                                @RequestParam(name = "pageSize",required = true,defaultValue = "10")Integer pageSize,
+                                @RequestParam(name = "pageSize",required = true,defaultValue = "5")Integer pageSize,
                                 @RequestParam(name="userName",required=false) String userName
                                 )
     {

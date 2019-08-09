@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MEIKO - CUSTOMER</title>
-    <meta name="description" content="MEIKO - 文档管理">
-    <meta name="keywords" content="MEIKO - 文档管理">
+    <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -84,6 +84,7 @@
                 <li class="active">登录失败</li>
             </ol>
 
+
         </section>
 
         <!-- Main content -->
@@ -98,7 +99,7 @@
                         重新登录
                     </p>
 
-          ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
+         
                 </div>
                 <!-- /.error-content -->
             </div>

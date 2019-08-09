@@ -14,9 +14,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MEIKO - 文档管理</title>
-    <meta name="description" content="MEIKO - 文档管理">
-    <meta name="keywords" content="MEIKO - 文档管理">
+   <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -141,8 +141,8 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input id="selall"
-                                                                               type="checkbox" class="icheckbox_square-blue"></th>
+                                <!-- <th class="" style="padding-right: 0px"><input id="selall"
+                                 type="checkbox" class="icheckbox_square-blue"></th> -->
                                 <th class="sorting_asc">ID</th>
                                 <th class="sorting">登录账号</th>
                                 <th class="sorting">登录密码</th>
@@ -153,10 +153,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pageInfo.list}" var="loginlog">
+                            <c:forEach items="${pageInfo.list}" var="loginlog" varStatus="status">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>${loginlog.id}</td>
+                                    <!-- <td><input name="ids" type="checkbox"></td> -->
+                                    <td>${status.index + 1}</td>
                                     <td>${loginlog.loginName}</td>
                                     <td>${loginlog.password}</td>
                                     <td>${loginlog.userId}</td>
@@ -206,10 +206,10 @@
                         <div class="form-group form-inline">
                             总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 <select class="form-control" id="changePageSize">
                             <option  <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1 </option>
-                            <option  <c:if test="${pageInfo.pageSize==2}">selected</c:if>>2</option>
-                            <option  <c:if test="${pageInfo.pageSize==3}">selected</c:if>>3 </option>
-                            <option  <c:if test="${pageInfo.pageSize==4}">selected</c:if>>4</option>
                             <option  <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option  <c:if test="${pageInfo.pageSize==10}">selected</c:if>>10 </option>
+                            <option  <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
+                            <option  <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
                         </select> 条
                         </div>
                     </div>

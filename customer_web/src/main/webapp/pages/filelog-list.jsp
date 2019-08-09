@@ -14,9 +14,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MEIKO-CUSTOMER</title>
-    <meta name="description" content="MEIKO - 文档管理">
-    <meta name="keywords" content="MEIKO - 文档管理">
+   <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta
@@ -142,8 +142,9 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input id="selall"
-                                                                               type="checkbox" class="icheckbox_square-blue"></th>
+                                <!-- <th class="" style="padding-right: 0px"><input id="selall"
+                                    type="checkbox" class="icheckbox_square-blue">
+                                </th> -->
                                 <th class="sorting_asc">ID</th>
                                 <th class="sorting">文件名</th>
                                 <th class="sorting">文件id</th>
@@ -156,10 +157,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pageInfo.list}" var="filelog">
+                            <c:forEach items="${pageInfo.list}" var="filelog" varStatus="status">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>${filelog.recid}</td>
+                                    <!-- <td><input name="ids" type="checkbox"></td> -->
+                                    <td>${status.index + 1}</td>
                                     <td>${filelog.file_name}</td>
                                     <td>${filelog.cust_jccjs_list_id}</td>
                                     <td>${filelog.type}</td>

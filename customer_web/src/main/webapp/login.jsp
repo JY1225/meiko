@@ -21,7 +21,7 @@
 	}
 
 </style>
-    <title>MEIKO - CUSTOMER | Log in</title>
+    <title>成绩书系统</title>
 
     <meta
             content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -42,7 +42,7 @@
 <body class="test">
 <div class="login-box">
     <div class="login-logo">
-        <a href="all-admin-index.html"><b>MEIKO</b>客户管理系统</a>
+        <a href="all-admin-index.html">成绩书管理系统</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

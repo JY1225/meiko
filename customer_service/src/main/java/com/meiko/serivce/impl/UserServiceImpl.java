@@ -30,6 +30,7 @@ import com.meiko.domain.LoginLog;
 import com.meiko.domain.Role;
 import com.meiko.domain.UserInfo;
 import com.meiko.service.ILoginLogService;
+import com.meiko.service.IRoleService;
 import com.meiko.service.IUserService;
 
 @Service("userService")
@@ -43,14 +44,13 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     private HttpServletRequest request;
     @Autowired
     private ILoginLogService service;
-    
     @Override
     public UserDetails loadUserByUsername(String s) {
     	 LoginLog loginLog=new LoginLog();
     	 loginLog.setIp(request.getRemoteAddr());
     	 loginLog.setLoginName(s);
     	 loginLog.setLoginTime(new Date());
-    	 
+    	 HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
     	try {
     		UserInfo userInfo= dao.findByUserName(s);
     		User user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
@@ -60,7 +60,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
             	loginLog.setPassword(userInfo.getPassword());
                 loginLog.setLoginStatus("OK");
                 loginLog.setUserId(userInfo.getId());
-                
+                session.setAttribute("company", userInfo.getCompany());
             }else {
             	if(userInfo!=null) {
         			loginLog.setUserId(userInfo.getId());       			
@@ -105,14 +105,14 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
         	PageHelper.startPage(page,pageSize);
         	list = dao.findAll();
         	for(int i = 0;i < list.size();i++) {
-        		list.get(i).setRoles(dao.findByUserName(list.get(i).getUserName()).getRoles());
+        		list.get(i).setRoles(dao.findAllHasRole(list.get(i).getUserName()).getRoles());
         	}
         	return list;
         }else {
         	PageHelper.startPage(page,pageSize);
         	list = dao.findAllByName("%"+userName+"%");
         	for(int i = 0;i < list.size();i++) {
-        		list.get(i).setRoles(dao.findByUserName(list.get(i).getUserName()).getRoles());
+        		list.get(i).setRoles(dao.findAllHasRole(list.get(i).getUserName()).getRoles());
         	}
         	return list;
         }

@@ -13,9 +13,9 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MEIKO - 文档管理</title>
-    <meta name="description" content="MEIKO - 文档管理">
-    <meta name="keywords" content="MEIKO - 文档管理">
+  <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

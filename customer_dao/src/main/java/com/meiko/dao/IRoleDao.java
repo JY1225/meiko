@@ -53,8 +53,6 @@ public interface IRoleDao {
     @Insert("insert into role(name,description)values(#{name},#{description})")
 	public void save(Role role);
     @Select("select * from role where name=#{name}")
-	public Role findByName(String name);
-
-	
+	public Role findByName(String name);	
 	
 }

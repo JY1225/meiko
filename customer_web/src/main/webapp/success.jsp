@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+   <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
 </head>
 <body>
 success

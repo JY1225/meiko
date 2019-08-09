@@ -30,6 +30,7 @@ public class RoleServiceImpl implements IRoleService {
 	public Role findByName(String name) {
 		return dao.findByName(name);
 	}
+	
     @Override
     public void saveRolePermission(String id,String roleId) {
         dao.saveRolePermission(id,roleId);
@@ -53,6 +54,4 @@ public class RoleServiceImpl implements IRoleService {
 		// TODO Auto-generated method stub
 		dao.save(role);
 	}
-
-
 }

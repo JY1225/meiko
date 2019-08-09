@@ -10,8 +10,9 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="#" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>数据</b></span> <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>数据</b>后台管理</span>
+        <span class="logo-mini"></span> <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>${sessionScope.company}
+        </b>成绩书系统</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -45,12 +46,11 @@
                             </div>
                         </li> --%>
                     </ul></li>
-                    <li class="" >                        
-                         <a href="${pageContext.request.contextPath}/pages/password-edit.jsp" class="">修改密码</a>                   
+                    <li  >                        
+                         <a href="${pageContext.request.contextPath}/pages/password-edit.jsp" >修改密码</a>                   
                     </li>
-					<li class="" >                                                      
-                        <a href="${pageContext.request.contextPath}/logout"
-                          class="" >注销</a>
+					<li  >                                                      
+                        <a href="${pageContext.request.contextPath}/logout">注销</a>
                             
                    </li>
             </ul>
