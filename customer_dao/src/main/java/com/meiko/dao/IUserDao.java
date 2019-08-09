@@ -18,7 +18,7 @@ import com.meiko.domain.UserInfo;
 
 public interface IUserDao {
 
-    @Select("select * from userinfo where userName=#{userName} and status = 1")
+    @Select("select * from userinfo where userName=#{userName}")
     @Results(id="userRoleMap",value = {
             @Result(id = true,property = "id",column = "id"),
             @Result(property = "roles",column = "id",javaType = java.util.List.class,
