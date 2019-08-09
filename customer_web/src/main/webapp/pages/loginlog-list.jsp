@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MEIKO -CUSTOMER</title>
+   <title>成绩书系统</title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -205,10 +205,10 @@
                         <div class="form-group form-inline">
                             总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 <select class="form-control" id="changePageSize">
                             <option  <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1 </option>
-                            <option  <c:if test="${pageInfo.pageSize==2}">selected</c:if>>2</option>
-                            <option  <c:if test="${pageInfo.pageSize==3}">selected</c:if>>3 </option>
-                            <option  <c:if test="${pageInfo.pageSize==4}">selected</c:if>>4</option>
                             <option  <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option  <c:if test="${pageInfo.pageSize==10}">selected</c:if>>10 </option>
+                            <option  <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
+                            <option  <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
                         </select> 条
                         </div>
                     </div>

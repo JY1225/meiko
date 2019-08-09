@@ -30,23 +30,23 @@
         
 
       
-            <li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
-                <span>基础数据</span> <span class="pull-right-container"> <i
+            <li class="treeview"><a href="${pageContext.request.contextPath}/file/findAll"> <i class="fa fa-cube"></i>
+                <span>成绩书管理</span> <span class="pull-right-container"> <i
                         class="fa fa-angle-left pull-right"></i>
 				</span>
             </a>
-                <ul class="treeview-menu">
+                <%-- <ul class="treeview-menu">
                     <li>
                         <a href="${pageContext.request.contextPath}/file/findAll">
                             <i class="fa fa-circle-o"></i> 成绩书管理
                         </a>
                     </li>
-                    <%-- <li>
+                    <li>
                         <a href="${pageContext.request.contextPath}/orders/findAll?page=1&pageSize=3">
                             <i class="fa fa-circle-o"></i> xxxx
                         </a>
-                    </li> --%>
-                </ul>
+                    </li>
+                </ul> --%>
             </li>
             
            <%-- <c:if test="${sessionScope.role == 'ROLE_ADMIN' }">  --%>

@@ -19,7 +19,7 @@ public class LoginController {
     @RequestMapping("/findAll")
     public  String findAll(
             @RequestParam(name="page",required = true,defaultValue = "1")Integer page,
-            @RequestParam(name="pageSize",required = true,defaultValue = "3")Integer pageSize,
+            @RequestParam(name="pageSize",required = true,defaultValue = "10")Integer pageSize,
             @RequestParam(name="loginName",required=false) String loginName,
             Model model)
     {

@@ -301,7 +301,30 @@
         $(".textarea").wysihtml5({
             locale: 'zh-CN'
         });
+        $("#btn_01").click(function(){
+        	var status=this.innerHTML;
+        	alert(status);
+        	if(status=="开启"){
+        		this.innerHTML="关闭";
+        	}else{
+        		this.innerHTML="开启";
+        	}
+        });
     });
+    function opOCl(id){
+    	var status=this.innerHTML;
+    	alert(id);
+    	alert(status);
+    	if(status=="开启"){
+    		this.innerHTML="关闭";
+    		$.get("/user/userOnById","id="+id);
+    	}else{
+    		this.innerHTML="开启";
+    		$.get("/user/userOffById","id="+id);
+    	}
+    	
+    	
+    }
 
     // 设置激活菜单
     function setSidebarActive(tagUri) {

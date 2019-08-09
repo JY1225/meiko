@@ -10,8 +10,8 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="#" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>数据</b></span> <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>数据</b>后台管理</span>
+        <span class="logo-mini"></span> <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b><security:authentication property="principal.username"></security:authentication>		</b>成绩书管理</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

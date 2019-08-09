@@ -111,6 +111,15 @@ public class Cust_jccjs_list {
 	public void setUpload_user(String upload_user) {
 		this.upload_user = upload_user;
 	}
+	@Override
+	public String toString() {
+		return "Cust_jccjs_list [recid=" + recid + ", cust_addr_id=" + cust_addr_id + ", cust_code=" + cust_code
+				+ ", cust_name=" + cust_name + ", cust_part=" + cust_part + ", shipping_addr=" + shipping_addr
+				+ ", shipping_dt=" + shipping_dt + ", shipping_jccjs_ptr=" + shipping_jccjs_ptr + ", shipping_jccjs_no="
+				+ shipping_jccjs_no + ", upload_filename=" + upload_filename + ", upload_dt=" + upload_dt
+				+ ", upload_terminal=" + upload_terminal + ", upload_user=" + upload_user + ", down_loads=" + down_loads
+				+ ", previews=" + previews + "]";
+	}
 	
 	
 }

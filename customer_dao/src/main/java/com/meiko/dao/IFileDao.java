@@ -44,4 +44,6 @@ public interface IFileDao {
 	void Previews( @Param("recid")int recid);
     @Select("select * from cust_jccjs_list where recid=#{recid}")
 	Cust_jccjs_list findByOne(int recid);
+    @Select("select * from cust_jccjs_list where upload_filename=#{upload_filename}")
+	Cust_jccjs_list findOneByName(String upload_filename);
 }

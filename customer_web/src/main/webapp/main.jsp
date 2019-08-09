@@ -5,6 +5,7 @@
   Time: 16:59
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <html>
 <head>
@@ -13,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MEIKO - CUSTOMER</title>
+    <title>成绩书系统</title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -143,7 +144,7 @@
             <div class="box box-primary">
                 <div   class="box-header with-border">
                    <p>
-                                     欢迎登陆名幸成绩书管理系统
+                                     欢迎登陆成绩书管理系统
                    </p>
 				
 

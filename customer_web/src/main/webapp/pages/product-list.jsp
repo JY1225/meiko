@@ -13,9 +13,9 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>数据 - AdminLTE2定制版</title>
-    <meta name="description" content="AdminLTE2定制版">
-    <meta name="keywords" content="AdminLTE2定制版">
+   <title>成绩书系统</title>
+    <meta name="description" content="MEIKO">
+    <meta name="keywords" content="MEIKO">
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -111,17 +111,17 @@
                     <div class="table-box">
 
                         <!--工具栏-->
-                        <%-- <div class="pull-left">
+                        <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建"
+                                   <%--  <button type="button" class="btn btn-default" title="新建"
                                             onclick="location.href='${pageContext.request.contextPath}/pages/product-add.jsp'">
                                         <i class="fa fa-file-o"></i> 新建
+                                    </button> --%>
+                                    <button type="button" class="btn btn-default" title="批量下载" id="btn_del">
+                                         批量下载
                                     </button>
-                                    <button type="button" class="btn btn-default" title="删除" id="btn_del">
-                                        <i class="fa fa-trash-o"></i> 删除
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="开启">
+                                   <!--  <button type="button" class="btn btn-default" title="开启">
                                         <i class="fa fa-check"></i> 开启
                                     </button>
                                     <button type="button" class="btn btn-default" title="屏蔽">
@@ -129,10 +129,10 @@
                                     </button>
                                     <button type="button" class="btn btn-default" title="刷新">
                                         <i class="fa fa-refresh"></i> 刷新
-                                    </button>
+                                    </button> -->
                                 </div>
                             </div>
-                        </div> --%>
+                        </div> 
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
                                 <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                         <!--工具栏/-->
-                        <form action="${pageContext.request.contextPath}/product/deleleByIds" method="post" id="formDel" >
+                        <form action="${pageContext.request.contextPath}/file/downLoadByNames" method="post" id="formDel" >
 
                         <!--数据列表-->
                         <table id="dataList"
@@ -177,7 +177,7 @@
                                 <c:forEach items="${productPageInfo.list}" var="ofile" >
 
                                     <tr>
-                                        <td><input name="ids"  type="checkbox" value="${ofile.recid}" id="ids" ></td>
+                                        <td><input name="names"  type="checkbox" value="${ofile.upload_filename}" id="ids" ></td>
                                         <td style="font-size:14px">${ofile.recid}</td>
                                         <td style="font-size:14px">${ofile.cust_code}</td>
                                         <td style="font-size:14px">${ofile.cust_name}</td>
@@ -251,10 +251,10 @@
                             <select class="form-control" id="changePageSize">
 
                                 <option  <c:if test="${productPageInfo.pageSize==1}">selected</c:if>>1 </option>
-                                <option  <c:if test="${productPageInfo.pageSize==2}">selected</c:if>>2</option>
-                                <option  <c:if test="${productPageInfo.pageSize==3}">selected</c:if>>3 </option>
-                                <option  <c:if test="${productPageInfo.pageSize==4}">selected</c:if>>4</option>
                                 <option  <c:if test="${productPageInfo.pageSize==5}">selected</c:if>>5</option>
+                                <option  <c:if test="${productPageInfo.pageSize==10}">selected</c:if>>10 </option>
+                                <option  <c:if test="${productPageInfo.pageSize==15}">selected</c:if>>15</option>
+                                <option  <c:if test="${productPageInfo.pageSize==20}">selected</c:if>>20</option>
                             </select> 条
                         </div>
                     </div>
@@ -424,12 +424,12 @@
             //alert("123");
 
             if($("#ids:checked").length>=1){
-                if(confirm("确定删除吗？")){
+                
                     $("#formDel").submit();
-                }
+               
 
             }else{
-                alert("未选择删除项");
+                alert("未选择下载项");
             }
 
 
