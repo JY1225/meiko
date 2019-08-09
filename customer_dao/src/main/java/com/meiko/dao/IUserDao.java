@@ -17,7 +17,7 @@ import com.meiko.domain.UserInfo;
 
 public interface IUserDao {
 
-    @Select("select * from userinfo where userName=#{userName}")
+    @Select("select * from userinfo where status=1 and userName=#{userName}")
     @Results(id="userRoleMap",value = {
             @Result(id = true,property = "id",column = "id"),
             @Result(property = "roles",column = "id",javaType = java.util.List.class,
@@ -30,7 +30,7 @@ public interface IUserDao {
     @Select("select * from userinfo")
     List<UserInfo> findAll();
     
-    @Select("select * from userinfo where userName like #{userName}")
+    @Select("select * from userinfo where  userName like #{userName}")
     List<UserInfo> findAllByName(String userName);
     
     @Insert("insert into userinfo(username,password,email,phonenum,status)values(#{userName},#{password},#{email},#{phoneNum},#{status})")
