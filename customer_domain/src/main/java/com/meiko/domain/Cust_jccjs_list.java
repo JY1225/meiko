@@ -1,6 +1,6 @@
 package com.meiko.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Cust_jccjs_list {
 

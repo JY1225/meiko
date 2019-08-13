@@ -120,7 +120,7 @@
                     
                         
                     <button type="button" class="btn bg-default"
-                            onclick="window.location.href='${pageContext.request.contextPath}/main.jsp'">返回</button>
+                            onclick="history.back(-1);">返回</button>
                 </div>
                 <!--工具栏/--> </section>
             <!-- 正文区域 /-->

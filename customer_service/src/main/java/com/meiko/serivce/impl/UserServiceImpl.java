@@ -38,8 +38,8 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
     @Autowired
     private IUserDao dao;
-    //@Autowired
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private HttpServletRequest request;
     @Autowired
@@ -55,9 +55,9 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     		UserInfo userInfo= dao.findByUserName(s);
     		User user = new User(userInfo.getUserName(),userInfo.getPassword(),getAuthority(userInfo.getRoles()));
     		
-            if(s.equals(userInfo.getUserName()) && request.getParameter("password").equals(userInfo.getPassword()) 
+            if(s.equals(userInfo.getUserName()) && bCryptPasswordEncoder.matches(request.getParameter("password"),userInfo.getPassword()) 
             		&& userInfo.getStatus()==1) {
-            	loginLog.setPassword(userInfo.getPassword());
+            	loginLog.setPassword(request.getParameter("password"));
                 loginLog.setLoginStatus("OK");
                 loginLog.setUserId(userInfo.getId());
                 session.setAttribute("company", userInfo.getCompany());
@@ -121,7 +121,7 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
     @Override
     public int save(UserInfo userInfo) {
-      /*userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));*/      
+      userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));     
       if(dao.findAllByName(userInfo.getUserName()).size()>0) {
     	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
     	  return 0;
@@ -169,14 +169,21 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	}
 
 	@Override
-	public List<Cust_jccjs_list> findFiles(int page, int pageSize,int id,String fileName) {
-		if(StringUtils.isBlank(fileName)) {
+	public List<Cust_jccjs_list> findFiles(int page, int pageSize,int id,String fromData,String toData) {
+		if(StringUtils.isBlank(fromData) && StringUtils.isBlank(toData)) {
         	PageHelper.startPage(page,pageSize);
         	return dao.findFiles(id);
-        }else {
+        } else if(!StringUtils.isBlank(fromData) && !StringUtils.isBlank(toData)) {
         	PageHelper.startPage(page,pageSize);
-        	return dao.findFilesByFileName("%"+fileName+"%");
-        }		
+        	return dao.findFilesByData(id,fromData,toData);
+        } else if(!StringUtils.isBlank(fromData) && StringUtils.isBlank(toData)) {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findFilesByFromData(id,fromData);
+        } else {
+        	PageHelper.startPage(page,pageSize);
+        	return dao.findFilesByTodata(id,toData);
+        }        
+
 	}
 
 	@Override
@@ -185,14 +192,31 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	}
 
 	@Override
-	public void passUpadateByName(String userName, String password) {
+	public void passUpadateByName(String userName, String password) {    
 		try {
-			dao.passUpadateByName(userName,password);
+			dao.passUpadateByName(userName,bCryptPasswordEncoder.encode(password));
 			JOptionPane.showMessageDialog(null,"密码修改成功","",JOptionPane.PLAIN_MESSAGE);
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null,"密码修改失败","",JOptionPane.PLAIN_MESSAGE);
 			e.printStackTrace();
 		}
 		
+	}
+
+
+
+
+	@Override
+	public void passUpadateById(int id, String password) {
+		int ifadd=JOptionPane.showConfirmDialog(null,"确定重置密码","",JOptionPane.YES_NO_OPTION);
+		try {
+			if(ifadd==JOptionPane.YES_OPTION){
+				dao.passUpadateById(id,bCryptPasswordEncoder.encode(password));
+				JOptionPane.showMessageDialog(null,"密码重置成功","",JOptionPane.PLAIN_MESSAGE);
+				}						
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"密码重置失败","",JOptionPane.PLAIN_MESSAGE);
+			e.printStackTrace();
+		}		
 	}
 }

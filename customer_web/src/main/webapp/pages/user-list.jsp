@@ -66,7 +66,7 @@
           href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
           
     <style type="text/css">
-        #box { font-size: 1vw;}
+        #box { font-size: 0.8vw;}
     </style>
 </head>
 
@@ -155,12 +155,14 @@
                                 </th> -->
                                 <th id="box">序号</th>
                                 <th id="box">用户名</th>
-                                <th id="box">密码</th>
+                                <!-- <th id="box">密码</th> -->
                                 <th id="box">角色</th>       
                                 <th id="box">公司</th> 
                                 <th id="box">备注</th>                               
                                 <th id="box">状态</th>                                
-                                <th id="box">操作</th>
+                                <th id="box">状态操作</th>
+                                <th id="box">地址操作</th>
+                                <th id="box">密码操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -169,17 +171,25 @@
                                     <!-- <td><input name="ids" type="checkbox"></td> -->
                                     <td id="box">${status.index + 1}</td>
                                     <td id="box">${userInfo.userName}</td>
-                                    <td id="box">${userInfo.password}</td>
+                                    <%-- <td id="box">${userInfo.password}</td> --%>
                                     <td id="box">${userInfo.roles[0].name}</td>
                                     <td id="box">${userInfo.company}</td>
                                     <td id="box">${userInfo.mark}</td>                                  
                                     <td id="box">${userInfo.statusStr}</td>
-                                    
                                     <td id="box">   
                                     	<a href="${pageContext.request.contextPath}/user/userOnById?id=${userInfo.id}" class="btn bg-olive btn-xs">开启</a>
-                                        <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>                     				
+                                        <a href="${pageContext.request.contextPath}/user/userOffById?id=${userInfo.id}" class="btn bg-olive btn-xs">关闭</a>                     				                                        
+                                    </td>
+                                    <td id="box">                                       	
                                         <%-- <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a> --%>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加送货地址</a>
+                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">添加送货地址</a>                                        
+                                    </td>
+                                    <td id="box">
+                                     <form action="${pageContext.request.contextPath}/user/passUpadateById" method="post"> 
+                                     <input style="display:none" type="text" name="id" value="${userInfo.id}"/>                                      	
+                                        <input class="col-md-3" id="pw" type="text" name="password" value="123"/>
+                                        <button type="submit" class="btn bg-olive btn-xs">密码重置</button>                                      
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>

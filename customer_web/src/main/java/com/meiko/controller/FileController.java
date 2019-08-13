@@ -55,12 +55,13 @@ public class FileController {
 	@RequestMapping("/findAll")
 	public String findAll(Model model, @RequestParam(name = "page", defaultValue = "1") Integer page,
 			@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
-			@RequestParam(name = "fileName", required = false) String fileName) {
+			@RequestParam(name = "fromData", required = false) String fromData,
+			@RequestParam(name = "toData", required = false) String toData) {
 		
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserInfo user = service.findByUserName(name);
 
-		List<Cust_jccjs_list> list = service.findFiles(page, pageSize, user.getId(), fileName);
+		List<Cust_jccjs_list> list = service.findFiles(page, pageSize, user.getId(), fromData, toData);
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setUpload_filename(list.get(i).getUpload_filename().trim());
 		}

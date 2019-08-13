@@ -67,6 +67,15 @@ public interface IUserDao {
     @Select("select * from cust_jccjs_list t where t.cust_addr_id in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
 	List<Cust_jccjs_list> findFiles(int id);
 	
+	@Select("select * from cust_jccjs_list t where t.cust_addr_id in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id}) AND CONVERT(varchar(100), t.shipping_dt, 23) BETWEEN #{fromData} AND  #{toData}")
+	List<Cust_jccjs_list> findFilesByData(@Param("id")int id,@Param("fromData")String fromData, @Param("toData")String toData);
+
+	@Select("select * from cust_jccjs_list t where t.cust_addr_id in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id}) AND CONVERT(varchar(100), t.shipping_dt, 23) >= #{fromData}")
+	List<Cust_jccjs_list> findFilesByFromData(@Param("id")int id,@Param("fromData")String fromData);
+
+	@Select("select * from cust_jccjs_list t where t.cust_addr_id in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id}) AND CONVERT(varchar(100), t.shipping_dt, 23) <= #{toData}")
+	List<Cust_jccjs_list> findFilesByTodata(@Param("id")int id,@Param("toData")String toData);
+	
     @Select("select * from CUST_ADDR t where t.recid not in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
 	List<Cust_Addr> findNotFile(String id);
 
@@ -82,4 +91,9 @@ public interface IUserDao {
 
 	@Update("UPDATE userinfo  SET password=#{password} WHERE userName = #{userName}")
 	void passUpadateByName(@Param("userName")String userName, @Param("password")String password);
+	
+	@Update("UPDATE userinfo  SET password=#{password} WHERE id = #{id}")
+	void passUpadateById(@Param("id")int id, @Param("password")String password);
+	
+	
 }

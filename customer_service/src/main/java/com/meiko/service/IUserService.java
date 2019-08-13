@@ -22,11 +22,13 @@ public interface IUserService {
 
 	List<Cust_Addr> findNotFile(String id);
 	
-	List<Cust_jccjs_list> findFiles(int id, int pageSize, int i, String fileName);
+	List<Cust_jccjs_list> findFiles(int id, int pageSize, int i, String fileName, String toData);
 
 	void saveUserFile(String userId, String fileId);
 
 	void updateUserStausById(int id, int status);
 
 	void passUpadateByName(String name, String password);
+
+	void passUpadateById(int id, String password);
 }

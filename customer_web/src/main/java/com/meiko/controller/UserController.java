@@ -139,9 +139,16 @@ public class UserController {
     }
     
     @RequestMapping("/passUpadateByName")
-    private String passUpadateById(UserInfo userInfo){
+    private String passUpadateByName(UserInfo userInfo){
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();                
         service.passUpadateByName(name,userInfo.getPassword());
         return  "password-edit";
+    }
+    
+    @RequestMapping("/passUpadateById")
+    private String passUpadateById(UserInfo userInfo){    	
+    	service.passUpadateById(userInfo.getId(),userInfo.getPassword());
+		return "redirect:findAll";
+    	
     }
 }

@@ -22,7 +22,7 @@ public class FilelogController {
     @RequestMapping("/findAll")
     public  String findAll(
             @RequestParam(name="page",required = true,defaultValue = "1")Integer page,
-            @RequestParam(name="pageSize",required = true,defaultValue = "3")Integer pageSize,
+            @RequestParam(name="pageSize",required = true,defaultValue = "10")Integer pageSize,
             @RequestParam(name="file_name",required=false) String file_name,
             Model model)
     {

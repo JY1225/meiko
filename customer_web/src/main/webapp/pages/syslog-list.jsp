@@ -64,6 +64,10 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+          
+    <style type="text/css">
+        #box { font-size: 0.8vw;}
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -135,26 +139,26 @@
                             <tr>
                                 <th class="" style="padding-right: 0px"><input id="selall"
                                                                                type="checkbox" class="icheckbox_square-blue"></th>
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting">访问时间</th>
-                                <th class="sorting">访问用户</th>
-                                <th class="sorting">访问IP</th>
-                                <th class="sorting">资源URL</th>
-                                <th class="sorting">执行时间</th>
-                                <th class="sorting">访问方法</th>
+                                <th id="box">ID</th>
+                                <th id="box">访问时间</th>
+                                <th id="box">访问用户</th>
+                                <th id="box">访问IP</th>
+                                <th id="box">资源URL</th>
+                                <th id="box">执行时间</th>
+                                <th id="box">访问方法</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${pageInfo.list}" var="syslog">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>${syslog.id}</td>
-                                    <td>${syslog.visitTimeStr}</td>
-                                    <td>${syslog.username}</td>
-                                    <td>${syslog.ip}</td>
-                                    <td>${syslog.url}</td>
-                                    <td>${syslog.executionTime}毫秒</td>
-                                    <td>${syslog.method}</td>
+                                    <td id="box"><input name="ids" type="checkbox"></td>
+                                    <td id="box">${syslog.id}</td>
+                                    <td id="box">${syslog.visitTimeStr}</td>
+                                    <td id="box">${syslog.username}</td>
+                                    <td id="box">${syslog.ip}</td>
+                                    <td id="box">${syslog.url}</td>
+                                    <td id="box">${syslog.executionTime}毫秒</td>
+                                    <td id="box">${syslog.method}</td>
                                 </tr>
                             </c:forEach>
 
@@ -382,6 +386,11 @@
             $(this).data("clicks", !clicks);
         });
     });
+    
+    window.onresize = function(){
+        var box = document.getElementById("box");
+        box.style["z-index"] = 1;
+    }
 </script>
 </body>
 

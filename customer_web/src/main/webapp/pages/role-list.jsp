@@ -64,6 +64,9 @@
           href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
+    <style type="text/css">
+        #box { font-size: 0.8vw;}
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -137,22 +140,22 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input
+                                <!-- <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
-                                </th>
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting_desc">角色名称</th>
-                                <th class="sorting_asc sorting_asc_disabled">描述</th>
-                                <th class="text-center">操作</th>
+                                </th> -->
+                                <th id="box">ID</th>
+                                <th id="box">角色名称</th>
+                                <th id="box">描述</th>
+                                <th id="box">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${pageInfo.list}" var="role">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>${role.id}</td>
-                                    <td>${role.name}</td>
-                                    <td>${role.description}</td>
+                                    <!-- <td id="box"><input name="ids" type="checkbox"></td> -->
+                                    <td id="box">${role.id}</td>
+                                    <td id="box">${role.name}</td>
+                                    <td id="box">${role.description}</td>
                                     <td class="text-center">
                                         <%-- <a href="${pageContext.request.contextPath}/role/findById?id=${role.id}" class="btn bg-olive btn-xs">详情</a>
                                         <a href="${pageContext.request.contextPath}/role/findNotPermissions?id=${role.id}" class="btn bg-olive btn-xs">添加权限</a>
@@ -351,6 +354,11 @@
 
                 });
             });
+    
+    window.onresize = function(){
+        var box = document.getElementById("box");
+        box.style["z-index"] = 1;
+    }
 </script>
 </body>
 

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <head>
@@ -65,7 +66,7 @@
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
           
     <style type="text/css">
-        #box { font-size: 1vw;}
+        #box { font-size: 0.8vw;}
     </style>
 </head>
 
@@ -140,13 +141,20 @@
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
                                 <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
-                                <div class="col-md-8">
+                                <label id="box" for="meeting">开始日期：</label>
+                                <input id="meeting" type="date" name="fromData" class="date-picker"/>
+                           
+                                <label id="box" for="meeting">结束日期：</label>
+                                <input id="meeting" type="date" name="toData" class="date-picker"/>
+                                
+                                <!-- <div class="col-md-8">
                                 <input type="text" class="form-control input-sm" name="fileName"
                                        placeholder="文件名称">
-                                 </div>   
-                                 <div class="col-md-1">
-                                         <button type="submit" class="btn btn-default">搜索</button> 
-                                  </div>
+                                 </div>    -->
+                                 <button type="submit" class="btn btn-default">搜索</button>
+                                 <!-- <div class="col-md-1">
+                                          
+                                  </div> -->
                              </form>
                             </div>
                         </div>
@@ -187,10 +195,10 @@
                                         <td id="box">${ofile.cust_name}</td>
                                         <td id="box">${ofile.shipping_addr}</td>
                                         <td id="box">${ofile.cust_part}</td>
-                                        <td id="box">${ofile.shipping_dt}</td>
+                                        <td id="box"><fmt:formatDate value='${ofile.shipping_dt}' type="both" /></td>
                                         <td id="box">${ofile.shipping_jccjs_no}</td>
                                         <td id="box">${ofile.upload_filename}</td>
-                                        <td id="box">${ofile.upload_dt}</td>
+                                        <td id="box"><fmt:formatDate value='${ofile.upload_dt}' type="both" /></td>
                                         <%-- <td>${product.upload_terminal}</td>  style="font-size:14px" --%>
                                         <td id="box">${ofile.upload_user}</td>
                                         <td id="box">
@@ -474,6 +482,11 @@
     window.onresize = function(){
         var box = document.getElementById("box");
         box.style["z-index"] = 1;
+    }
+    
+    var defaultDate = document.querySelectorAll('.date-picker');
+    for (var i = 0; i<defaultDate.length; i++) {
+        defaultDate[i].valueAsDate = new Date();
     }
 </script>
 </body>

@@ -67,6 +67,9 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <style type="text/css">
+        #box { font-size: 0.8vw;}
+    </style> 
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -143,26 +146,26 @@
                             <tr>
                                 <!-- <th class="" style="padding-right: 0px"><input id="selall"
                                  type="checkbox" class="icheckbox_square-blue"></th> -->
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting">登录账号</th>
-                                <th class="sorting">登录密码</th>
-                                <th class="sorting">用户id</th>
-                                <th class="sorting">登录状态</th>
-                                <th class="sorting">登录时间</th>
-                                <th class="sorting">ip</th>
+                                <th id="box">ID</th>
+                                <th id="box">登录账号</th>
+                                <th id="box">登录密码</th>
+                                <th id="box">用户id</th>
+                                <th id="box">登录状态</th>
+                                <th id="box">登录时间</th>
+                                <th id="box">ip</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${pageInfo.list}" var="loginlog" varStatus="status">
                                 <tr>
                                     <!-- <td><input name="ids" type="checkbox"></td> -->
-                                    <td>${status.index + 1}</td>
-                                    <td>${loginlog.loginName}</td>
-                                    <td>${loginlog.password}</td>
-                                    <td>${loginlog.userId}</td>
-                                    <td>${loginlog.loginStatus}</td>
-                                    <td><fmt:formatDate value='${loginlog.loginTime}' type="both" /></td>
-                                    <td>${loginlog.ip}</td>
+                                    <td id="box">${status.index + 1}</td>
+                                    <td id="box">${loginlog.loginName}</td>
+                                    <td id="box">${loginlog.password}</td>
+                                    <td id="box">${loginlog.userId}</td>
+                                    <td id="box">${loginlog.loginStatus}</td>
+                                    <td id="box"><fmt:formatDate value='${loginlog.loginTime}' type="both" /></td>
+                                    <td id="box">${loginlog.ip}</td>
                                 </tr>
                             </c:forEach>
 

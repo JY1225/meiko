@@ -67,6 +67,10 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+          
+    <style type="text/css">
+        #box { font-size: 0.8vw;}
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -145,14 +149,14 @@
                                 <!-- <th class="" style="padding-right: 0px"><input id="selall"
                                     type="checkbox" class="icheckbox_square-blue">
                                 </th> -->
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting">文件名</th>
-                                <th class="sorting">文件id</th>
-                                <th class="sorting">操作类型</th>
-                                <th class="sorting">操作时间</th>
-                                <th class="sorting">登录用户名</th>
-                                <th class="sorting">下载总数</th>
-                                <th class="sorting">预览总数</th>
+                                <th id="box">ID</th>
+                                <th id="box">文件名</th>
+                                <th id="box">文件id</th>
+                                <th id="box">操作类型</th>
+                                <th id="box">操作时间</th>
+                                <th id="box">登录用户名</th>
+                                <th id="box">下载总数</th>
+                                <th id="box">预览总数</th>
                                  
                             </tr>
                             </thead>
@@ -160,14 +164,14 @@
                             <c:forEach items="${pageInfo.list}" var="filelog" varStatus="status">
                                 <tr>
                                     <!-- <td><input name="ids" type="checkbox"></td> -->
-                                    <td>${status.index + 1}</td>
-                                    <td>${filelog.file_name}</td>
-                                    <td>${filelog.cust_jccjs_list_id}</td>
-                                    <td>${filelog.type}</td>
-                                    <td><fmt:formatDate value='${filelog.loadTime}' type="both"/></td>
-                                    <td>${filelog.login_name}</td>
-                                    <td>${filelog.down_loads}</td>
-                                    <td>${filelog.previews}</td>
+                                    <td id="box">${status.index + 1}</td>
+                                    <td id="box">${filelog.file_name}</td>
+                                    <td id="box">${filelog.cust_jccjs_list_id}</td>
+                                    <td id="box">${filelog.type}</td>
+                                    <td id="box"><fmt:formatDate value='${filelog.loadTime}' type="both"/></td>
+                                    <td id="box">${filelog.login_name}</td>
+                                    <td id="box">${filelog.down_loads}</td>
+                                    <td id="box">${filelog.previews}</td>
                                     
                                 </tr>
                             </c:forEach>
@@ -212,10 +216,10 @@
                         <div class="form-group form-inline">
                             总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 <select class="form-control" id="changePageSize">
                             <option  <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1 </option>
-                            <option  <c:if test="${pageInfo.pageSize==2}">selected</c:if>>2</option>
-                            <option  <c:if test="${pageInfo.pageSize==3}">selected</c:if>>3 </option>
-                            <option  <c:if test="${pageInfo.pageSize==4}">selected</c:if>>4</option>
                             <option  <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option  <c:if test="${pageInfo.pageSize==10}">selected</c:if>>10 </option>
+                            <option  <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
+                            <option  <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
                         </select> 条
                         </div>
                     </div>
@@ -422,6 +426,10 @@
 
                 });
             });
+    window.onresize = function(){
+        var box = document.getElementById("box");
+        box.style["z-index"] = 1;
+    }
 </script>
 </body>
 
