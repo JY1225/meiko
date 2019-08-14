@@ -260,7 +260,9 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-
+<!-- 多语言 -->        
+<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
+<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

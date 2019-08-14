@@ -10,7 +10,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.8
     </div>
-    <strong>Copyright &copy; 2014-2017 <a
+    <!-- <strong>Copyright &copy; 2014-2017 <a
             href="http://www..cn">名幸电子</a>.
-    </strong> All rights reserved.
+    </strong> All rights reserved. -->
 </footer>

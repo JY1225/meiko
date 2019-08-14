@@ -289,6 +289,9 @@
 <script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<!-- 多语言 -->        
+<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
+<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

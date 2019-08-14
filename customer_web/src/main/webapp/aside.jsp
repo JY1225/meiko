@@ -16,22 +16,23 @@
             </div> 
             <div class="pull-left info" >
                <security:authentication property="principal.username"></security:authentication>
-                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                <a href="#" ><i class="fa fa-circle text-success"></i>
+                	<font class="online">在线</font></a>
             </div>
         </div>
 
         <ul class="sidebar-menu">
-            <li class="header">菜单</li>
+            <li class="header"><font class="menu">菜单</font></li>
             <li id="admin-index">
                 <a href="${pageContext.request.contextPath}/main.jsp">
-                    <i class="fa fa-dashboard"></i> <span>首页</span>
+                    <i class="fa fa-dashboard"></i> <span class="home_page">首页</span>
                 </a>
             </li>
         
 
       
             <li class="treeview"><a href="${pageContext.request.contextPath}/file/findAll"> <i class="fa fa-cube"></i>
-                <span>成绩书管理</span> <span class="pull-right-container"> <i
+                <span class="report_list">成绩书管理</span> <span class="pull-right-container"> <i
                         class="fa fa-angle-left pull-right"></i>
 				</span>
             </a>
@@ -54,7 +55,7 @@
  <security:authorize access="hasRole('ROLE_ADMIN')">
                 <a href="#">
                     <i class="fa fa-cogs"></i>
-                    <span>系统管理</span>
+                    <span class="system_manage">系统管理</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -63,12 +64,12 @@
 
                     <li>
                         <a href="${pageContext.request.contextPath}/user/findAll">
-                            <i class="fa fa-circle-o"></i> 用户管理
+                            <i class="fa fa-circle-o"></i><font class="user_manage">用户管理</font> 
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/role/findAll">
-                            <i class="fa fa-circle-o"></i> 角色管理
+                            <i class="fa fa-circle-o"></i><font class="role_manage">角色管理</font> 
                         </a>
                     </li>
                     <%-- <li>
@@ -83,12 +84,12 @@
                     </li> --%>
                     <li>
                         <a href="${pageContext.request.contextPath}/loginlog/findAll">
-                            <i class="fa fa-circle-o"></i> 登录日志
+                            <i class="fa fa-circle-o"></i> <font class="login_log">登录日志</font> 
                         </a>
                     </li>
                       <li>
                         <a href="${pageContext.request.contextPath}/filelog/findAll">
-                            <i class="fa fa-circle-o"></i> 下载日志
+                            <i class="fa fa-circle-o"></i> <font class="download_log">下载日志</font>
                         </a>
                     </li>
                      <%-- <li>
@@ -98,7 +99,7 @@
                     </li> --%>
                      <li>
                         <a href="${pageContext.request.contextPath}/file/findAllDir">
-                            <i class="fa fa-circle-o"></i> 文件路径管理
+                            <i class="fa fa-circle-o"></i> <font class="source_url">文件路径管理</font>
                         </a>
                     </li>
                 </ul>
@@ -115,6 +116,10 @@
 </aside>
 <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- 多语言 -->
+        
+<script src="./plugins/jQuery/jquery.i18n.properties.js"></script>  
+<script src="./plugins/jQuery/language.js"></script>
 <script>
 /* $(document).ready(function () {
 	

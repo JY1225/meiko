@@ -107,6 +107,7 @@
         }
          
     </style>
+    
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -127,13 +128,12 @@
         <!-- <img src="../images/bg.jpg" width="100%" height="100%"/>  -->
         <!-- 内容头部 -->
         <section class="content-header">
-            <h1>
-               系统公告！
-                <small></small>
+            <h1 class="bulletin_board">
+               系统公告！                
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/file/findAll">成绩书管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> <span class="home_page">首页</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/file/findAll"><span class="report_list">成绩书管理</span></a></li>
                 <li class="active"></li>
             </ol>
         </section>
@@ -143,7 +143,7 @@
         <section class="content">
             <div class="box box-primary">
                 <div   class="box-header with-border">
-                   <p>
+                   <p class="welcome_system">
                                      欢迎登陆成绩书管理系统
                    </p>
 				
@@ -262,6 +262,9 @@
         src="./plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script
         src="./plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<!-- 多语言 -->         
+<script src="./plugins/jQuery/jquery.i18n.properties.js"></script>  
+<script src="./plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

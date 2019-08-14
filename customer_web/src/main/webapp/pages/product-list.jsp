@@ -89,13 +89,13 @@
 
         <!-- 内容头部 -->
         <section class="content-header">
-            <h1>
-                成绩书管理
+            <h1 class="report_list">
+               成绩书管理
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li>成绩书管理</li>
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i><span class="home_page">首页</span></a></li>
+                <li><span class="report_list">成绩书管理</span></li>
                 <li class="active"></li>
             </ol>
         </section>
@@ -107,7 +107,7 @@
             <!-- .box-body -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">列表</h3>
+                    <h3 class="box-title"><font class="list">列表</font></h3>
                 </div>
 
                 <div class="box-body">
@@ -124,7 +124,7 @@
                                         <i class="fa fa-file-o"></i> 新建
                                     </button> --%>
                                     <button type="button" class="btn btn-default" title="批量下载" id="btn_del">
-                                         批量下载
+                                        						<font class="batch_download"> 批量下载</font>
                                     </button>
                                    <!--  <button type="button" class="btn btn-default" title="开启">
                                         <i class="fa fa-check"></i> 开启
@@ -411,6 +411,9 @@
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- 多语言 -->       
+<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
+<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框
