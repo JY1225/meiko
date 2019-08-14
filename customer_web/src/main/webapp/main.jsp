@@ -145,9 +145,7 @@
                 <div   class="box-header with-border">
                    <p class="welcome_system">
                                      欢迎登陆成绩书管理系统
-                   </p>
-				
-
+                   </p>				
                 </div>
                 <!-- /.error-content -->
             </div>
