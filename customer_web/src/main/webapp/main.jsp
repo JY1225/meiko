@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     
@@ -14,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>成绩书系统</title>
+    <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -129,11 +130,18 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1 class="bulletin_board">
-               系统公告！                
+              <!--  系统公告！  -->   
+              <spring:message code="bulletin_board"/>            
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> <span class="home_page">首页</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/file/findAll"><span class="report_list">成绩书管理</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 
+                <!-- <span class="home_page">首页</span> -->
+                <spring:message code="home_page"/>  
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/file/findAll">
+                <!-- <span class="report_list">成绩书管理</span> -->
+                <spring:message code="report_list"/>   
+                </a></li>
                 <li class="active"></li>
             </ol>
         </section>
@@ -144,7 +152,8 @@
             <div class="box box-primary">
                 <div   class="box-header with-border">
                    <p class="welcome_system">
-                                     欢迎登陆成绩书管理系统
+                       <!--  欢迎登陆成绩书管理系统 -->
+                       <spring:message code="welcome_system"/>  
                    </p>				
                 </div>
                 <!-- /.error-content -->
@@ -260,9 +269,6 @@
         src="./plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script
         src="./plugins/bootstrap-slider/bootstrap-slider.js"></script>
-<!-- 多语言 -->         
-<script src="./plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="./plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,7 +24,7 @@
 	}
 
 </style>
-    <title>成绩书系统</title>
+    <title><spring:message code="achievement_system"/></title>
 
     <meta
             content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -44,11 +45,14 @@
 <body class="test">  
 <div class="login-box">
     <div class="login-logo">
-        <a href="all-admin-index.html" class="achievement_system">成绩书管理系统</a>
+        <!-- <a href="all-admin-index.html" class="achievement_system">成绩书管理系统</a> -->
+        <spring:message code="achievement_system"/>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg"><label class="login_title">登录系统</label></p>
+        <p class="login-box-msg"><!-- <label class="login_title">登录系统</label> -->
+        <spring:message code="login_title"/>
+        </p>
 <!-- <form>  
 	<label>language</label>
      <select class="lan_select">  
@@ -71,13 +75,16 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <input type="checkbox"><label class="remember_me">记住下次自动登录</label>
+                        <input type="checkbox">
+                        <!-- <label class="remember_me">记住下次自动登录</label> -->
+                        <spring:message code="remember_me"/>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">
-                    <font class="login">登录</font>
+                    <!-- <font class="login">登录</font> -->
+                    <spring:message code="login"/>
                     </button>
                 </div>
                 <!-- /.col -->

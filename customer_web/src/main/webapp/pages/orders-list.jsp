@@ -304,9 +304,6 @@
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-<!-- 多语言 -->        
-<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="../plugins/jQuery/language.js"></script>
 <script>
 
     $(document).ready(function () {

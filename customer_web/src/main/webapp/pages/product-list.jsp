@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>成绩书系统</title>
+   <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
@@ -90,12 +91,16 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1 class="report_list">
-               成绩书管理
+               <!-- 成绩书管理 -->
+               <spring:message code="report_list"/>
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i><span class="home_page">首页</span></a></li>
-                <li><span class="report_list">成绩书管理</span></li>
+                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i>
+                <!--首页-->
+                <spring:message code="home_page"/></a></li>
+                <li><!--成绩书管理-->
+                <spring:message code="report_list"/></li>
                 <li class="active"></li>
             </ol>
         </section>
@@ -107,7 +112,8 @@
             <!-- .box-body -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><font class="list">列表</font></h3>
+                    <h3 class="box-title">
+                    <spring:message code="list"/><!-- 列表 --></h3>
                 </div>
 
                 <div class="box-body">
@@ -124,7 +130,8 @@
                                         <i class="fa fa-file-o"></i> 新建
                                     </button> --%>
                                     <button type="button" class="btn btn-default" title="批量下载" id="btn_del">
-                                        						<font class="batch_download"> 批量下载</font>
+                                        						<!-- 批量下载 -->
+                                        						<spring:message code="batch_download"/>
                                     </button>
                                    <!--  <button type="button" class="btn btn-default" title="开启">
                                         <i class="fa fa-check"></i> 开启
@@ -141,17 +148,17 @@
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
                                 <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
-                                <label id="box" for="meeting">开始日期：</label>
-                                <input id="meeting" type="date" name="fromData" class="date-picker"/>
+                                <label id="box" for="meeting"><spring:message code="begin"/></label>
+                                <input id="meeting" type="date" name="fromData" class="date-picker" placeholder="2019/01/01"/>
                            
-                                <label id="box" for="meeting">结束日期：</label>
-                                <input id="meeting" type="date" name="toData" class="date-picker"/>
+                                <label id="box" for="meeting"><spring:message code="end"/></label>
+                                <input id="meeting" type="date" name="toData" class="date-picker" placeholder="2019/01/02"/>
                                 
                                 <!-- <div class="col-md-8">
                                 <input type="text" class="form-control input-sm" name="fileName"
                                        placeholder="文件名称">
                                  </div>    -->
-                                 <button type="submit" class="btn btn-default">搜索</button>
+                                 <button type="submit" class="btn btn-default"><spring:message code="Search"/></button>
                                  <!-- <div class="col-md-1">
                                           
                                   </div> -->
@@ -171,16 +178,16 @@
                                 </th>
                                 <th id="box" >ID</th>
                                 <!-- <th class="" >客户编码</th> -->
-                                <th id="box" >客户名称</th>
-                                <th id="box" >送货地址</th>
-                                <th id="box" >品名</th>
-                                <th  id="box">送货日期</th>
-                                <th  id="box">成绩书编号</th>                        
-                                <th  id="box">文件名称</th>
-                                <th  id="box">上传时间</th>   
+                                <th id="box" ><spring:message code="custom"/></th>
+                                <th id="box" ><spring:message code="shipping_addr"/></th>
+                                <th id="box" ><spring:message code="cust_part"/></th>
+                                <th  id="box"><spring:message code="shipping_dt"/></th>
+                                <th  id="box"><spring:message code="shipping_no"/></th>                        
+                                <th  id="box"><spring:message code="filename"/></th>
+                                <th  id="box"><spring:message code="upload_dt"/></th>   
                                 <!-- <th class="text-center" >上传终端</th> -->
-                                <th  id="box">上传人员</th>    
-                                <th  id="box">操作</th>
+                                <th  id="box"><spring:message code="upload_user"/></th>    
+                                <th  id="box"><spring:message code="handle"/></th>
                                 
                             </tr>
                             </thead>
@@ -203,8 +210,10 @@
                                         <td id="box">${ofile.upload_user}</td>
                                         <td id="box">
                                           
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >预览</button>
-                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >下载</button>
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >
+                                           <spring:message code="preview"/></button>
+                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >
+                                            <spring:message code="download"/></button>
                                           
                                                                               
                                         </td>
@@ -259,7 +268,8 @@
                 <!-- .box-footer-->
                 <div class="box-footer">
                     <div class="pull-left">
-                        <div class="form-group form-inline"> 总共${productPageInfo.pages}页，共${productPageInfo.total} 条数据。 每页
+                        <div class="form-group form-inline"> <spring:message code="total"/> ${productPageInfo.pages} <spring:message code="page"/>，
+                        <spring:message code="total"/> ${productPageInfo.total} <spring:message code="piece_of_data"/>  <spring:message code="each_page"/> 
                             <select class="form-control" id="changePageSize">
 
                                 <option  <c:if test="${productPageInfo.pageSize==1}">selected</c:if>>1 </option>
@@ -267,13 +277,15 @@
                                 <option  <c:if test="${productPageInfo.pageSize==10}">selected</c:if>>10 </option>
                                 <option  <c:if test="${productPageInfo.pageSize==15}">selected</c:if>>15</option>
                                 <option  <c:if test="${productPageInfo.pageSize==20}">selected</c:if>>20</option>
-                            </select> 条
+                            </select> <spring:message code="item"/>
                         </div>
                     </div>
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=1&pageSize=${productPageInfo.pageSize}" aria-label="Previous">
+                            	<spring:message code="first_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum-1}&pageSize=${productPageInfo.pageSize}">
+                            <spring:message code="up_page"/></a></li>
 
                             <c:if test="${productPageInfo.pages<10}">
                                 <c:set var="begin" value="1" />
@@ -300,8 +312,10 @@
 
 
 
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">
+                            <spring:message code="next_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pages}&pageSize=${productPageInfo.pageSize}" aria-label="Next">
+                            <spring:message code="last_page"/></a></li>
                         </ul>
                     </div>
                 </div>
@@ -411,9 +425,6 @@
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-<!-- 多语言 -->       
-<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

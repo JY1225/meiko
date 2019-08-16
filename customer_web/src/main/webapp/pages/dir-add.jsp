@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>成绩书系统</title>
+    <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -86,13 +87,14 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                目录管理 <small>添加目录</small>
+                <spring:message code="resource_directory"/>
+                 <small><spring:message code="add_directory"/></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.jsp"><i
-                        class="fa fa-dashboard"></i> 首页</a></li>
-                <li> 目录管理</li>
-                <li class="active">添加目录</li>
+                        class="fa fa-dashboard"></i> <spring:message code="home_page"/></a></li>
+                <li><spring:message code="resource_directory"/></li>
+                <li class="active"><spring:message code="add_directory"/></li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -102,21 +104,21 @@
             <section class="content"> <!--产品信息-->
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"> 目录信息</div>
+                    <div class="panel-heading"><spring:message code="dir_massage"/></div>
                     <div class="row data-type">
 
-                        <div class="col-md-2 title"> 目录地址</div>
+                        <div class="col-md-2 title"> <spring:message code="directory"/></div>
                         <div class="col-md-4 data">
                             <input type="text" class="form-control" name="url"
-                                   placeholder="目录地址" value="">
+                                   placeholder="directory" value="">
                         </div>
                         
-                        <div class="col-md-2 title"> 目录状态</div>
+                        <div class="col-md-2 title"><spring:message code="status"/></div>
                         <div class="col-md-4 data">
                             <select class="form-control select2" style="width: 100%"
                                     name="status">
-                                <option value="0" selected="selected">关闭</option>
-                                <option value="1">开启</option>
+                                <option value="0" selected="selected"><spring:message code="close"/></option>
+                                <option value="1"><spring:message code="open"/></option>
                             </select>
                         </div>
 
@@ -124,13 +126,14 @@
                 </div>
                 <!--订单信息/--> <!--工具栏-->
                 <div class="box-tools text-center">
-                    <button type="submit" class="btn bg-maroon">保存</button>
+                    <button type="submit" class="btn bg-maroon"><spring:message code="save"/></button>
                     <%-- <a href="${pageContext.request.contextPath}/file/findAllDir">
                             <i class="fa fa-circle-o"></i>返回
                         </a> --%>
                         
                     <button type="button" class="btn bg-default"
-                            onclick="window.location.href='${pageContext.request.contextPath}/file/findAllDir'">返回</button>
+                            onclick="window.location.href='${pageContext.request.contextPath}/file/findAllDir'">
+                            <spring:message code="back"/></button>
                 </div>
                 <!--工具栏/--> </section>
             <!-- 正文区域 /-->
@@ -230,9 +233,6 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<!-- 多语言 -->        
-<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function() {
         // 选择框

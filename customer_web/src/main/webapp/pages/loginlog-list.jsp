@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-   <title>成绩书系统</title>
+   <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -90,14 +91,15 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-               登录日志管理 <small>全部日志</small>
+               <spring:message code="login_log"/> 
+               <small><spring:message code="all_log"/></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.jsp"><i
-                        class="fa fa-dashboard"></i> 首页</a></li>
-                <li>登录日志管理</li>
+                        class="fa fa-dashboard"></i><spring:message code="home_page"/></a></li>
+                <li><spring:message code="login_log"/></li>
 
-                <li class="active">全部日志</li>
+                <li class="active"><spring:message code="all_log"/></li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -106,7 +108,7 @@
         <section class="content"> <!-- .box-body -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">列表</h3>
+                    <h3 class="box-title"><spring:message code="list"/></h3>
                 </div>
 
                 <div class="box-body">
@@ -118,9 +120,9 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="刷新"
+                                    <button type="button" class="btn btn-default" title="refresh"
                                             onclick="window.location.reload();">
-                                        <i class="fa fa-refresh"></i> 刷新
+                                        <i class="fa fa-refresh"></i><spring:message code="refresh"/>
                                     </button>
                                 </div>
                             </div>
@@ -129,10 +131,10 @@
                             <div class="">
                             <form action="${pageContext.request.contextPath}/loginlog/findAll" method="post" >
                                 <div class="col-md-8"><input type="text" class="form-control input-sm" name="loginName"
-                                       placeholder="账号">
+                                       placeholder="username">
                                  </div>   
                                  <div class="col-md-1">
-                                         <button type="submit" class="btn btn-default">搜索</button> 
+                                         <button type="submit" class="btn btn-default"><spring:message code="Search"/></button> 
                                   </div>
                              </form>
                             </div>
@@ -147,12 +149,12 @@
                                 <!-- <th class="" style="padding-right: 0px"><input id="selall"
                                  type="checkbox" class="icheckbox_square-blue"></th> -->
                                 <th id="box">ID</th>
-                                <th id="box">登录账号</th>
-                                <th id="box">登录密码</th>
-                                <th id="box">用户id</th>
-                                <th id="box">登录状态</th>
-                                <th id="box">登录时间</th>
-                                <th id="box">ip</th>
+                                <th id="box"><spring:message code="user_name"/></th>
+                                <th id="box"><spring:message code="login_password"/></th>
+                                <th id="box"><spring:message code="user_id"/></th>
+                                <th id="box"><spring:message code="authorize"/></th>
+                                <th id="box"><spring:message code="login_time"/></th>
+                                <th id="box">IP</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -168,35 +170,8 @@
                                     <td id="box">${loginlog.ip}</td>
                                 </tr>
                             </c:forEach>
-
-
-
                             </tbody>
-
-                        </table>
-                        <!--数据列表/-->
-
-                        <!--工具栏-->
-                        <!-- <div class="pull-left">
-                            <div class="form-group form-inline">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="刷新"
-                                            onclick="window.location.reload();">
-                                        <i class="fa fa-refresh"></i> 刷新
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
-                            </div>
-                        </div> -->
-                        <!--工具栏/-->
-
-
+                        </table>                      
                     </div>
                     <!-- 数据表格 /-->
 
@@ -206,21 +181,25 @@
                 <!-- .box-footer-->
                 <div class="box-footer">
                     <div class="pull-left">
-                        <div class="form-group form-inline">
-                            总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 <select class="form-control" id="changePageSize">
-                            <option  <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1 </option>
-                            <option  <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
-                            <option  <c:if test="${pageInfo.pageSize==10}">selected</c:if>>10 </option>
-                            <option  <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
-                            <option  <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
-                        </select> 条
+                          <div class="form-group form-inline">
+                            <spring:message code="total"/> ${pageInfo.pages} <spring:message code="page"/>，
+                            <spring:message code="total"/> ${pageInfo.total} <spring:message code="piece_of_data"/> <spring:message code="each_page"/>
+                            <select class="form-control" id="changePageSize">
+                            <option <c:if test="${pageInfo.pageSize==1}">selected</c:if>>1</option>
+                            <option <c:if test="${pageInfo.pageSize==5}">selected</c:if>>5</option>
+                            <option <c:if test="${pageInfo.pageSize==10}">selected</c:if>>10</option>
+                            <option <c:if test="${pageInfo.pageSize==15}">selected</c:if>>15</option>
+                            <option <c:if test="${pageInfo.pageSize==20}">selected</c:if>>20</option>
+                        </select> <spring:message code="item"/>
                         </div>
                     </div>
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}" aria-label="Previous">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=1&pageSize=${pageInfo.pageSize}" aria-label="Previous" aria-label="Previous">
+                            <spring:message code="first_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum-1}&pageSize=${pageInfo.pageSize}" aria-label="Previous">
+                            <spring:message code="up_page"/></a></li>
                             <c:if test="${pageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>
                                 <c:set var="end" value="${pageInfo.pages}"></c:set>
@@ -249,8 +228,10 @@
                             </c:forEach>
 
 
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pageNum+1}&pageSize=${pageInfo.pageSize}">
+                            <spring:message code="next_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginlog/findAll?page=${pageInfo.pages}&pageSize=${pageInfo.pageSize}" aria-label="Next">
+                            <spring:message code="last_page"/></a></li>
                         </ul>
                     </div>
 
@@ -356,9 +337,6 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<!-- 多语言 -->        
-<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="../plugins/jQuery/language.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

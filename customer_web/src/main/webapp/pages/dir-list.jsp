@@ -7,13 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>成绩书系统</title>
+    <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -84,15 +85,15 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                文件根目录管理
-                <small>全部根目录</small>
+               <spring:message code="resource_directory"/>
+                <small><spring:message code="all_directory"/></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/main.jsp"><i
-                        class="fa fa-dashboard"></i> 首页</a></li>
-                <li>根目录管理</li>
+                        class="fa fa-dashboard"></i><spring:message code="home_page"/></a></li>
+                <li><spring:message code="resource_directory"/></li>
 
-                <li class="active">全部根目录</li>
+                <li class="active"><spring:message code="all_directory"/></li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -101,7 +102,7 @@
         <section class="content"> <!-- .box-body -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">列表</h3>
+                    <h3 class="box-title"><spring:message code="list"/></h3>
                 </div>
 
                 <div class="box-body">
@@ -113,31 +114,18 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建"
+                                    <button type="button" class="btn btn-default" title="new"
                                             onclick="location.href='${pageContext.request.contextPath}/pages/dir-add.jsp'">
-                                        <i class="fa fa-file-o"></i> 新建
+                                        <i class="fa fa-file-o"></i> <spring:message code="new"/>
                                     </button>
 
-                                    <button type="button" class="btn btn-default" title="刷新" 
+                                    <button type="button" class="btn btn-default" title="refresh" 
                                      onclick="window.location.reload();">
-                                        <i class="fa fa-refresh"></i> 刷新
+                                        <i class="fa fa-refresh"></i> <spring:message code="refresh"/>
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <%-- <div class="box-tools pull-right">
-                            <div class="">
-                            <form action="${pageContext.request.contextPath}/user/findAll" method="post" >
-                                <div class="col-md-8"><input type="text" class="form-control input-sm" name="userName"
-                                       placeholder="客户名称">
-                                 </div>   
-                                 <div class="col-md-1">
-                                         <button type="submit" class="btn btn-default">搜索</button> 
-                                  </div>
-                             </form>
-                            </div>
-                        </div> --%>
+                        </div>                                           
                        
                         <!--工具栏/-->
 
@@ -149,11 +137,11 @@
                                 <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="text-center">序号</th>                                
-                                <th class="text-center">根目录</th>
-                                <th class="text-center">状态</th>
-                                <th class="text-center">编辑员</th>
-                                <th class="text-center">操作</th>
+                                <th class="text-center">ID</th>                                
+                                <th class="text-center"><spring:message code="directory"/></th>
+                                <th class="text-center"><spring:message code="status"/></th>
+                                <th class="text-center"><spring:message code="editor"/></th>
+                                <th class="text-center"><spring:message code="handle"/></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -165,9 +153,12 @@
                                    <td class="text-center">${dir.statuStr}</td>
                                    <td class="text-center">${dir.editUser}</td>
                                     <td class="text-center">
-                                        <a href="${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}" class="btn bg-olive btn-xs">开启</a>
-                                        <a href="${pageContext.request.contextPath}/file/dirOffById?id=${dir.id}" class="btn bg-olive btn-xs">关闭</a>
-                                        <a href="${pageContext.request.contextPath}/file/dirDeleById?id=${dir.id}" class="btn bg-olive btn-xs">删除</a>
+                                        <a href="${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}" class="btn bg-olive btn-xs">
+                                        <spring:message code="open"/></a>
+                                        <a href="${pageContext.request.contextPath}/file/dirOffById?id=${dir.id}" class="btn bg-olive btn-xs">
+                                        <spring:message code="close"/></a>
+                                        <a href="${pageContext.request.contextPath}/file/dirDeleById?id=${dir.id}" class="btn bg-olive btn-xs">
+										<spring:message code="delete"/></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -181,21 +172,24 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            总共${filePageInfo.pages} 页，共${filePageInfo.total}条数据。 每页
+                            <spring:message code="total"/> ${filePageInfo.pages} <spring:message code="page"/>，
+                            <spring:message code="total"/> ${filePageInfo.total} <spring:message code="piece_of_data"/> <spring:message code="each_page"/>
                             <select class="form-control" id="changePageSize">
                             <option <c:if test="${filePageInfo.pageSize==1}">selected</c:if>>1</option>
                             <option <c:if test="${filePageInfo.pageSize==2}">selected</c:if>>2</option>
                             <option <c:if test="${filePageInfo.pageSize==3}">selected</c:if>>3</option>
                             <option <c:if test="${filePageInfo.pageSize==4}">selected</c:if>>4</option>
                             <option <c:if test="${filePageInfo.pageSize==5}">selected</c:if>>5</option>
-                        </select> 条
+                        </select> <spring:message code="item"/>
                         </div>
                     </div>
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=1&pageSize=${filePageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum-1}&pageSize=${filePageInfo.pageSize}">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=1&pageSize=${filePageInfo.pageSize}" aria-label="Previous">
+                            <spring:message code="first_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum-1}&pageSize=${filePageInfo.pageSize}">
+                            <spring:message code="up_page"/></a></li>
                             <c:if test="${filePageInfo.pages<10 }">
                                 <c:set var="begin" value="1"></c:set>
                                 <c:set var="end" value="${filePageInfo.pages}"></c:set>
@@ -223,8 +217,10 @@
                             </c:forEach>
 
 
-                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum+1}&pageSize=${filePageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pages}&pageSize=${filePageInfo.pageSize}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pageNum+1}&pageSize=${filePageInfo.pageSize}">
+                            <spring:message code="next_page"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/file/findAllDir?page=${filePageInfo.pages}&pageSize=${filePageInfo.pageSize}" aria-label="Next">
+                            <spring:message code="last_page"/></a></li>
                         </ul>
                     </div>
 
@@ -289,9 +285,7 @@
 <script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
-<!-- 多语言 -->        
-<script src="../plugins/jQuery/jquery.i18n.properties.js"></script>  
-<script src="../plugins/jQuery/language.js"></script>
+
 <script>
     $(document).ready(function () {
         // 选择框
