@@ -65,7 +65,8 @@
           href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
-          
+    <link rel="stylesheet"
+          href="../plugins/jQuery/layer.css">       
     <style type="text/css">
         #box { font-size: 0.8vw;}
     </style>
@@ -189,10 +190,10 @@
                                         <spring:message code="add_shipping_addr"/></a>                                        
                                     </td>
                                     <td id="box">
-                                     <form action="${pageContext.request.contextPath}/user/passUpadateById" method="post"> 
-                                     <input style="display:none" type="text" name="id" value="${userInfo.id}"/>                                      	
-                                        <input class="col-md-3" id="pw" type="text" name="password" value="123"/>
-                                        <button type="submit" class="btn bg-olive btn-xs"><spring:message code="reset"/></button>                                      
+                                     <form <%-- action="${pageContext.request.contextPath}/user/passUpadateById" method="post" --%>> 
+                                     <input style="display:none" type="text" name="id" id="userId" value="${userInfo.id}"/>                                      	
+                                        <input class="col-md-3" id="pw" type="text" name="password" value="123456" disabled/>
+                                        <button type="button" class="btn bg-olive btn-xs" onclick="showMess(${userInfo.id},document.getElementById('pw').value);"><spring:message code="reset"/></button>                                      
                                         </form>
                                     </td>
                                 </tr>
@@ -320,6 +321,8 @@
 <script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<!-- layer -->
+<script src="../plugins/jQuery/layer.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框
@@ -409,6 +412,25 @@
     window.onresize = function(){
         var box = document.getElementById("box");
         box.style["z-index"] = 1;
+    }
+    
+    function showMess(id,password) {
+    	//var id = document.getElementById("userId").value; 
+    	//var password = document.getElementById("pw").value;
+    	
+    	layer.confirm('您确定要重置密码吗?',{btn: ['确定', '取消'],title:"提示"},function(){
+            $.ajax({
+                type: "post",
+                url: "${ctx}/user/passUpadateById",
+                data: {'id':id,
+                	'password':password},
+                dataType: "json",
+                async:false,
+                success:function(data) {
+                    layer.msg(data);                    
+                }
+            });
+       });
     }
 </script>
 </body>

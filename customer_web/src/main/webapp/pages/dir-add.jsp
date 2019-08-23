@@ -67,6 +67,8 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+   <link rel="stylesheet"
+          href="../plugins/jQuery/layer.css">       
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
@@ -99,7 +101,7 @@
         </section>
         <!-- 内容头部 /-->
 
-        <form action="${pageContext.request.contextPath}/file/save" method="post">
+        <form <%-- action="${pageContext.request.contextPath}/file/save" method="post" --%>>
             <!-- 正文区域 -->
             <section class="content"> <!--产品信息-->
 
@@ -109,14 +111,14 @@
 
                         <div class="col-md-2 title"> <spring:message code="directory"/></div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="url"
+                            <input type="text" class="form-control"  id="url" name="url"
                                    placeholder="directory" value="">
                         </div>
                         
                         <div class="col-md-2 title"><spring:message code="status"/></div>
                         <div class="col-md-4 data">
                             <select class="form-control select2" style="width: 100%"
-                                    name="status">
+                                    name="status" id="status">
                                 <option value="0" selected="selected"><spring:message code="close"/></option>
                                 <option value="1"><spring:message code="open"/></option>
                             </select>
@@ -126,7 +128,8 @@
                 </div>
                 <!--订单信息/--> <!--工具栏-->
                 <div class="box-tools text-center">
-                    <button type="submit" class="btn bg-maroon"><spring:message code="save"/></button>
+                    <button type="button" class="btn bg-maroon" onclick="showMess('${ctx}/file/save','/file/findAllDir');">
+                    <spring:message code="save"/></button>
                     <%-- <a href="${pageContext.request.contextPath}/file/findAllDir">
                             <i class="fa fa-circle-o"></i>返回
                         </a> --%>
@@ -233,6 +236,8 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<!-- layer -->
+<script src="../plugins/jQuery/layer.js"></script>
 <script>
     $(document).ready(function() {
         // 选择框
@@ -252,8 +257,43 @@
             liObj.addClass("active");
         }
     }
+    
+    function showMess(url,redirectUrl) {
+    	var sourceurl = document.getElementById("url").value;
+    	var status = document.getElementById("status").value;
+        $.ajax({
+            method:"post",
+            url:"${ctx}/file/save",
+            //dataType : "JSON",
+            data:{'url':sourceurl,
+            	'status':status
+            	},
+            success:function(exeDetail){  
+            	//alert("1111"+exeDetail)
+            	if(exeDetail != null && exeDetail != ""){
+            		layer.alert(exeDetail, {
+            		    skin: 'layui-layer-lan'
+            		    ,closeBtn: 0
+            		    //,time: 5000 //2秒后自动关闭
+            		    //,anim: 1 //动画类型
+            		  });
+            	}else{
+            		//location='${ctx}/file/findAllDir';
+            		layer.alert('add success', {
+            		    skin: 'layui-layer-lan'
+            		    ,closeBtn: 0
+            		    //,time: 5000 //2秒后自动关闭
+            		    //,anim: 1 //动画类型
+            		  });
+            		
+            	}           	
+            },
+            error : function (data){
+                alert(data.responseText);                
+            }
+        });
+    }
 </script>
-
 
 </body>
 

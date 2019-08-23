@@ -17,7 +17,7 @@
             </div> 
             <div class="pull-left info" >
                <security:authentication property="principal.username"></security:authentication>
-                <a href="#" ><i class="fa fa-circle text-success"></i>
+                <a href="" ><i class="fa fa-circle text-success"></i>
                 	<!-- <font class="online">在线</font> -->
                 	<spring:message code="online"/></a>
             </div>
@@ -43,18 +43,6 @@
                         class="fa fa-angle-left pull-right"></i>
 				</span>
             </a>
-                <%-- <ul class="treeview-menu">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/file/findAll">
-                            <i class="fa fa-circle-o"></i> 成绩书管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/orders/findAll?page=1&pageSize=3">
-                            <i class="fa fa-circle-o"></i> xxxx
-                        </a>
-                    </li>
-                </ul> --%>
             </li>
             
            <%-- <c:if test="${sessionScope.role == 'ROLE_ADMIN' }">  --%>
@@ -118,12 +106,6 @@
                 </ul>
                 </security:authorize> 
             </li>
-           <%-- </c:if>  --%>
-           <%-- <li id="admin-index">
-                <a href="${pageContext.request.contextPath}/pages/barcode-create.jsp">
-                    <i class="fa fa-dashboard"></i> <span>条码</span>
-                </a>
-            </li> --%>
         </ul>
     </section>
 </aside>

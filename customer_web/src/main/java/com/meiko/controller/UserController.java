@@ -1,6 +1,9 @@
 package com.meiko.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,12 +60,33 @@ public class UserController {
         return modelAndView;
     }
     
+    @RequestMapping("/isUserNameExist")
+    @ResponseBody   
+    public void isUserNameExist(@RequestParam(name="userName",required = false) String userName,
+    		HttpServletResponse response){
+    	response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+    	int id = service.isUserNameExist(userName);
+    	try {
+    	if(id !=0 ) {    		
+			response.getWriter().print("× 用户名已注册");			
+    	}else {
+    		response.getWriter().print("√ 验证成功");
+    	}
+    	} catch (IOException e) {			
+			e.printStackTrace();
+		}
+		//return id;         
+    }
+    
 	@RequestMapping("/save")
     public String save(UserInfo userInfo){
-        service.save(userInfo);
-        Role role = roleService.findByName(userInfo.getRole());
-        service.saveUserRole(String.valueOf(userInfo.getId()),String.valueOf(role.getId()));
-        return "redirect:findAll";
+        int id = service.save(userInfo);
+        if(id != 0) {
+        	Role role = roleService.findByName(userInfo.getRole());
+        	service.saveUserRole(String.valueOf(userInfo.getId()),String.valueOf(role.getId()));
+        }
+        return "redirect:findAll";            
     }
     
     @RequestMapping("/findById")
@@ -139,16 +163,26 @@ public class UserController {
     }
     
     @RequestMapping("/passUpadateByName")
+    @ResponseBody //加此
     private String passUpadateByName(UserInfo userInfo){
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();                
-        service.passUpadateByName(name,userInfo.getPassword());
-        return  "password-edit";
+        int isUp = service.passUpadateByName(name,userInfo.getPassword());
+        if(isUp == 1) {
+    		return "√ 密码修改成功";
+    	}else {
+    		return "× 密码修改失败";
+    	}    
+       // return  "password-edit";
     }
     
     @RequestMapping("/passUpadateById")
+    @ResponseBody  
     private String passUpadateById(UserInfo userInfo){    	
-    	service.passUpadateById(userInfo.getId(),userInfo.getPassword());
-		return "redirect:findAll";
-    	
+    	int isUp = service.passUpadateById(userInfo.getId(),userInfo.getPassword());
+    	if(isUp == 1) {
+    		return "√ 密码重置成功";
+    	}else {
+    		return "× 密码重置失败";
+    	}    	
     }
 }

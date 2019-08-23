@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>成绩书系统</title>
+   <title><spring:message code="achievement_system"/></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -66,6 +67,8 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <link rel="stylesheet"
+          href="../plugins/jQuery/layer.css">  
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
@@ -86,41 +89,41 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-               密码管理 <small>密码表单</small>
+               <spring:message code="passwordManage"/> <small><spring:message code="passwordList"/></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../main.jsp"><i
-                        class="fa fa-dashboard"></i> 首页</a></li>
+                        class="fa fa-dashboard"></i><spring:message code="home_page"/></a></li>
                 <li><a
-                        href="#"> 密码管理</a></li>
-                <li class="active"> 密码表单</li>
+                        href="#"> <spring:message code="passwordManage"/></a></li>
+                <li class="active"> <spring:message code="passwordList"/></li>
             </ol>
         </section>
         <!-- 内容头部 /-->
 
-        <form action="${pageContext.request.contextPath}/user/passUpadateByName" method="post">
+        <form <%-- action="${pageContext.request.contextPath}/user/passUpadateByName" method="post" --%>>
             <!-- 正文区域 -->
             <section class="content"> <!--产品信息-->
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"> 密码信息</div>
+                    <div class="panel-heading"><spring:message code="passwordEdit"/></div>
                     <div class="row data-type">
 
-                        <div class="col-md-2 title"> 新密码</div>
+                        <div class="col-md-2 title"><spring:message code="newPassword"/></div>
                         <div class="col-md-4 data">
                             <input type="text" class="form-control" name="password" required="required"
-                                   placeholder="新密码" value="">
+                                  id="password" placeholder="new password" value="">
                         </div>
 
                     </div>
                 </div>
                 <!--订单信息/--> <!--工具栏-->
                 <div class="box-tools text-center">
-                    <button type="submit" class="btn bg-maroon">保存</button>
+                    <button type="button" class="btn bg-maroon" onclick="showMess()"><spring:message code="save"/></button>
                     
                         
-                    <button type="button" class="btn bg-default"
-                            onclick="history.back(-1);">返回</button>
+                    <%-- <button type="button" class="btn bg-default"
+                            onclick="history.back(-1);"><spring:message code="back"/></button> --%>
                 </div>
                 <!--工具栏/--> </section>
             <!-- 正文区域 /-->
@@ -220,6 +223,8 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<!-- layer -->
+<script src="../plugins/jQuery/layer.js"></script>
 <script>
     $(document).ready(function() {
         // 选择框
@@ -238,6 +243,24 @@
             liObj.parent().parent().addClass("active");
             liObj.addClass("active");
         }
+    }
+        
+    function showMess() {
+    	var password = document.getElementById("password").value;     	
+        $.ajax({
+            method:"post",
+            url:"${ctx}/user/passUpadateByName",
+            data:{'password':password},
+            dataType: "json",
+            /* dataType: "json",//传对象要json格式
+            async:true, */
+            success:function(data){            	
+            	layer.msg(data); 
+            },
+            error : function (data){
+            	layer.alert(data);                
+            }
+        });
     }
 </script>
 

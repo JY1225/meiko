@@ -13,9 +13,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.tools.zip.ZipOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.Cust_jccjs_list;
 import com.meiko.domain.Dir;
@@ -35,6 +38,8 @@ import com.meiko.service.IUserService;
 import com.meiko.utils.FileUtil;
 import com.meiko.utils.Office2PDF;
 import com.meiko.utils.ZipUtils;
+
+
 
 @Controller
 @RequestMapping("/file")
@@ -195,9 +200,11 @@ public class FileController {
 	}
 
 	@RequestMapping("/dirOnById")
+	@ResponseBody   
 	public String dirOnById(Model model, @RequestParam(name = "page", defaultValue = "1") Integer page,
 			@RequestParam(name = "pageSize", defaultValue = "3") Integer pageSize,
-			@RequestParam(name = "id", required = false) int id) throws IOException {
+			@RequestParam(name = "id", required = false) int id,
+			HttpServletResponse response) throws IOException {
 		List<Dir> dirs = fileservice.findAll(page, pageSize, "");
 		List<Integer> status = new ArrayList<Integer>();
 		for (int i = 0; i < dirs.size(); i++) {
@@ -209,12 +216,10 @@ public class FileController {
 		if (status.size() == 0) {
 			String name = SecurityContextHolder.getContext().getAuthentication().getName();
 			fileservice.updateDirStausById(1, name, id);
-
+			return null;
 		} else {
-			JOptionPane.showMessageDialog(null, "已有开启目录，如需切换请先关闭该目录", "错误", JOptionPane.PLAIN_MESSAGE);
-		}
-
-		return "redirect:findAllDir";
+			return "已有开启目录，如需切换请先关闭该目录";
+		}		
 	}
 
 	@RequestMapping("/dirOffById")
@@ -236,6 +241,7 @@ public class FileController {
 	}
 
 	@RequestMapping("/save")
+	@ResponseBody   
 	public String save(Dir dir) {
 		List<Dir> dirs = fileservice.findAll(1, 3, "");
 		List<Integer> status = new ArrayList<Integer>();
@@ -249,12 +255,12 @@ public class FileController {
 			String name = SecurityContextHolder.getContext().getAuthentication().getName();
 			dir.setEditUser(name);
 			fileservice.save(dir);
-
+			return null;
 		} else {
-			JOptionPane.showMessageDialog(null, "已有开启目录，如需添加请选择关闭状态", "错误", JOptionPane.PLAIN_MESSAGE);
+			return "已有开启目录，如需添加请选择关闭状态";			
 		}
 
-		return "redirect:findAllDir";
+		//return "redirect:findAllDir";
 	}
 
 	/**

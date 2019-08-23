@@ -67,6 +67,8 @@
           href="../plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
           href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+   <link rel="stylesheet"
+          href="../plugins/jQuery/layer.css"> 
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
@@ -107,19 +109,22 @@
                     <div class="row data-type">
 
                         <div class="col-md-2 title"><spring:message code="user_name"/></div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="userName"
-                                   placeholder="username" value="">
+                        <div class="col-md-2 data">
+                            <input type="text" class="form-control" name="userName" id="userName"
+                                   placeholder="username" value=""/>
+                                   
                         </div>
+                        <div class="col-md-2 title"><span id="msg">请输入昵称</span></div>
+
                         <div class="col-md-2 title"><spring:message code="password"/></div>
                         <div class="col-md-4 data">
-                            <input type="password" class="form-control" name="password"
+                            <input type="password" class="form-control" name="password" id="password"
                                    placeholder="password" value="">
                         </div>
                         <div class="col-md-2 title"><spring:message code="role"/></div>
                         <div class="col-md-4 data">
                             <select class="form-control select2" style="width: 100%"
-                                    name="role">
+                                    name="role" id="role">
                                 <option value="USER" selected="selected">USER</option>
                                 <option value="ADMIN">ADMIN</option>
                             </select>
@@ -127,19 +132,19 @@
                         <div class="col-md-2 title"><spring:message code="status"/></div>
                         <div class="col-md-4 data">
                             <select class="form-control select2" style="width: 100%"
-                                    name="status">
+                                    name="status" id="status">
                                 <option value="1" selected="selected"><spring:message code="open"/></option>
                                 <option value="0"><spring:message code="close"/></option>
                             </select>
                         </div>
 						<div class="col-md-2 title"><spring:message code="company"/></div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="company"
+                            <input type="text" class="form-control" name="company" id="company"
                                    placeholder="company" value="">
                         </div>
                         <div class="col-md-2 title"><spring:message code="mark"/></div>
                         <div class="col-md-4 data">
-                            <input type="text" class="form-control" name="mark"
+                            <input type="text" class="form-control" name="mark" id="mark"
                                    placeholder="mark" value="">
                         </div>
                     </div>
@@ -248,6 +253,8 @@
         src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
         src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<!-- layer -->
+<script src="../plugins/jQuery/layer.js"></script>
 <script>
     $(document).ready(function() {
         // 选择框
@@ -257,6 +264,24 @@
         $(".textarea").wysihtml5({
             locale : 'zh-CN'
         });
+        
+      //当表单里的用户名失去焦点时，就会触发该ajax 判断用户名是否已存在
+      //var userName = document.getElementById("userName").value;
+        $("#userName").blur(function(){       	
+    		 //var userName = {username:$("#userName").val()};
+    		 var userName = document.getElementById("userName").value;
+    		  $.ajax({
+    			  method:"post",
+    		   url:"${ctx}/user/isUserNameExist",
+    		   data:{'userName':userName},
+    		   async:true,
+    		   //type:"POST",
+    		   dataType:"html",
+    		   success:function(result){     			   
+					$("#msg").html(result).css("color","red");   			   
+    			 }    		     			   
+    	     });  
+           });      
     });
 
     // 设置激活菜单
@@ -267,6 +292,7 @@
             liObj.addClass("active");
         }
     }
+    
 </script>
 
 

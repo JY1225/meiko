@@ -65,6 +65,8 @@
           href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/plugins/jQuery/layer.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -134,9 +136,10 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input
+                                <!-- <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
-                                </th>
+                                        ${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}
+                                </th> -->
                                 <th class="text-center">ID</th>                                
                                 <th class="text-center"><spring:message code="directory"/></th>
                                 <th class="text-center"><spring:message code="status"/></th>
@@ -147,13 +150,13 @@
                             <tbody>
                             <c:forEach items="${filePageInfo.list}" var="dir" varStatus="status">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td class="text-center">${dir.id}</td>                                    
+                                    <!-- <td><input name="ids" type="checkbox"></td> -->
+                                    <td class="text-center">${status.index + 1}</td>                                    
                                     <td class="text-center">${dir.url}</td>
                                    <td class="text-center">${dir.statuStr}</td>
                                    <td class="text-center">${dir.editUser}</td>
                                     <td class="text-center">
-                                        <a href="${pageContext.request.contextPath}/file/dirOnById?id=${dir.id}" class="btn bg-olive btn-xs">
+                                        <a href="javascript:void(0)" class="btn bg-olive btn-xs" onclick="showMess('${ctx}/file/dirOnById',${dir.id},'/file/findAllDir');">
                                         <spring:message code="open"/></a>
                                         <a href="${pageContext.request.contextPath}/file/dirOffById?id=${dir.id}" class="btn bg-olive btn-xs">
                                         <spring:message code="close"/></a>
@@ -237,7 +240,7 @@
 
 </div>
 
-<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -285,8 +288,10 @@
 <script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
-
-<script>
+<!-- layer -->
+<script src="../plugins/jQuery/layer.js"></script>
+<script src="../plugins/jQuery/showMess.js"></script>
+<script type="text/javascript">
     $(document).ready(function () {
         // 选择框
         $(".select2").select2();
@@ -348,6 +353,31 @@
 
                 });
             });
+    
+    /* function showMess(url,id) {   	
+        $.ajax({
+            method:"post",
+            url:url,
+            data:{'id':id},
+            success:function(exeDetail){           	
+            	if(exeDetail != null && exeDetail != ""){
+            	layer.open({
+                    type: 1,
+                    title:['<span style="color:white;">消息</span> ','background-color: #4898d5' ],
+                    area : ['300px ,80px'],
+                    shade: 0.5,
+                    id: 'LAY_layuipro',
+                    moveType: 1,
+                    btn: ['确定'],
+                 content: '<div id="exe_detail" class="gray-bg  pace-done" style="padding: 50px;  line-height: 22px; font-weight: bold;" ><p style="word-wrap:break-word; word-break:break-all;">'+exeDetail+'</p></div>',
+                    closeBtn:1
+                  });
+            	}else{
+            		location='${ctx}/file/findAllDir'; 
+            	}
+            },
+        });
+    } */
 </script>
 </body>
 

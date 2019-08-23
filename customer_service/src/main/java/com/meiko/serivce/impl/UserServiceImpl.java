@@ -122,15 +122,18 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
     @Override
     public int save(UserInfo userInfo) {
       userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));     
-      if(dao.findAllByName(userInfo.getUserName()).size()>0) {
-    	  JOptionPane.showMessageDialog(null,"用户名已存在","",JOptionPane.PLAIN_MESSAGE);
+      if(dao.findAllByName(userInfo.getUserName()).size()>0) {    	  
     	  return 0;
       }else {
     	  return dao.save(userInfo);
       }
 	
     }
-
+    
+    public int isUserNameExist(String name) {
+    	return dao.findAllByName(name).size();  	
+      }
+    
     @Override
     public UserInfo findById(String id) {
         return dao.findById(id);
@@ -192,13 +195,12 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 	}
 
 	@Override
-	public void passUpadateByName(String userName, String password) {    
+	public int passUpadateByName(String userName, String password) {    
 		try {
 			dao.passUpadateByName(userName,bCryptPasswordEncoder.encode(password));
-			JOptionPane.showMessageDialog(null,"密码修改成功","",JOptionPane.PLAIN_MESSAGE);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null,"密码修改失败","",JOptionPane.PLAIN_MESSAGE);
-			e.printStackTrace();
+			return 1;			
+		}catch(Exception e) {			
+			return 0;
 		}
 		
 	}
@@ -207,16 +209,12 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
 
 	@Override
-	public void passUpadateById(int id, String password) {
-		int ifadd=JOptionPane.showConfirmDialog(null,"确定重置密码","",JOptionPane.YES_NO_OPTION);
-		try {
-			if(ifadd==JOptionPane.YES_OPTION){
-				dao.passUpadateById(id,bCryptPasswordEncoder.encode(password));
-				JOptionPane.showMessageDialog(null,"密码重置成功","",JOptionPane.PLAIN_MESSAGE);
-				}						
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null,"密码重置失败","",JOptionPane.PLAIN_MESSAGE);
-			e.printStackTrace();
+	public int passUpadateById(int id, String password) {		
+		try {			
+			dao.passUpadateById(id,bCryptPasswordEncoder.encode(password));	
+			return 1;
+		}catch(Exception e) {			
+			return 0;
 		}		
 	}
 }

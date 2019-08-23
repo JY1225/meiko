@@ -28,7 +28,9 @@ public interface IUserService {
 
 	void updateUserStausById(int id, int status);
 
-	void passUpadateByName(String name, String password);
+	int passUpadateByName(String name, String password);
 
-	void passUpadateById(int id, String password);
+	int passUpadateById(int id, String password);
+
+	int isUserNameExist(String userName);
 }
