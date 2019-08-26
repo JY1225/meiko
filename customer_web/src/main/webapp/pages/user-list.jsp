@@ -192,7 +192,7 @@
                                     <td id="box">
                                      <form <%-- action="${pageContext.request.contextPath}/user/passUpadateById" method="post" --%>> 
                                      <input style="display:none" type="text" name="id" id="userId" value="${userInfo.id}"/>                                      	
-                                        <input class="col-md-3" id="pw" type="text" name="password" value="123456" disabled/>
+                                        <input class="col-md-4" id="pw" type="text" name="password" value="123456" disabled/>
                                         <button type="button" class="btn bg-olive btn-xs" onclick="showMess(${userInfo.id},document.getElementById('pw').value);"><spring:message code="reset"/></button>                                      
                                         </form>
                                     </td>
@@ -418,7 +418,7 @@
     	//var id = document.getElementById("userId").value; 
     	//var password = document.getElementById("pw").value;
     	
-    	layer.confirm('您确定要重置密码吗?',{btn: ['确定', '取消'],title:"提示"},function(){
+    	layer.confirm('您确定要重置密码为吗?',{btn: ['确定', '取消'],title:"提示"},function(){
             $.ajax({
                 type: "post",
                 url: "${ctx}/user/passUpadateById",

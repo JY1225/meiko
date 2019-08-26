@@ -111,5 +111,23 @@
 </aside>
 <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
-
+<script type="text/javascript">
+function menuClick(url) {   	
+    $.ajax({
+        method:"post",
+        url:url,
+        data:{'id':id},
+        success:function(exeDetail){           	
+        	if(exeDetail != null && exeDetail != ""){
+        		layer.alert(exeDetail, {
+        		    skin: 'layui-layer-lan'
+        		    ,closeBtn: 0
+        		  });  
+        	}else{
+        		location=redirectUrl; 
+        	}
+        },
+    });
+}
+</script>
 
