@@ -105,9 +105,9 @@ public class FileController {
 			toClient.flush();
 			toClient.close();
 
-			Cust_jccjs_list ofile = fileservice.findOneByName(upload_filename.trim());
-			fileservice.updateDownloads(ofile.getRecid());
-			Cust_jccjs_list one = fileservice.findByOne(ofile.getRecid());
+			List<Cust_jccjs_list> ofile = fileservice.findOneByName(upload_filename.trim());
+			fileservice.updateDownloads(ofile.get(0).getRecid());
+			Cust_jccjs_list one = fileservice.findByOne(ofile.get(0).getRecid());
 
 			saveFileLog(one, "下载");
 
@@ -277,7 +277,7 @@ public class FileController {
 	 */
 
 	@RequestMapping("/downLoadByNames")
-	public void downLoadByNames(@RequestParam(name = "names") String[] names) {
+	public void downLoadByNames(HttpServletResponse response,@RequestParam(name = "names") String[] names) {
 		// System.out.println(Arrays.toString(names));
 		String loginName = SecurityContextHolder.getContext().getAuthentication().getName();
 		try {
@@ -321,36 +321,51 @@ public class FileController {
 	}
 
 	public static void downLoadFile(HttpServletRequest request, HttpServletResponse response, String filePath,
-			String filename) {
+			String filename) throws Exception{
+		FileInputStream fs = null;
+		OutputStream writer = null;
 		try {
 			File file = new File(filePath);
 			// 先去掉文件名称中的空格,然后转换编码格式为utf-8,保证不出现乱码,这个文件名称 用于浏览器的下载框中自动显示的文件名
-			String userAgent = request.getHeader("User-Agent");
-			if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
-				filename = java.net.URLEncoder.encode(filename, "UTF-8");
-			} else {
-				filename = new String(filename.getBytes("utf-8"), "iso8859-1");
-			}
-			 
-			response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-			// response.setContentType("application/vnd.ms-excel");
-			response.setContentType("multipart/form-data");
-			byte[] b = new byte[1024];
+			/*
+			 * String userAgent = request.getHeader("User-Agent"); if
+			 * (userAgent.contains("MSIE") || userAgent.contains("Trident")) { filename =
+			 * java.net.URLEncoder.encode(filename, "UTF-8"); } else { filename = new
+			 * String(filename.getBytes("utf-8"), "iso8859-1"); }
+			 */
+			//response.reset();
+			response.setHeader("Content-Type","application/octet-stream");
+            response.setHeader("Content-Disposition",
+                    "attachment;filename="+java.net.URLEncoder.encode(filename, "UTF-8"));
+            response.setContentType("multipart/form-data");
+			/*
+			 * response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+			 * // response.setContentType("application/vnd.ms-excel");
+			 * response.setContentType("multipart/form-data");
+			 */
+			byte[] buffer = new byte[1024];
 			int len = 0;
-			FileInputStream fs = new FileInputStream(file);
-			PrintWriter writer = response.getWriter();
-			while ((len = fs.read()) != -1) {
-				writer.write(len);
+			 fs = new FileInputStream(file);
+			 writer = response.getOutputStream();
+			//PrintWriter writer = response.getWriter();
+			while ((len = fs.read(buffer)) != -1) {
+				writer.write(buffer, 0, len);//(len);
 			}
 			fs.close();
 			writer.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {			
 			e.printStackTrace();
-		}
+		}finally {
+            if(fs != null){
+            	fs.close();
+            }
+            if(writer != null){
+            	writer.close();
+            }
+        }
 	}
 
 }

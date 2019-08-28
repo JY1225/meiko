@@ -25,5 +25,5 @@ public interface IFileService {
 
 	Cust_jccjs_list findByOne(int recid);
 
-	Cust_jccjs_list findOneByName(String fileName);
+	List<Cust_jccjs_list> findOneByName(String fileName);
 }

@@ -84,7 +84,7 @@ public  class FileServiceImpl implements IFileService {
 	}
 
 	@Override
-	public Cust_jccjs_list findOneByName(String fileName) {
+	public List<Cust_jccjs_list> findOneByName(String fileName) {
 		// TODO Auto-generated method stub
 		return dao.findOneByName(fileName);
 	}
