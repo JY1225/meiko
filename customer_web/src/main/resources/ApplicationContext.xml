@@ -13,8 +13,8 @@
       http://www.springframework.org/schema/tx
       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-     <import resource="classpath:ApplicationContext_Dao.xml"></import>
-     <import resource="classpath:ApplicationContext_Service.xml"></import> 
+    <import resource="classpath:ApplicationContext_Dao.xml"></import>
+    <import resource="classpath:ApplicationContext_Service.xml"></import> 
      
      <!--多语言的配置 开始 根据浏览器--> 
      <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

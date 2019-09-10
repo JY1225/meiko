@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.meiko.domain.Cust_jccjs_list;
@@ -56,13 +57,14 @@ public class FileController {
 	private HttpServletRequest request;
 	private static final String CHAR_SET = "GBK";
 	private static final String BASE_DIR = "";
-
+	protected static String REDIRECT = "redirect:";
+    protected static String FORWARD = "forward:";
 	@RequestMapping("/findAll")
-	public String findAll(Model model, @RequestParam(name = "page", defaultValue = "1") Integer page,
+	public ModelAndView findAll(Model model, @RequestParam(name = "page", defaultValue = "1") Integer page,
 			@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
 			@RequestParam(name = "fromData", required = false) String fromData,
 			@RequestParam(name = "toData", required = false) String toData) {
-		
+		ModelAndView modelAndView=new ModelAndView();
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserInfo user = service.findByUserName(name);
 
@@ -71,8 +73,10 @@ public class FileController {
 			list.get(i).setUpload_filename(list.get(i).getUpload_filename().trim());
 		}
 		PageInfo<Cust_jccjs_list> pageInfo = new PageInfo<Cust_jccjs_list>(list);
-		model.addAttribute("productPageInfo", pageInfo);
-		return "product-list";
+		//model.addAttribute("productPageInfo", pageInfo);
+		modelAndView.addObject("productPageInfo",pageInfo);
+        modelAndView.setViewName("product-list");
+        return modelAndView;
 	}
 
 
