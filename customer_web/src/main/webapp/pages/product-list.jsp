@@ -148,6 +148,7 @@
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
                                 <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
+                                <label id="box" for="meeting"><spring:message code="shipping_dt"/></label>
                                 <label id="box" for="meeting"><spring:message code="begin"/></label>
                                 <input id="meeting" type="date" name="fromData" class="date-picker" placeholder="2019/01/01"/>
                            

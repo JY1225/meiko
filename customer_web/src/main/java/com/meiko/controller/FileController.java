@@ -84,7 +84,8 @@ public class FileController {
 	public void download(HttpServletResponse response, HttpServletRequest request, String upload_filename) {
 		try {
 			Dir dir = fileservice.findDirByStatus(1);
-			String path = dir.getUrl().replace("\\", "/") + "/" + upload_filename.trim();
+			String date = upload_filename.split("\\.")[4].substring(0,6);
+			String path = dir.getUrl().replace("\\", "/")+date + "/" + upload_filename.trim();
 			//
 
 			File file = new File(path);
@@ -145,9 +146,12 @@ public class FileController {
 		InputStream in = null;
 		OutputStream out = null;
 		Dir dir = fileservice.findDirByStatus(1);
-		String path = dir.getUrl().replace("\\", "/") + "/" + ofile.getUpload_filename().trim();
+		String fileName = ofile.getUpload_filename().trim();
+		String date = fileName.split("\\.")[4].substring(0,6);
+		System.out.println(date);
+		String path = dir.getUrl().replace("\\", "/")+date + "/" + fileName;
 		String filePath = fileHandler(path);
-		System.out.println(filePath);
+		System.out.println(path);
 
 		try {
 			if (filePath != null) {
