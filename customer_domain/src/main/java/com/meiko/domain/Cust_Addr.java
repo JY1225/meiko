@@ -6,11 +6,21 @@ public class Cust_Addr {
 	private String cust_code;
 	private String cust_name;
 	private String cust_shipping_addr;
+	private int status;
+	
+	
 	public int getRecid() {
 		return recid;
 	}
 	public void setRecid(int recid) {
 		this.recid = recid;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public String getCust_code() {
 		return cust_code;

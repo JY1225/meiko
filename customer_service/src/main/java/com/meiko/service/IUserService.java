@@ -33,4 +33,6 @@ public interface IUserService {
 	int passUpadateById(int id, String password);
 
 	int isUserNameExist(String userName);
+
+	void deleUserFile(String userId);
 }

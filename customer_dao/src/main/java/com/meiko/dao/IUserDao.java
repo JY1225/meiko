@@ -78,7 +78,13 @@ public interface IUserDao {
 	
     @Select("select * from CUST_ADDR t where t.recid not in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
 	List<Cust_Addr> findNotFile(String id);
+	
+	@Select("select * from CUST_ADDR t where t.recid in( select ur.addr_id from userinfo_cust_addr ur where ur.user_id=#{id})")
+	List<Cust_Addr> findHasAddFile(String id);
 
+	@Select("delete from userinfo_cust_addr where user_id=#{userId}")
+	void deleUserFile(@Param("userId")String userId);
+	
     //@Insert("insert into user_file(userId,fileId) values (#{userId},#{fileId})")
     @Insert("insert into userinfo_cust_addr(user_id,addr_id) values (#{userId},#{addr_id})")
 	void saveUserFile(@Param("userId")String userId,@Param("addr_id")String addr_id);

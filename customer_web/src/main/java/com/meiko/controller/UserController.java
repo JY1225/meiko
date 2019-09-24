@@ -134,7 +134,8 @@ public class UserController {
     }
     @RequestMapping("/saveUserFile")
     public String saveFile(String userId,String[] ids){
-        for(String addr_id :ids){
+    	service.deleUserFile(userId);
+        for(String addr_id :ids){        	
             service.saveUserFile(userId,addr_id);
         }
 

@@ -159,16 +159,25 @@ public class UserServiceImpl implements IUserService ,UserDetailsService {
 
 	@Override
 	public List<Cust_Addr> findNotFile(String id) {
-		// TODO Auto-generated method stub
-		return  dao.findNotFile(id);
+		List<Cust_Addr> list = new ArrayList<Cust_Addr>();
+		List<Cust_Addr> listHasAdd = dao.findHasAddFile(id);
+		for(int i = 0;i < listHasAdd.size(); i++) {
+			listHasAdd.get(i).setStatus(1);
+		}
+		list.addAll(listHasAdd);
+		list.addAll(dao.findNotFile(id));
+		return  list;
 	}
 
 	@Override
-	public void saveUserFile(String userId, String addr_id) {
-		// TODO Auto-generated method stub
-		
-        dao.saveUserFile(userId,addr_id);
-        
+	public void deleUserFile(String userId) {
+		dao.deleUserFile(userId);
+	}
+	
+	@Override
+	public void saveUserFile(String userId, String addr_id) {		
+		dao.saveUserFile(userId,addr_id);
+             
 	}
 
 	@Override

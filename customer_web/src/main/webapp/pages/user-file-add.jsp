@@ -117,12 +117,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${files}" var="file">
+                    <c:forEach items="${files}" var="file" varStatus="status">
                         <tr>
                             <td>
-                                <input name="ids" type="checkbox" value="${file.recid}">
+                            	<c:if test="${file.status == 1 }"> 
+                                	<input name="ids" type="checkbox" checked="checked" value="${file.recid}">
+                                </c:if>
+                                <c:if test="${file.status == 0 }"> 
+                                	<input name="ids" type="checkbox" value="${file.recid}">
+                                </c:if>
                             </td>
-                            <td>${file.recid}</td>
+                            <td>${status.index + 1}</td>
                             <td>${file.cust_code}</td>
                             <td>${file.cust_name}</td>
                             <td>${file.cust_shipping_addr}</td>
