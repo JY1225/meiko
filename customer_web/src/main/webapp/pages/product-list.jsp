@@ -173,9 +173,8 @@
                             <tbody>
 
                                 <c:forEach items="${productPageInfo.list}" var="ofile" varStatus="status">
-								
-                                    <tr>
-                                    
+								 
+                                    <tr>                                                                   
                                         <td><input name="names"  type="checkbox" value="${ofile.upload_filename}" id="ids" ></td>
                                         <td id="box">${status.index + 1}</td>
                                        <%--  <td style="font-size:14px">${ofile.cust_code}</td> --%>
@@ -189,12 +188,16 @@
                                         <%-- <td>${product.upload_terminal}</td>  style="font-size:14px" --%>
                                         <td id="box">${ofile.upload_user}</td>
                                         <td id="box">
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >
-                                           <spring:message code="preview"/></button>
-                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >
+                                           <%-- <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >
+                                           <spring:message code="preview"/></button> --%>
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="openPostWindow('${pageContext.request.contextPath}/file/read','','${ofile.upload_filename}','${ofile.recid}');" >
+                                           <spring:message code="preview"/></button> 
+                                           <%--  <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >
+                                            <spring:message code="download"/></button> --%> 
+                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="openPostWindow('${pageContext.request.contextPath}/file/download','','${ofile.upload_filename}','${ofile.recid}');" >
                                             <spring:message code="download"/></button>                                                                         
-                                        </td>                                     
-                                    </tr>
+                                        </td>                                                                        
+                                    </tr> 
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -436,6 +439,38 @@
         defaultDate[i].valueAsDate = new Date();
     }
 
+
+    function openPostWindow(url, name, upload_filename, recid){
+        var tempForm = document.createElement("form");
+        tempForm.id = "tempForm1";
+        tempForm.method = "post";
+        tempForm.action = url;
+        tempForm.target=name;
+        var hideInput1 = document.createElement("input");
+        hideInput1.type = "hidden";
+        hideInput1.name="upload_filename";
+        hideInput1.value = upload_filename;
+        var hideInput2 = document.createElement("input");
+        hideInput2.type = "hidden";
+        hideInput2.name="recid";
+        hideInput2.value = recid;
+        tempForm.appendChild(hideInput1);
+        tempForm.appendChild(hideInput2);
+        if(document.all){
+            tempForm.attachEvent("onsubmit",function(){});        //IE
+        }else{
+            var subObj = tempForm.addEventListener("submit",function(){},false);    //firefox
+        }
+        document.body.appendChild(tempForm);
+        if(document.all){
+            tempForm.fireEvent("onsubmit");
+        }else{
+            tempForm.dispatchEvent(new Event("submit"));
+        }
+        tempForm.submit();
+        document.body.removeChild(tempForm);
+    }
+     
 </script>
 </body>
 

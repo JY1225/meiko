@@ -186,7 +186,7 @@
                                     </td>
                                     <td id="box">                                       	
                                         <%-- <a href="${pageContext.request.contextPath}/user/findNotRoles?id=${userInfo.id}" class="btn bg-olive btn-xs">添加角色</a> --%>
-                                        <a href="${pageContext.request.contextPath}/user/findNotFile?id=${userInfo.id}" class="btn bg-olive btn-xs">
+                                        <a href="javascript:void(0);" onclick="openPostWindow('${pageContext.request.contextPath}/user/findNotFile','','${userInfo.id}');" class="btn bg-olive btn-xs">
                                         <spring:message code="add_shipping_addr"/></a>                                        
                                     </td>
                                     <td id="box">
@@ -431,6 +431,32 @@
                 }
             });
        });
+    }
+    
+    function openPostWindow(url, name, id){
+        var tempForm = document.createElement("form");
+        tempForm.id = "tempForm1";
+        tempForm.method = "post";
+        tempForm.action = url;
+        tempForm.target=name;
+        var hideInput1 = document.createElement("input");
+        hideInput1.type = "hidden";
+        hideInput1.name="id";
+        hideInput1.value = id;       
+        tempForm.appendChild(hideInput1);       
+        if(document.all){
+            tempForm.attachEvent("onsubmit",function(){});        //IE
+        }else{
+            var subObj = tempForm.addEventListener("submit",function(){},false);    //firefox
+        }
+        document.body.appendChild(tempForm);
+        if(document.all){
+            tempForm.fireEvent("onsubmit");
+        }else{
+            tempForm.dispatchEvent(new Event("submit"));
+        }
+        tempForm.submit();
+        document.body.removeChild(tempForm);
     }
 </script>
 </body>

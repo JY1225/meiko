@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title><spring:message code="achievement_system"/></title>
+    <title><%-- <spring:message code="achievement_system"/> --%></title>
     <meta name="description" content="MEIKO">
     <meta name="keywords" content="MEIKO">
 
@@ -114,13 +114,13 @@
             <!-- 公告 -->
             <div class="case">
         <div class="part1">
-            <img src="../img/notice.png"/>
+            <!-- <img src="../img/notice.png"/> -->
         </div>
         <div class="part2" id="part2">
             <div id="scroll1">
                 
-                    <a href="#"> ${paramInfo.RESULT };</a><br>
-                    <a href="#"> ${paramInfo.RESULT_DESC };</a> <br>                  
+                    <a href="#">RESULT:  &nbsp; ${paramInfo.RESULT };</a><br><br>
+                    <a href="#">RESULT_DESC:  &nbsp; ${paramInfo.RESULT_DESC };</a> <br>                  
                 
             </div>
         </div>
