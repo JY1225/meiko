@@ -125,44 +125,22 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                   <%--  <button type="button" class="btn btn-default" title="新建"
-                                            onclick="location.href='${pageContext.request.contextPath}/pages/product-add.jsp'">
-                                        <i class="fa fa-file-o"></i> 新建
-                                    </button> --%>
                                     <button type="button" class="btn btn-default" title="批量下载" id="btn_del">
-                                        						<!-- 批量下载 -->
-                                        						<spring:message code="batch_download"/>
+                                        <!-- 批量下载 -->
+                                       <spring:message code="batch_download"/>
                                     </button>
-                                   <!--  <button type="button" class="btn btn-default" title="开启">
-                                        <i class="fa fa-check"></i> 开启
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="屏蔽">
-                                        <i class="fa fa-ban"></i> 屏蔽
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="刷新">
-                                        <i class="fa fa-refresh"></i> 刷新
-                                    </button> -->
                                 </div>
                             </div>
                         </div> 
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
+                              <form action="${pageContext.request.contextPath}/file/findAll" method="post" >
                                 <label id="box" for="meeting"><spring:message code="shipping_dt"/></label>
                                 <label id="box" for="meeting"><spring:message code="begin"/></label>
-                                <input id="meeting" type="date" name="fromData" class="date-picker" placeholder="2019/01/01"/>
-                           
+                                <input id="meeting" type="date" name="fromData" class="date-picker" placeholder="2019/01/01"/>                           
                                 <label id="box" for="meeting"><spring:message code="end"/></label>
                                 <input id="meeting" type="date" name="toData" class="date-picker" placeholder="2019/01/02"/>
-                                
-                                <!-- <div class="col-md-8">
-                                <input type="text" class="form-control input-sm" name="fileName"
-                                       placeholder="文件名称">
-                                 </div>    -->
                                  <button type="submit" class="btn btn-default"><spring:message code="Search"/></button>
-                                 <!-- <div class="col-md-1">
-                                          
-                                  </div> -->
                              </form>
                             </div>
                         </div>
@@ -184,7 +162,7 @@
                                 <th id="box" ><spring:message code="cust_part"/></th>
                                 <th  id="box"><spring:message code="shipping_dt"/></th>
                                 <th  id="box"><spring:message code="shipping_no"/></th>                        
-                                <th  id="box"><spring:message code="filename"/></th>
+                                <%-- <th  id="box"><spring:message code="filename"/></th> --%>
                                 <th  id="box"><spring:message code="upload_dt"/></th>   
                                 <!-- <th class="text-center" >上传终端</th> -->
                                 <th  id="box"><spring:message code="upload_user"/></th>    
@@ -195,8 +173,9 @@
                             <tbody>
 
                                 <c:forEach items="${productPageInfo.list}" var="ofile" varStatus="status">
-
+								
                                     <tr>
+                                    
                                         <td><input name="names"  type="checkbox" value="${ofile.upload_filename}" id="ids" ></td>
                                         <td id="box">${status.index + 1}</td>
                                        <%--  <td style="font-size:14px">${ofile.cust_code}</td> --%>
@@ -205,68 +184,24 @@
                                         <td id="box">${ofile.cust_part}</td>
                                         <td id="box"><fmt:formatDate value='${ofile.shipping_dt}' type="both" /></td>
                                         <td id="box">${ofile.shipping_jccjs_no}</td>
-                                        <td id="box">${ofile.upload_filename}</td>
+                                        <%-- <td id="box">${ofile.upload_filename}</td> --%>
                                         <td id="box"><fmt:formatDate value='${ofile.upload_dt}' type="both" /></td>
                                         <%-- <td>${product.upload_terminal}</td>  style="font-size:14px" --%>
                                         <td id="box">${ofile.upload_user}</td>
                                         <td id="box">
-                                          
                                            <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >
                                            <spring:message code="preview"/></button>
                                             <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >
-                                            <spring:message code="download"/></button>
-                                          
-                                                                              
-                                        </td>
+                                            <spring:message code="download"/></button>                                                                         
+                                        </td>                                     
                                     </tr>
-
                                 </c:forEach>
-
-
-
                             </tbody>
-
                         </table>
-                        </form>
-                        <!--数据列表/-->
-
-                        <!--工具栏-->
-                      <!--   <div class="pull-left">
-                            <div class="form-group form-inline">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建">
-                                        <i class="fa fa-file-o"></i> 新建
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="删除">
-                                        <i class="fa fa-trash-o"></i> 删除
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="开启">
-                                        <i class="fa fa-check"></i> 开启
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="屏蔽">
-                                        <i class="fa fa-ban"></i> 屏蔽
-                                    </button>
-                                    <button type="button" class="btn btn-default" title="刷新">
-                                        <i class="fa fa-refresh"></i> 刷新
-                                    </button>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <!--工具栏/-->
-
+                       </form>
                     </div>
                     <!-- 数据表格 /-->
                 </div>
-                <!-- /.box-body -->
-
-                <!-- .box-footer-->
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline"> <spring:message code="total"/> ${productPageInfo.pages} <spring:message code="page"/>，
@@ -307,11 +242,8 @@
                             </c:if>
 
                                  <c:forEach begin="${begin}" end="${end}" var="i">
-                                     <li><a href="${pageContext.request.contextPath}/file/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</c:forEach>
-                                     </a></li>
-
-
-
+                                     <li><a href="${pageContext.request.contextPath}/file/findAll?page=${i}&pageSize=${productPageInfo.pageSize}">${i}</a></li>
+                                 </c:forEach>
 
                             <li><a href="${pageContext.request.contextPath}/file/findAll?page=${productPageInfo.pageNum+1}&pageSize=${productPageInfo.pageSize}">
                             <spring:message code="next_page"/></a></li>
@@ -503,6 +435,7 @@
     for (var i = 0; i<defaultDate.length; i++) {
         defaultDate[i].valueAsDate = new Date();
     }
+
 </script>
 </body>
 

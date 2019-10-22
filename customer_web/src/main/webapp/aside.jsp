@@ -103,6 +103,13 @@
                             <spring:message code="source_url"/>
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="${pageContext.request.contextPath}/param/show">
+                            <i class="fa fa-circle-o"></i> <!-- <font class="source_url">文件路径管理</font> -->
+                            <spring:message code="param_handle"/>
+                        </a>
+                    </li>
                 </ul>
                 </security:authorize> 
             </li>

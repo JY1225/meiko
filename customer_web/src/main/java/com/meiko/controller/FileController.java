@@ -24,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,7 +60,7 @@ public class FileController {
 	private static final String BASE_DIR = "";
 	protected static String REDIRECT = "redirect:";
     protected static String FORWARD = "forward:";
-	@RequestMapping("/findAll")
+	@RequestMapping(value = "/findAll")
 	public ModelAndView findAll(Model model, @RequestParam(name = "page", defaultValue = "1") Integer page,
 			@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
 			@RequestParam(name = "fromData", required = false) String fromData,
@@ -84,24 +85,19 @@ public class FileController {
 	public void download(HttpServletResponse response, HttpServletRequest request, String upload_filename) {
 		try {
 			Dir dir = fileservice.findDirByStatus(1);
+			//截取文件名中年月，即为文件所在文件夹
 			String date = upload_filename.split("\\.")[4].substring(0,6);
 			String path = dir.getUrl().replace("\\", "/")+date + "/" + upload_filename.trim();
-			//
 
 			File file = new File(path);
-			//
 			String filename = file.getName();
-			//
 			String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
 
-			//
 			InputStream fis = new BufferedInputStream(new FileInputStream(path));
 			byte[] buffer = new byte[fis.available()];
 			fis.read(buffer);
 			fis.close();
-			//
-			 response.reset();
-			//
+			response.reset();
 			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
 			response.addHeader("Content-Length", "" + file.length());
 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
@@ -147,6 +143,7 @@ public class FileController {
 		OutputStream out = null;
 		Dir dir = fileservice.findDirByStatus(1);
 		String fileName = ofile.getUpload_filename().trim();
+		//截取文件名中年月，即为文件所在文件夹
 		String date = fileName.split("\\.")[4].substring(0,6);
 		System.out.println(date);
 		String path = dir.getUrl().replace("\\", "/")+date + "/" + fileName;
