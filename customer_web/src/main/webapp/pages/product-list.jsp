@@ -190,11 +190,11 @@
                                         <td id="box">
                                            <%-- <button type="button" class="btn bg-olive btn-xs" onclick="javascript:window.open('${pageContext.request.contextPath}/file/read?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}')" >
                                            <spring:message code="preview"/></button> --%>
-                                           <button type="button" class="btn bg-olive btn-xs" onclick="openPostWindow('${pageContext.request.contextPath}/file/read','','${ofile.upload_filename}','${ofile.recid}');" >
+                                           <button type="button" class="btn bg-olive btn-xs" onclick="openPostWindow('${pageContext.request.contextPath}/file/read','_blank','${ofile.upload_filename}','${ofile.recid}');" >
                                            <spring:message code="preview"/></button> 
                                            <%--  <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="location.href='${pageContext.request.contextPath}/file/download?upload_filename=${ofile.upload_filename}&recid=${ofile.recid}'" >
                                             <spring:message code="download"/></button> --%> 
-                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="openPostWindow('${pageContext.request.contextPath}/file/download','','${ofile.upload_filename}','${ofile.recid}');" >
+                                            <button id="download_btn" type="button" class="btn bg-olive btn-xs"  onclick="openPostWindow('${pageContext.request.contextPath}/file/download','_self','${ofile.upload_filename}','${ofile.recid}');" >
                                             <spring:message code="download"/></button>                                                                         
                                         </td>                                                                        
                                     </tr> 
@@ -440,12 +440,12 @@
     }
 
 
-    function openPostWindow(url, name, upload_filename, recid){
+    function openPostWindow(url, target, upload_filename, recid){
         var tempForm = document.createElement("form");
         tempForm.id = "tempForm1";
         tempForm.method = "post";
         tempForm.action = url;
-        tempForm.target=name;
+        tempForm.target=target;
         var hideInput1 = document.createElement("input");
         hideInput1.type = "hidden";
         hideInput1.name="upload_filename";
