@@ -82,6 +82,7 @@ public class FileController {
 	}
 
 
+	@SuppressWarnings("unused")
 	@RequestMapping("/download")
 	public void download(HttpServletResponse response, HttpServletRequest request, String upload_filename) {
 		try {
