@@ -1,6 +1,13 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% 
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
+<c:set var="webRoot" value="<%=basePath%>" />
 <header class="main-header">
     <!-- Logo -->
     <a href="" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -27,7 +34,7 @@
                 <li class="dropdown user user-menu">        
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     
-               <img src="../img/user.png" class="user-image" alt="User Image"> 
+               <img src="${webRoot}/img/user.png" class="user-image" alt="User Image"> 
                  <span>
 				    <security:authentication property="principal.username"></security:authentication>				    
 				</span>            

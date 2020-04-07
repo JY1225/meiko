@@ -76,11 +76,11 @@
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
+    <jsp:include page="/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="${pageContext.request.contextPath}/aside.jsp"></jsp:include>
+    <jsp:include page="/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -162,7 +162,7 @@
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
-    <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+    <jsp:include page="/footer.jsp"></jsp:include>
     <!-- 底部导航 /-->
 
 </div>

@@ -1,16 +1,16 @@
-<%@ page import="com.github.pagehelper.PageInfo" %><%--
-  Created by IntelliJ IDEA.
-  User: 38279
-  Date: 2019/3/14
-  Time: 17:58
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.github.pagehelper.PageInfo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<html>
 
+<% 
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
+<c:set var="webRoot" value="<%=basePath%>" />
+
+<html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -22,49 +22,49 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <link rel="stylesheet"
-          href="../plugins/bootstrap/css/bootstrap.min.css">
+          href="${webRoot}/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
-          href="../plugins/font-awesome/css/font-awesome.min.css">
+          href="${webRoot}/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet"
-          href="../plugins/ionicons/css/ionicons.min.css">
+          href="${webRoot}/plugins/ionicons/css/ionicons.min.css">
     <link rel="stylesheet"
-          href="../plugins/iCheck/square/blue.css">
+          href="${webRoot}/plugins/iCheck/square/blue.css">
     <link rel="stylesheet"
-          href="../plugins/morris/morris.css">
+          href="${webRoot}/plugins/morris/morris.css">
     <link rel="stylesheet"
-          href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+          href="${webRoot}/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet"
-          href="../plugins/datepicker/datepicker3.css">
+          href="${webRoot}/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet"
-          href="../plugins/daterangepicker/daterangepicker.css">
+          href="${webRoot}/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet"
-          href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+          href="${webRoot}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet"
-          href="../plugins/datatables/dataTables.bootstrap.css">
+          href="${webRoot}/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet"
-          href="../plugins/treeTable/jquery.treetable.css">
+          href="${webRoot}/plugins/treeTable/jquery.treetable.css">
     <link rel="stylesheet"
-          href="../plugins/treeTable/jquery.treetable.theme.default.css">
+          href="${webRoot}/plugins/treeTable/jquery.treetable.theme.default.css">
     <link rel="stylesheet"
-          href="../plugins/select2/select2.css">
+          href="${webRoot}/plugins/select2/select2.css">
     <link rel="stylesheet"
-          href="../plugins/colorpicker/bootstrap-colorpicker.min.css">
+          href="${webRoot}/plugins/colorpicker/bootstrap-colorpicker.min.css">
     <link rel="stylesheet"
-          href="../plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+          href="${webRoot}/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
     <link rel="stylesheet"
-          href="../plugins/adminLTE/css/AdminLTE.css">
+          href="${webRoot}/plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet"
-          href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+          href="${webRoot}/plugins/adminLTE/css/skins/_all-skins.min.css">
     <link rel="stylesheet"
-          href="../css/style.css">
+          href="css/style.css">
     <link rel="stylesheet"
-          href="../plugins/ionslider/ion.rangeSlider.css">
+          href="${webRoot}/plugins/ionslider/ion.rangeSlider.css">
     <link rel="stylesheet"
-          href="../plugins/ionslider/ion.rangeSlider.skinNice.css">
+          href="${webRoot}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet"
-          href="../plugins/bootstrap-slider/slider.css">
+          href="${webRoot}/plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet"
-          href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+          href="${webRoot}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
           
     <style type="text/css">
         #box { font-size: 0.8vw;}
@@ -75,11 +75,11 @@
 
 <div class="wrapper">
 
-    <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
+    <jsp:include page="/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="${pageContext.request.contextPath}/aside.jsp"></jsp:include>
+    <jsp:include page="/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -96,7 +96,7 @@
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i>
+                <li><!-- <a href="/main.jsp"> --><i class="fa fa-dashboard"></i>
                 <!--首页-->
                 <spring:message code="home_page"/></a></li>
                 <li><!--成绩书管理-->
@@ -268,99 +268,99 @@
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
-    <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+    <jsp:include page="/footer.jsp"></jsp:include>
     <!-- 底部导航 /-->
 
 </div>
 
 
 <script
-        src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+        src="${webRoot}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script
-        src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+        src="${webRoot}/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script
-        src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+        src="${webRoot}/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script
-        src="../plugins/raphael/raphael-min.js"></script>
+        src="${webRoot}/plugins/raphael/raphael-min.js"></script>
 <script
-        src="../plugins/morris/morris.min.js"></script>
+        src="${webRoot}/plugins/morris/morris.min.js"></script>
 <script
-        src="../plugins/sparkline/jquery.sparkline.min.js"></script>
+        src="${webRoot}/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script
-        src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        src="${webRoot}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script
-        src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        src="${webRoot}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script
-        src="../plugins/knob/jquery.knob.js"></script>
+        src="${webRoot}/plugins/knob/jquery.knob.js"></script>
 <script
-        src="../plugins/daterangepicker/moment.min.js"></script>
+        src="${webRoot}/plugins/daterangepicker/moment.min.js"></script>
 <script
-        src="../plugins/daterangepicker/daterangepicker.js"></script>
+        src="${webRoot}/plugins/daterangepicker/daterangepicker.js"></script>
 <script
-        src="../plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
+        src="${webRoot}/plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
 <script
-        src="../plugins/datepicker/bootstrap-datepicker.js"></script>
+        src="${webRoot}/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script
-        src="../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+        src="${webRoot}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 <script
-        src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+        src="${webRoot}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script
-        src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        src="${webRoot}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script
-        src="../plugins/fastclick/fastclick.js"></script>
+        src="${webRoot}/plugins/fastclick/fastclick.js"></script>
 <script
-        src="../plugins/iCheck/icheck.min.js"></script>
+        src="${webRoot}/plugins/iCheck/icheck.min.js"></script>
 <script
-        src="../plugins/adminLTE/js/app.min.js"></script>
+        src="${webRoot}/plugins/adminLTE/js/app.min.js"></script>
 <script
-        src="../plugins/treeTable/jquery.treetable.js"></script>
+        src="${webRoot}/plugins/treeTable/jquery.treetable.js"></script>
 <script
-        src="../plugins/select2/select2.full.min.js"></script>
+        src="${webRoot}/plugins/select2/select2.full.min.js"></script>
 <script
-        src="../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+        src="${webRoot}/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script
-        src="../plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
+        src="${webRoot}/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
 <script
-        src="../plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+        src="${webRoot}/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
 <script
-        src="../plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+        src="${webRoot}/plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
 <script
-        src="../plugins/bootstrap-markdown/js/markdown.js"></script>
+        src="${webRoot}/plugins/bootstrap-markdown/js/markdown.js"></script>
 <script
-        src="../plugins/bootstrap-markdown/js/to-markdown.js"></script>
+        src="${webRoot}/plugins/bootstrap-markdown/js/to-markdown.js"></script>
 <script
-        src="../plugins/ckeditor/ckeditor.js"></script>
+        src="${webRoot}/plugins/ckeditor/ckeditor.js"></script>
 <script
-        src="../plugins/input-mask/jquery.inputmask.js"></script>
+        src="${webRoot}/plugins/input-mask/jquery.inputmask.js"></script>
 <script
-        src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        src="${webRoot}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script
-        src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        src="${webRoot}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script
-        src="../plugins/datatables/jquery.dataTables.min.js"></script>
+        src="${webRoot}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script
-        src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+        src="${webRoot}/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script
-        src="../plugins/chartjs/Chart.min.js"></script>
+        src="${webRoot}/plugins/chartjs/Chart.min.js"></script>
 <script
-        src="../plugins/flot/jquery.flot.min.js"></script>
+        src="${webRoot}/plugins/flot/jquery.flot.min.js"></script>
 <script
-        src="../plugins/flot/jquery.flot.resize.min.js"></script>
+        src="${webRoot}/plugins/flot/jquery.flot.resize.min.js"></script>
 <script
-        src="../plugins/flot/jquery.flot.pie.min.js"></script>
+        src="${webRoot}/plugins/flot/jquery.flot.pie.min.js"></script>
 <script
-        src="../plugins/flot/jquery.flot.categories.min.js"></script>
+        src="${webRoot}/plugins/flot/jquery.flot.categories.min.js"></script>
 <script
-        src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
+        src="${webRoot}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script
-        src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
+        src="${webRoot}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script
-        src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+        src="${webRoot}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script
-        src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+        src="${webRoot}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
     $(document).ready(function () {
         // 选择框

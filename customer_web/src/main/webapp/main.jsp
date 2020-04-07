@@ -8,6 +8,12 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% 
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
+<c:set var="webRoot" value="<%=basePath%>" />
 <html>
 <head>
     
@@ -116,11 +122,11 @@
 <div class="wrapper">
 
     <!-- 页面头部 -->
-   <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
+   <jsp:include page="/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="${pageContext.request.contextPath}/aside.jsp"></jsp:include>
+    <jsp:include page="/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -134,11 +140,11 @@
               <spring:message code="bulletin_board"/>            
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/main.jsp"><i class="fa fa-dashboard"></i> 
+                <li><a href="${webRoot}/main.jsp"><i class="fa fa-dashboard"></i> 
                 <!-- <span class="home_page">首页</span> -->
                 <spring:message code="home_page"/>  
                 </a></li>
-                <li><a href="${pageContext.request.contextPath}/file/findAll">
+                <li><a href="${webRoot}/file/findAll">
                 <!-- <span class="report_list">成绩书管理</span> -->
                 <spring:message code="report_list"/>   
                 </a></li>
@@ -161,7 +167,7 @@
             <!-- 公告 -->
             <div class="case">
         <div class="part1">
-            <img src="../img/notice.png"/>
+            <img src="${webRoot}/img/notice.png"/>
         </div>
         <div class="part2" id="part2">
             <div id="scroll1">
@@ -182,7 +188,7 @@
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
-    <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+    <jsp:include page="/footer.jsp"></jsp:include>
     <!-- 底部导航 /-->
 </div>
 
